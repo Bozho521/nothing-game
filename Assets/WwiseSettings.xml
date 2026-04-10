@@ -1,9 +1,0 @@
-<?xml version='1.0'?>
-<WwiseSettings>
-    <WwiseProjectPath>../../../Nordic_GameJ/Nordic_GameJam26_Wwise/Nordic_GameJam26_Wwise.wproj</WwiseProjectPath>
-    <SoundbankPath>Audio/GeneratedSoundBanks</SoundbankPath>
-    <CreateWwiseGlobal>true</CreateWwiseGlobal>
-    <CreateWwiseListener>true</CreateWwiseListener>
-    <WwiseInstallationPathWindows>C:\Audiokinetic\Wwise2024.1.7.8863</WwiseInstallationPathWindows>
-    <WwiseInstallationPathMac></WwiseInstallationPathMac>
-</WwiseSettings>
