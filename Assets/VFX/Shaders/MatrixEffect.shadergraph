@@ -182,9 +182,6 @@
         },
         {
             "m_Id": "0bd3afc97efc45b4920ea72401ef97d9"
-        },
-        {
-            "m_Id": "33b5347b50184fc6ac89ea1316792000"
         }
     ],
     "m_GroupDatas": [
@@ -828,9 +825,6 @@
         "m_Blocks": [
             {
                 "m_Id": "a833f925b5694e708aa32ccb5e225555"
-            },
-            {
-                "m_Id": "33b5347b50184fc6ac89ea1316792000"
             }
         ]
     },
@@ -1238,8 +1232,8 @@
     "m_ObjectId": "180aec344f044303a457fbfebf52a85b",
     "m_Title": "Matrix Rain",
     "m_Position": {
-        "x": -1486.6666259765625,
-        "y": 188.0
+        "x": -1486.5,
+        "y": 188.5
     }
 }
 
@@ -1832,40 +1826,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "33b5347b50184fc6ac89ea1316792000",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.Emission",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "567faf52e3054d55b8aa2f33e3310ef6"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.Emission"
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicValueMaterialSlot",
     "m_ObjectId": "37886879e3ea4aaca370a640faeb8e5a",
     "m_Id": 1,
@@ -1963,8 +1923,8 @@
     "m_ObjectId": "3ff80b562c984347be0e51b439e2df36",
     "m_Title": "Text Animation",
     "m_Position": {
-        "x": -1275.333251953125,
-        "y": -468.6666564941406
+        "x": -1275.0,
+        "y": -468.5
     }
 }
 
@@ -2476,36 +2436,6 @@
     "m_DefaultValue": 0.0,
     "m_Labels": [],
     "m_LiteralMode": false
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.ColorRGBMaterialSlot",
-    "m_ObjectId": "567faf52e3054d55b8aa2f33e3310ef6",
-    "m_Id": 0,
-    "m_DisplayName": "Emission",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Emission",
-    "m_StageCapability": 2,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": [],
-    "m_ColorMode": 1,
-    "m_DefaultColor": {
-        "r": 0.0,
-        "g": 0.0,
-        "b": 0.0,
-        "a": 1.0
-    }
 }
 
 {
@@ -3562,15 +3492,6 @@
 }
 
 {
-    "m_SGVersion": 2,
-    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalUnlitSubTarget",
-    "m_ObjectId": "8fcb3b84da5846d5a3eb2771e3bfa685",
-    "m_KeepLightingVariants": false,
-    "m_DefaultDecalBlending": true,
-    "m_DefaultSSAO": true
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "900715beab3a4bb79b88a9eab6bc398f",
@@ -4590,8 +4511,8 @@
     "m_ObjectId": "be285ea1f7c84630ac177a95399a7d96",
     "m_Title": "UV",
     "m_Position": {
-        "x": -2787.333251953125,
-        "y": 190.666748046875
+        "x": -2787.0,
+        "y": 191.0
     }
 }
 
@@ -5733,19 +5654,28 @@
 }
 
 {
+    "m_SGVersion": 2,
+    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalUnlitSubTarget",
+    "m_ObjectId": "f9bde9883b644a6bbc801d8b19c5f2b4",
+    "m_KeepLightingVariants": false,
+    "m_DefaultDecalBlending": true,
+    "m_DefaultSSAO": true
+}
+
+{
     "m_SGVersion": 1,
     "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalTarget",
     "m_ObjectId": "f9c6881cf49a4c568225a5f2c523af30",
     "m_Datas": [],
     "m_ActiveSubTarget": {
-        "m_Id": "8fcb3b84da5846d5a3eb2771e3bfa685"
+        "m_Id": "f9bde9883b644a6bbc801d8b19c5f2b4"
     },
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 0,
     "m_ZTestMode": 4,
     "m_ZWriteControl": 0,
     "m_AlphaMode": 0,
-    "m_RenderFace": 2,
+    "m_RenderFace": 0,
     "m_AlphaClip": false,
     "m_CastShadows": true,
     "m_ReceiveShadows": true,
