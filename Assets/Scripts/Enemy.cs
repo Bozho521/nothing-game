@@ -91,13 +91,12 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator IdleSoundDelay()
     {
-        float elapsedTime = 0.0f;
-        while (elapsedTime < 2.5f)
+        while (true)
         {
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            var random_wait = Random.Range(2.0f, 7.5f);
+            yield return new WaitForSeconds(random_wait);
+            IdleSound.Post(gameObject);s
         }
-        IdleSound.Post(gameObject);
     }
 
     private void AttackPlayer()
@@ -142,8 +141,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         EnemyManager.killCount++;
-        //DeathSound.Post(gameObject);
-        IdleSound.Post(gameObject);
+        DeathSound.Post(gameObject);
         if (UIManager.Instance != null) UIManager.Instance.UpdateKills(EnemyManager.killCount);
 
         HandleDrops(); 
