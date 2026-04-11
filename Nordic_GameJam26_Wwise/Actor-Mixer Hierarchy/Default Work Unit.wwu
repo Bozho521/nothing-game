@@ -327,16 +327,6 @@
 										<ActiveSource Name="NothingGame_PlayerDamage" ID="{A352A997-0C25-4D81-93EC-F67F96360CEC}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
-								<Sound Name="Player Jump" ID="{51BB676D-9A95-4211-BFB8-0CA7E19A7F7F}" ShortID="216276897">
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
-										</Reference>
-									</ReferenceList>
-								</Sound>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Environment" ID="{0C4CACFB-B2BD-4240-8D5F-26654ADEB21F}" ShortID="644279349">
@@ -381,25 +371,6 @@
 									<ActiveSourceList>
 										<ActiveSource Name="NothingGame_WallDestroy" ID="{9FD9A46E-E883-485A-BE02-D1A52C43AF5C}" Platform="Linked"/>
 									</ActiveSourceList>
-								</Sound>
-								<Sound Name="Door" ID="{241D9D92-C315-4036-B086-12F8B4914957}" ShortID="940279251">
-									<PropertyList>
-										<Property Name="Pitch" Type="int32">
-											<ModifierList>
-												<ModifierInfo>
-													<Modifier Name="" ID="{BA1B582A-F311-479A-A3DF-C8297526437E}"/>
-												</ModifierInfo>
-											</ModifierList>
-										</Property>
-									</PropertyList>
-									<ReferenceList>
-										<Reference Name="Conversion">
-											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
-										</Reference>
-										<Reference Name="OutputBus">
-											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
-										</Reference>
-									</ReferenceList>
 								</Sound>
 							</ChildrenList>
 						</Folder>
