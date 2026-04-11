@@ -714,36 +714,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2061871551141360830, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
-      propertyPath: interactAction.m_Name
-      value: Interact
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061871551141360830, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
-      propertyPath: interactAction.m_SingletonActionBindings.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061871551141360830, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
-      propertyPath: interactAction.m_SingletonActionBindings.Array.data[0].m_Id
-      value: 2ef4b1b5-a1ac-4196-a095-d672b737d6b0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061871551141360830, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
-      propertyPath: interactAction.m_SingletonActionBindings.Array.data[0].m_Path
-      value: <Keyboard>/#(E)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061871551141360830, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
-      propertyPath: interactAction.m_SingletonActionBindings.Array.data[0].m_Action
-      value: Interact
-      objectReference: {fileID: 0}
-    - target: {fileID: 2061871551141360830, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
-      propertyPath: interactAction.m_SingletonActionBindings.Array.data[0].m_Interactions
-      value: Press
-      objectReference: {fileID: 0}
     - target: {fileID: 8193203996642386299, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3648926264427493929, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
