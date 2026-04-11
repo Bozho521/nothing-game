@@ -10,12 +10,280 @@
     "Type": "User",
     "GUID": "{217BA030-52FA-4781-8508-AA9C60AEA44B}",
     "Language": "SFX",
-    "Hash": "{5473A28E-1569-4DE9-14CD-5943A26DAC43}",
+    "Hash": "{4778C33C-EF44-5D74-0098-133E592BFA48}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\MainBank",
     "ShortName": "MainBank",
-    "Path": "MainBank.bnk"
+    "Path": "MainBank.bnk",
+    "Media": [
+     {
+      "Id": "268643418",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_ShotgunShooting.wav",
+      "CachePath": "04/{04C18EE4-A65E-A3C7-CA0D-78B2F8933334}.wem"
+     },
+     {
+      "Id": "277294612",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_PistolShooting.wav",
+      "CachePath": "38/{38D571A5-3F9D-1A17-DB13-84E0DB3112ED}.wem"
+     },
+     {
+      "Id": "321431979",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_ShotgunEmpty.wav",
+      "CachePath": "48/{48BBFF53-984A-0FB4-D387-208841AC71C7}.wem"
+     },
+     {
+      "Id": "333786727",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_DemonDie.wav",
+      "CachePath": "F1/{F13513DD-7D05-41D1-3408-0F85ADF364DB}.wem"
+     },
+     {
+      "Id": "455380154",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_PistolEmpty.wav",
+      "CachePath": "BF/{BF6F154E-A8F3-F589-7DE1-9F77F7022FF8}.wem"
+     },
+     {
+      "Id": "508432336",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_WallDestroy.wav",
+      "CachePath": "48/{48991227-0854-1AF9-6543-5F8318361B5C}.wem"
+     },
+     {
+      "Id": "613488527",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_PistolReload.wav",
+      "CachePath": "93/{933C4E74-DF03-1EE7-5974-368B6ECB6C3A}.wem"
+     },
+     {
+      "Id": "695172470",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_MenuButton1.wav",
+      "CachePath": "35/{353D4957-D3D7-049B-8C35-A4E6198D69C6}.wem"
+     },
+     {
+      "Id": "709175964",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_PlayerDamage.wav",
+      "CachePath": "01/{0111D1EA-C189-7E60-C9BD-939D1B5186BA}.wem"
+     },
+     {
+      "Id": "757288292",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_ShotgunReload.wav",
+      "CachePath": "A7/{A7664D80-F2F1-49FC-9664-E0E3815423CE}.wem"
+     },
+     {
+      "Id": "862177575",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_DemonIdle.wav",
+      "CachePath": "15/{1512FDBC-0D31-332F-1946-6094FFF08AD5}.wem"
+     },
+     {
+      "Id": "1054474706",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_ShotgunShell.wav",
+      "CachePath": "48/{48BAB43A-044B-FD1D-A23E-784F6811AFF5}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2448258477",
+      "Name": "Play_Enemy_Die",
+      "ObjectPath": "\\Events\\Default Work Unit\\Enemy\\Play_Enemy_Die",
+      "GUID": "{3DEF6225-A339-400C-A582-6FB1D125DA37}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3808093",
+      "DurationMax": "1.5499063",
+      "MediaRefs": [
+       {
+        "Id": "333786727"
+       }
+      ]
+     },
+     {
+      "Id": "1109600527",
+      "Name": "Play_Enemy_Idle",
+      "ObjectPath": "\\Events\\Default Work Unit\\Enemy\\Play_Enemy_Idle",
+      "GUID": "{076FFA12-F6E7-437C-AA5B-E236E8A035CC}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3808093",
+      "DurationMax": "1.5499063",
+      "MediaRefs": [
+       {
+        "Id": "862177575"
+       }
+      ]
+     },
+     {
+      "Id": "328562558",
+      "Name": "Play_Menu_Button_1",
+      "ObjectPath": "\\Events\\Default Work Unit\\Menu\\Play_Menu_Button_1",
+      "GUID": "{964D19C9-BBB6-48A1-89C8-1E546CB4CC3B}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3033105",
+      "DurationMax": "1.6420684",
+      "MediaRefs": [
+       {
+        "Id": "695172470"
+       }
+      ]
+     },
+     {
+      "Id": "2165847569",
+      "Name": "Play_Pistol_Empty",
+      "ObjectPath": "\\Events\\Default Work Unit\\Pistol\\Play_Pistol_Empty",
+      "GUID": "{BC2B2702-47B6-40E8-8959-583D6D216FA4}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "455380154"
+       }
+      ]
+     },
+     {
+      "Id": "1886652945",
+      "Name": "Play_Pistol_Reload",
+      "ObjectPath": "\\Events\\Default Work Unit\\Pistol\\Play_Pistol_Reload",
+      "GUID": "{BC0439D2-3A5B-44EB-91D6-EBA63EDC2A8C}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "613488527"
+       }
+      ]
+     },
+     {
+      "Id": "2955138351",
+      "Name": "Play_Pistol_Shoot",
+      "ObjectPath": "\\Events\\Default Work Unit\\Pistol\\Play_Pistol_Shoot",
+      "GUID": "{30B8EBFA-F5A7-4281-841F-AC43E523FBC9}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "277294612"
+       }
+      ]
+     },
+     {
+      "Id": "3638125099",
+      "Name": "Play_Player_Damage",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Player_Damage",
+      "GUID": "{4AD5D51F-2989-4019-94DF-DC0D47C614A7}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3808093",
+      "DurationMax": "1.5499063",
+      "MediaRefs": [
+       {
+        "Id": "709175964"
+       }
+      ]
+     },
+     {
+      "Id": "1908822854",
+      "Name": "Play_Shotgun_Empty",
+      "ObjectPath": "\\Events\\Default Work Unit\\Shotgun\\Play_Shotgun_Empty",
+      "GUID": "{06E9987C-9E12-4600-BB13-C569B57A8893}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "321431979"
+       }
+      ]
+     },
+     {
+      "Id": "1248355840",
+      "Name": "Play_Shotgun_Reload",
+      "ObjectPath": "\\Events\\Default Work Unit\\Shotgun\\Play_Shotgun_Reload",
+      "GUID": "{C31BE833-8EA9-4944-84A9-E47AE7EDCB7D}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "757288292"
+       }
+      ]
+     },
+     {
+      "Id": "2876530582",
+      "Name": "Play_Shotgun_Shells",
+      "ObjectPath": "\\Events\\Default Work Unit\\Shotgun\\Play_Shotgun_Shells",
+      "GUID": "{E0D7F2A9-A5C1-42CF-B27C-5E8D553EE50E}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "1054474706"
+       }
+      ]
+     },
+     {
+      "Id": "2995294012",
+      "Name": "Play_Shotgun_Shoot",
+      "ObjectPath": "\\Events\\Default Work Unit\\Shotgun\\Play_Shotgun_Shoot",
+      "GUID": "{2588BEC1-D6C1-460E-BC6E-F25707DDF14B}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "268643418"
+       }
+      ]
+     },
+     {
+      "Id": "1374894833",
+      "Name": "Play_Wall_Destroy",
+      "ObjectPath": "\\Events\\Default Work Unit\\Wall\\Play_Wall_Destroy",
+      "GUID": "{2F4CB71A-0971-4C13-AEF8-A4B4111F60EA}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.3415004",
+      "DurationMax": "1.5953219",
+      "MediaRefs": [
+       {
+        "Id": "508432336"
+       }
+      ]
+     }
+    ]
    }
   ],
-  "FileHash": "{0AFFA803-37E8-99B6-945E-677FFBB91B52}"
+  "FileHash": "{E620CE3C-EC9B-B9C4-CC7F-89E7190F45B9}"
  }
 }

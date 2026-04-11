@@ -13,7 +13,18 @@ namespace AK
 {
     namespace EVENTS
     {
-        static const AkUniqueID PLAY_TEST_SOUND = 3211564518U;
+        static const AkUniqueID PLAY_ENEMY_DIE = 2448258477U;
+        static const AkUniqueID PLAY_ENEMY_IDLE = 1109600527U;
+        static const AkUniqueID PLAY_MENU_BUTTON_1 = 328562558U;
+        static const AkUniqueID PLAY_PISTOL_EMPTY = 2165847569U;
+        static const AkUniqueID PLAY_PISTOL_RELOAD = 1886652945U;
+        static const AkUniqueID PLAY_PISTOL_SHOOT = 2955138351U;
+        static const AkUniqueID PLAY_PLAYER_DAMAGE = 3638125099U;
+        static const AkUniqueID PLAY_SHOTGUN_EMPTY = 1908822854U;
+        static const AkUniqueID PLAY_SHOTGUN_RELOAD = 1248355840U;
+        static const AkUniqueID PLAY_SHOTGUN_SHELLS = 2876530582U;
+        static const AkUniqueID PLAY_SHOTGUN_SHOOT = 2995294012U;
+        static const AkUniqueID PLAY_WALL_DESTROY = 1374894833U;
     } // namespace EVENTS
 
     namespace BANKS
