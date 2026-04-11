@@ -2419,10 +2419,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883560711434179353, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_text
+      value: Broodlings
+      objectReference: {fileID: 0}
     - target: {fileID: 6535686432984913602, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_Name
       value: BreakableIcon (75)
       objectReference: {fileID: 0}
+    - target: {fileID: 7471253524935167502, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 24924593923ac4394b75b94d4bbe6c94, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2681,7 +2689,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 45.483753
+      value: 44.22
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4895,10 +4903,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883560711434179353, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_text
+      value: Second Dealing
+      objectReference: {fileID: 0}
     - target: {fileID: 6535686432984913602, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_Name
       value: BreakableIcon (78)
       objectReference: {fileID: 0}
+    - target: {fileID: 7471253524935167502, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: a6116a76977ef48c98462633cd2131d9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6449,10 +6465,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883560711434179353, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_text
+      value: Colorsaur
+      objectReference: {fileID: 0}
     - target: {fileID: 6535686432984913602, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_Name
       value: BreakableIcon (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7471253524935167502, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2493d42c2ef57411586927749f215b9e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
