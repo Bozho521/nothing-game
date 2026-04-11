@@ -54,7 +54,11 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     
     public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        Health -= damage;
+        if (Health<= 0)
+        {
+            DestroyObject();
+        }
     }
 
     public void DestroyObject()
