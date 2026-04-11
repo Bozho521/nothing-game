@@ -93,11 +93,12 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
         
         if (!Physics.Raycast(ray, out RaycastHit hit)) return;
-        Debug.Log("Ray hit");
+        //Debug.Log("Ray hit");
         if (!hit.collider.TryGetComponent<IInteractable>(out var interactable)) return;
-        Debug.Log("Interactable found");
+       //Debug.Log("Interactable found");
         if (interactAction.triggered && canInteract)
         {
+            Debug.Log("Interacting");
             interactable.Interact(this);
         }
     }
