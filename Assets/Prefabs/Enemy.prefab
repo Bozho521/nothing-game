@@ -1,5 +1,60 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1782729920016017492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6297295539118124179}
+  - component: {fileID: 7561472660425530716}
+  m_Layer: 0
+  m_Name: HeadHitbox
+  m_TagString: Headshot
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6297295539118124179
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782729920016017492}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.02, y: 0.88495994, z: -0.101}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6576284391600872478}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7561472660425530716
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1782729920016017492}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.22711754
+  m_Height: 0.8104551
+  m_Direction: 1
+  m_Center: {x: 0.0017337799, y: 0.09477246, z: 0.18463564}
 --- !u!1 &7946325001487091293
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,9 +66,8 @@ GameObject:
   - component: {fileID: 4479744573263588451}
   - component: {fileID: 3742104539158186766}
   - component: {fileID: 2293967704281733076}
-  - component: {fileID: 6720523246052464148}
-  - component: {fileID: 2317662056063458938}
-  - component: {fileID: 3813283628210616126}
+  - component: {fileID: 8193765061850795097}
+  - component: {fileID: 143707273280757476}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -94,7 +148,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6720523246052464148
+--- !u!136 &8193765061850795097
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,36 +167,11 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.60082245
+  m_Height: 2.3149679
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!143 &2317662056063458938
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7946325001487091293}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3813283628210616126
+  m_Center: {x: 0.031871796, y: -0.21542132, z: -0.23560524}
+--- !u!114 &143707273280757476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,10 +183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bccf2a76448ae0047ab85a690d0aff66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  maxHealth: 30
   player: {fileID: 0}
-  spriteVisual: {fileID: 6576284391600872478}
-  speed: 3
-  stopDistance: 1.5
+  moveSpeed: 3
+  enemyRenderer: {fileID: 0}
+  damageColor: {r: 1, g: 0, b: 0, a: 1}
+  bloodEffectPrefab: {fileID: 6559164260365895845, guid: d0969b1df5b3a024bbd7dd682c69e61d, type: 3}
+  headshotTextPrefab: {fileID: 4095507737644242033, guid: 1b75be281ccd19e42ab5492c018dd2bb, type: 3}
 --- !u!1 &8710730883076376958
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,7 +219,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6297295539118124179}
   m_Father: {fileID: 4479744573263588451}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5945875660913724542
