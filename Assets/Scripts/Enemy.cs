@@ -20,7 +20,8 @@ public class Enemy : MonoBehaviour
     private float lastAttackTime = 0f;
 
     [Header("Visual Feedback")]
-    public Renderer enemyRenderer;   
+    public Renderer enemyRenderer;
+    [SerializeField] private Animator animator;
     public Color damageColor = Color.red; 
     private Color originalColor;
     private float flashDuration = 0.1f;   
@@ -98,6 +99,15 @@ public class Enemy : MonoBehaviour
             movement.y = verticalVelocity;
             
             transform.position += movement * Time.deltaTime;
+
+            if (movement.magnitude > 0f)
+            {
+                animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", false);
+            }
         }
     }
 
@@ -117,18 +127,19 @@ public class Enemy : MonoBehaviour
 
     private IEnumerator IdleSoundDelay()
     {
-        float elapsedTime = 0.0f;
-        while (elapsedTime < 2.5f)
+        while (true)
         {
-            elapsedTime += Time.deltaTime;
-            yield return null;
+            var random_wait = Random.Range(2.0f, 7.5f);
+            yield return new WaitForSeconds(random_wait);
+            IdleSound.Post(gameObject);
         }
-        IdleSound.Post(gameObject);
     }
 
     private void AttackPlayer()
     {
         lastAttackTime = Time.time;
+
+        animator.SetTrigger("IsAttacking");
         
         if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerStats))
         {
@@ -168,8 +179,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         EnemyManager.killCount++;
-        //DeathSound.Post(gameObject);
-        IdleSound.Post(gameObject);
+        DeathSound.Post(gameObject);
         if (UIManager.Instance != null) UIManager.Instance.UpdateKills(EnemyManager.killCount);
 
         HandleDrops(); 
@@ -191,15 +201,15 @@ public class Enemy : MonoBehaviour
 
             if (needsHealth && needsAmmo)
             {
-                Instantiate(Random.value > 0.5f ? healthPickupPrefab : ammoPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+                Instantiate(Random.value > 0.5f ? healthPickupPrefab : ammoPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
             }
             else if (needsHealth && healthPickupPrefab != null)
             {
-                Instantiate(healthPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+                Instantiate(healthPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
             }
             else if (needsAmmo && ammoPickupPrefab != null)
             {
-                Instantiate(ammoPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+                Instantiate(ammoPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
             }
         }
     }

@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.ProBuilder.MeshOperations;
 
-/// <summary>
-/// Destructible component for ProBuilder-based meshes.
-/// Instead of destroying the full GameObject on hit, this removes the impacted face.
-/// </summary>
 public class DamageablePolyshapes : MonoBehaviour, IDestructable
 {
     [Header("Destructable settings")]
@@ -37,22 +33,15 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         set => armor = value;
     }
 
-    // Auto-populates target meshes to reduce manual setup in the Inspector.
     private void Awake()
     {
-        if (maxHealthPerFace <= 0f)
-        {
-            maxHealthPerFace = 1f;
-            LogDebug("maxHealthPerFace was <= 0, clamped to 1.");
-        }
+        if (maxHealthPerFace <= 0f) maxHealthPerFace = 1f;
 
         health = Mathf.Clamp(health, 0f, maxHealthPerFace);
-        LogDebug($"Awake complete. health={health}, maxHealthPerFace={maxHealthPerFace}, armor={armor}");
 
         if (autoFindChildPolyshapes && (polyshapeMeshes == null || polyshapeMeshes.Length == 0))
         {
             polyshapeMeshes = GetComponentsInChildren<ProBuilderMesh>();
-            LogDebug($"Auto-found {polyshapeMeshes.Length} ProBuilder mesh(es).");
         }
 
         RefreshConfiguredMeshColliders();
@@ -61,51 +50,35 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
 
     public void TakeDamage(float damage)
     {
-        float finalDamage = Mathf.Max(0f, damage - armor);
-        health -= finalDamage;
-        LogDebug($"TakeDamage called. incoming={damage}, final={finalDamage}, healthNow={health}");
+        health -= damage; 
 
         if (health <= 0f)
         {
-            LogDebug("Health reached zero in TakeDamage. Destroying object.");
             DestroyObject();
         }
     }
 
     public void TakeDamageAtHit(float damage, RaycastHit hit)
     {
-        float finalDamage = Mathf.Max(0f, damage - armor);
         if (!TryResolveHitFace(hit, out ProBuilderMesh targetMesh, out Face targetFace, out int faceIndex, out MeshCollider targetCollider))
         {
-            LogDebug($"TakeDamageAtHit failed to resolve a face. triangleIndex={hit.triangleIndex}");
             return;
         }
 
         float faceHealth = GetFaceHealth(targetMesh, targetFace);
-        faceHealth = Mathf.Max(0f, faceHealth - finalDamage);
+        
+        faceHealth = Mathf.Max(0f, faceHealth - damage);
         SetFaceHealth(targetMesh, targetFace, faceHealth);
 
-        // Keep interface health in sync with the most recently hit face for debugging/UI.
         health = faceHealth;
-        LogDebug($"TakeDamageAtHit called. incoming={damage}, final={finalDamage}, mesh='{targetMesh.name}', faceIndex={faceIndex}, faceHealthNow={faceHealth}, triangleIndex={hit.triangleIndex}");
 
-        if (faceHealth > 0f)
-        {
-            LogDebug("Hit face not depleted yet. No face removed.");
-            return;
-        }
+        if (faceHealth > 0f) return;
 
-        // Remove only the depleted face.
         bool deletedFace = TryDeleteFace(targetMesh, targetFace, faceIndex, targetCollider);
         if (deletedFace)
         {
             RemoveFaceHealth(targetMesh, targetFace);
             health = maxHealthPerFace;
-            LogDebug($"Face removed successfully. Next face starts at {maxHealthPerFace} health.");
-        }
-        else
-        {
-            LogDebug("Face removal failed after health depletion.");
         }
     }
 
