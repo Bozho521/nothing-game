@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 35
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -272,6 +272,94 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Bars_6
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 65
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 14, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b9a35624249cfa49890cb9c60d7d8b6
+      internalID: -1459992218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars_9
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 49
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 14, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41c0956de1204a14b8b0d0eab7b18adc
+      internalID: 782337534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 13, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 754e8811dc4aed14e9c64109282d028d
+      internalID: -1386276046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Bars_11
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 8
+        width: 13
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 13, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6c264d43ceab2947bd8ac75e556b3af
+      internalID: 455236015
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -290,6 +378,8 @@ TextureImporter:
     nameFileIdTable:
       Bars_0: 1536579728
       Bars_1: 1026775717
+      Bars_10: -1386276046
+      Bars_11: 455236015
       Bars_2: 537615543
       Bars_3: 1945311202
       Bars_4: 1630661115
@@ -297,6 +387,7 @@ TextureImporter:
       Bars_6: -1459992218
       Bars_7: 1885351824
       Bars_8: 1844973627
+      Bars_9: 782337534
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

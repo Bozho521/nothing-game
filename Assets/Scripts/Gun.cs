@@ -144,8 +144,6 @@ public class Gun : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
-            
-            if (player != null) player.canLookUpAndDown = false;
         }
         else
         {
@@ -153,8 +151,6 @@ public class Gun : MonoBehaviour
             Cursor.visible = false;
             
             transform.localRotation = originalLocalRotation;
-
-            if (player != null) player.canLookUpAndDown = true;
         }
     }
 
