@@ -7,6 +7,8 @@ public class Damageable : MonoBehaviour, IDestructable
     public float Health { get; set; } = 50;
     public int Armor { get; set; } = 0;
     
+    [SerializeField]
+    private AK.Wwise.Event wallDestroyedSound;
     public void TakeDamage(float damage)
     {
         float finalDamage = Mathf.Max(0, damage - Armor);
@@ -20,6 +22,7 @@ public class Damageable : MonoBehaviour, IDestructable
 
     public void DestroyObject()
     {
+        wallDestroyedSound.Post(gameObject);
         Destroy(gameObject); 
     }
 }

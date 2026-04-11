@@ -18,6 +18,8 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
     [SerializeField] private bool destroyWhenNoFacesRemain = false;
     [SerializeField] private bool useDoubleSidedColliders = true;
 
+    [SerializeField] private AK.Wwise.Event wallDestroySound;
+
     private readonly Dictionary<ProBuilderMesh, Dictionary<Face, float>> faceHealthByMesh = new Dictionary<ProBuilderMesh, Dictionary<Face, float>>();
     private readonly Dictionary<MeshCollider, Mesh> runtimeColliderMeshes = new Dictionary<MeshCollider, Mesh>();
 
@@ -77,6 +79,7 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         bool deletedFace = TryDeleteFace(targetMesh, targetFace, faceIndex, targetCollider);
         if (deletedFace)
         {
+            wallDestroySound.Post(targetCollider.gameObject);
             RemoveFaceHealth(targetMesh, targetFace);
             health = maxHealthPerFace;
         }
