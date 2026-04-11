@@ -14,13 +14,13 @@ public class PlayerMovement : MonoBehaviour, IInteractor
 
     [Header("Movement Stats")]
     public float speed = 6f;
-    public float sprintSpeed = 10f;
+    public float sprintSpeed = 10f; 
     public float gravity = -19.62f; 
     public float jumpHeight = 2f;
 
     [Header("Movement Constraints")]
     public bool canLookUpAndDown = false; 
-    public bool canJump = false;          
+    public bool canJump = false;
     public bool canSprint = false;
 
     [Header("Camera & Look Settings")]
@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     public InputAction jumpAction;
     public InputAction lookAction;
     public InputAction interactAction;
-    public InputAction sprintAction;
+    public InputAction sprintAction;      
 
     [Header("UI Elements")]
     public GameObject deathScreenUI; 
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         jumpAction.Enable();
         lookAction.Enable();
         interactAction.Enable();
-        sprintAction.Enable();
+        sprintAction.Enable(); 
     }
 
     private void OnDisable()
@@ -76,11 +76,13 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         jumpAction.Disable();
         lookAction.Disable();
         interactAction.Disable();
-        sprintAction.Disable();
+        sprintAction.Disable(); 
     }
 
     private void Update()
     {
+        if (UIManager.Instance != null && UIManager.Instance.isPaused) return;
+
         if (isDead) 
         {
             if (Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
@@ -160,9 +162,17 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         if (deathScreenUI != null)
         {
             deathScreenUI.SetActive(true);
+            
+            foreach (Transform child in deathScreenUI.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
         }
         
         Time.timeScale = 0f; 
+        
+        Gun playerGun = FindFirstObjectByType<Gun>();
+        if (playerGun != null) playerGun.UpdateCursorAndPlayerState();
     }
 
     private void RestartGame()
@@ -199,7 +209,6 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         
         if (interactAction.triggered && canInteract)
         {
-            Debug.Log("Interacting");
             interactable.Interact(this);
         }
     }
@@ -213,7 +222,6 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     {
         canLookUpAndDown = true;
         canJump = true;
-        canSprint = true;
-        Debug.Log("Constraints unlocked!");
+        canSprint = true; 
     }
 }
