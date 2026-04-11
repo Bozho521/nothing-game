@@ -6,13 +6,26 @@ using Interfaces;
 using UnityEngine.EventSystems; 
 using UnityEngine.UI; 
 
+[System.Serializable]
+public class WeaponVisual
+{
+    public GameObject weaponModel;
+    public Transform firePoint;
+    public ParticleSystem muzzleFlash;
+}
+
 public class Gun : MonoBehaviour
 {
+    [Header("Weapon Visuals")]
+    public WeaponVisual[] weaponVisuals;
+    public int currentWeaponIndex = 0;
+
     [Header("Gun Stats")]
     public int damage = 10;
     public float range = 100f;         
     public float fireRate = 0.15f;
-    public int destructivePower = 0;
+    public float visualBulletSpeed = 0.15f; 
+    public int destructivePower = 0; 
     
     [Header("Ammo System")]
     public int currentAmmo;
@@ -22,8 +35,6 @@ public class Gun : MonoBehaviour
     private bool isReloading = false;
 
     [Header("Setup & Effects")]
-    public Transform firePoint;
-    public ParticleSystem muzzleFlash;
     public GameObject sparkEffectPrefab; 
     public GameObject visualBulletPrefab; 
     public GameObject bloodDecalPrefab;
@@ -42,7 +53,8 @@ public class Gun : MonoBehaviour
         originalLocalRotation = transform.localRotation;
         
         if (aimingReticle != null) aimingReticle.SetActive(false);
-        
+
+        RefreshWeaponVisuals();
         currentAmmo = magazineSize; 
         UpdateAmmoUI(); 
     }
@@ -87,6 +99,37 @@ public class Gun : MonoBehaviour
         {
             nextFireTime = Time.unscaledTime + fireRate;
             Shoot(effectivelyInUIMode, isPaused, isDead);
+        }
+    }
+
+    public void EquipWeapon(int index, int newDamage, float newRange, float newFireRate, int newDestructivePower, int newMagSize, int newReserve, float newReloadTime)
+    {
+        if (index < 0 || index >= weaponVisuals.Length) return;
+
+        currentWeaponIndex = index;
+        damage = newDamage;
+        range = newRange;
+        fireRate = newFireRate;
+        destructivePower = newDestructivePower;
+        magazineSize = newMagSize;
+        reserveAmmo = newReserve;
+        reloadTime = newReloadTime;
+        
+        currentAmmo = magazineSize;
+        isReloading = false;
+
+        RefreshWeaponVisuals();
+        UpdateAmmoUI();
+    }
+
+    private void RefreshWeaponVisuals()
+    {
+        for (int i = 0; i < weaponVisuals.Length; i++)
+        {
+            if (weaponVisuals[i].weaponModel != null)
+            {
+                weaponVisuals[i].weaponModel.SetActive(i == currentWeaponIndex);
+            }
         }
     }
 
@@ -159,7 +202,9 @@ public class Gun : MonoBehaviour
         currentAmmo--; 
         UpdateAmmoUI();
 
-        if (muzzleFlash != null) muzzleFlash.Play();
+        WeaponVisual activeVisual = weaponVisuals[currentWeaponIndex];
+
+        if (activeVisual.muzzleFlash != null) activeVisual.muzzleFlash.Play();
 
         if (effectivelyInUIMode && CheckAndDestroyUI())
         {
@@ -168,13 +213,12 @@ public class Gun : MonoBehaviour
 
         if (isPaused || isDead) return;
 
-        if (Physics.Raycast(firePoint.position, firePoint.forward, out RaycastHit hit, range))
+        if (Physics.Raycast(activeVisual.firePoint.position, activeVisual.firePoint.forward, out RaycastHit hit, range))
         {
-            StartCoroutine(AnimateVisualBullet(firePoint.position, hit.point));
+            StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, hit.point));
 
             if (hit.collider.TryGetComponent<IDestructable>(out var destructible) && destructivePower >= destructible.Armor)
             {
-                Debug.Log("Hit Destructible object");
                 destructible.TakeDamage(damage);
                 return;
             }
@@ -190,8 +234,8 @@ public class Gun : MonoBehaviour
 
                 if (bloodDecalPrefab != null)
                 {
-                    Vector3 passThroughStart = hit.point + (firePoint.forward * 0.5f); 
-                    if (Physics.Raycast(passThroughStart, firePoint.forward, out RaycastHit wallHit, 3f))
+                    Vector3 passThroughStart = hit.point + (activeVisual.firePoint.forward * 0.5f); 
+                    if (Physics.Raycast(passThroughStart, activeVisual.firePoint.forward, out RaycastHit wallHit, 3f))
                     {
                         if (wallHit.collider.GetComponentInParent<Enemy>() == null)
                         {
@@ -219,7 +263,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            StartCoroutine(AnimateVisualBullet(firePoint.position, firePoint.position + firePoint.forward * range));
+            StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, activeVisual.firePoint.position + activeVisual.firePoint.forward * range));
         }
     }
 
