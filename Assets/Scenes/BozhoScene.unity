@@ -884,7 +884,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.1000061, y: 0}
+  m_AnchoredPosition: {x: 0.099975586, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &811359964
@@ -1662,10 +1662,6 @@ PrefabInstance:
       propertyPath: deathScreenUI
       value: 
       objectReference: {fileID: 89007903}
-    - target: {fileID: 6588336951261555373, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
-      propertyPath: ammoDisplay
-      value: 
-      objectReference: {fileID: 811359964}
     - target: {fileID: 8193203996642386299, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1731,6 +1727,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1731052220}
+    - target: {fileID: 6488790283184834935, guid: 1ab4d5cd3bb52c24da9ccf2ba63f0673, type: 3}
+      propertyPath: initialSpawnDelay
+      value: 100000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
