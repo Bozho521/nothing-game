@@ -283,16 +283,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a31dcb3bc6fef4c8673005aac58f71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  maxHealth: 100
-  currentHealth: 0
-  isDead: 0
   speed: 6
-  sprintSpeed: 10
   gravity: -19.62
   jumpHeight: 2
-  canLookUpAndDown: 0
-  canJump: 0
-  canSprint: 0
   cameraTransform: {fileID: 8203138547755961292}
   mouseSensitivity: 0.2
   moveAction:
@@ -395,26 +388,8 @@ MonoBehaviour:
       m_Action: Interact
       m_Flags: 0
     m_Flags: 0
-  sprintAction:
-    m_Name: Sprint
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 9f2abcec-27b4-417f-9ab3-85daed73cae3
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: daba16a3-3dc1-4127-9f68-229c371bbf0b
-      m_Path: <Keyboard>/shift
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Sprint
-      m_Flags: 0
-    m_Flags: 0
-  deathScreenUI: {fileID: 0}
   canInteract: 1
-  playerCamera: {fileID: 0}
+  camera: {fileID: 0}
 --- !u!1001 &7041106327849687733
 PrefabInstance:
   m_ObjectHideFlags: 0
