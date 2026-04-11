@@ -4,10 +4,6 @@ using UnityEngine;
 using UnityEngine.ProBuilder;
 using UnityEngine.ProBuilder.MeshOperations;
 
-/// <summary>
-/// Destructible component for ProBuilder-based meshes.
-/// Instead of destroying the full GameObject on hit, this removes the impacted face.
-/// </summary>
 public class DamageablePolyshapes : MonoBehaviour, IDestructable
 {
     [Header("Destructable settings")]
@@ -37,7 +33,6 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         set => armor = value;
     }
 
-    // Auto-populates target meshes to reduce manual setup in the Inspector.
     private void Awake()
     {
         if (maxHealthPerFace <= 0f) maxHealthPerFace = 1f;
@@ -75,23 +70,15 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         faceHealth = Mathf.Max(0f, faceHealth - damage);
         SetFaceHealth(targetMesh, targetFace, faceHealth);
 
-        // Keep interface health in sync with the most recently hit face for debugging/UI.
         health = faceHealth;
-        LogDebug($"TakeDamageAtHit called. incoming={damage}, final={finalDamage}, mesh='{targetMesh.name}', faceIndex={faceIndex}, faceHealthNow={faceHealth}, triangleIndex={hit.triangleIndex}");
 
         if (faceHealth > 0f) return;
 
-        // Remove only the depleted face.
         bool deletedFace = TryDeleteFace(targetMesh, targetFace, faceIndex, targetCollider);
         if (deletedFace)
         {
             RemoveFaceHealth(targetMesh, targetFace);
             health = maxHealthPerFace;
-            LogDebug($"Face removed successfully. Next face starts at {maxHealthPerFace} health.");
-        }
-        else
-        {
-            LogDebug("Face removal failed after health depletion.");
         }
     }
 

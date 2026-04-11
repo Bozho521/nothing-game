@@ -17882,6 +17882,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BreakableVoxelBlock
   mainBlock: {fileID: 9036593726011131978}
   voxelBlocks: {fileID: 3813152765052680139}
+  health: 50
+  armor: 2
 --- !u!65 &6226017745776908432
 BoxCollider:
   m_ObjectHideFlags: 0

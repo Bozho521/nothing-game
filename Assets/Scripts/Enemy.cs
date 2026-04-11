@@ -105,7 +105,7 @@ public class Enemy : MonoBehaviour
         {
             var random_wait = Random.Range(2.0f, 7.5f);
             yield return new WaitForSeconds(random_wait);
-            IdleSound.Post(gameObject);s
+            IdleSound.Post(gameObject);
         }
     }
 
