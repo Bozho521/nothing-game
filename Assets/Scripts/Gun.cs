@@ -9,8 +9,9 @@ public class Gun : MonoBehaviour
     public int damage = 10;
     public float range = 100f;         
     public float fireRate = 0.15f;
-    public float visualBulletSpeed = 0.15f; 
-
+    public float visualBulletSpeed = 0.15f;
+    public int destructivePower = 0;
+    
     [Header("Ammo System")]
     public int currentAmmo;
     public int magazineSize = 10;      
@@ -82,9 +83,10 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(AnimateVisualBullet(firePoint.position, hit.point));
 
-            if (hit.collider.TryGetComponent<IDestructable>(out var destructible))
+            if (hit.collider.TryGetComponent<IDestructable>(out var destructible)&& destructivePower >=destructible.Armor)
             {
                 Debug.Log("Hit Destructible object");
+                
                 destructible.TakeDamage(damage);
                 return;
             }
