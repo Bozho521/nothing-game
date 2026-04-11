@@ -98,23 +98,26 @@ public class PlayerMovement : MonoBehaviour, IInteractor
 
     private void HandleMovement()
     {
+        Vector2 moveInput = moveAction.ReadValue<Vector2>();
+        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = -2f; 
         }
 
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
-        controller.Move(move * speed * Time.deltaTime);
-
         if (jumpAction.triggered && controller.isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-        CheckInteraction();
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+
+        Vector3 finalMovement = (move * speed) + (Vector3.up * velocity.y);
+
+        controller.Move(finalMovement * Time.deltaTime);
+
+        CheckInteraction();
     }
 
     public void TakeDamage(int damage)
