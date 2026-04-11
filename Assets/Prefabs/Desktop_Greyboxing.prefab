@@ -6366,10 +6366,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883560711434179353, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_text
+      value: Fishing at the End of Time
+      objectReference: {fileID: 0}
     - target: {fileID: 6535686432984913602, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_Name
       value: BreakableIcon (40)
       objectReference: {fileID: 0}
+    - target: {fileID: 7471253524935167502, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: b734256b726a74488bbb136ff24af334, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6818,10 +6826,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883560711434179353, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_text
+      value: Scrungly
+      objectReference: {fileID: 0}
     - target: {fileID: 6535686432984913602, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_Name
       value: BreakableIcon (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 7471253524935167502, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f8c4401df699459384535a265210fa4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7624,6 +7640,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1148009652882296409}
     m_Modifications:
+    - target: {fileID: 1433154977287291869, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 520
+      objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalScale.x
       value: 100
