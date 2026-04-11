@@ -11,6 +11,11 @@ public class EnemyManager : MonoBehaviour
     public float minimumSpawnDelay = 0.5f;
     public float spawnRadius = 30f;
 
+    [Header("Spawn Adjustments")]
+    public float groundOffset = 1f;
+    public float maxElevationDifference = 2f;
+    public int maxSpawnAttempts = 10;
+
     public static int killCount = 0; 
 
     private void Start()
@@ -38,14 +43,35 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnSingleEnemy()
     {
-        Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
-        Vector3 spawnPosition = transform.position + new Vector3(randomCircle.x, 0f, randomCircle.y);
+        if (player == null) return;
 
-        GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
-        if (newEnemy.TryGetComponent<Enemy>(out Enemy chaseScript))
+        for (int i = 0; i < maxSpawnAttempts; i++)
         {
-            chaseScript.player = player;
+            Vector2 randomCircle = Random.insideUnitCircle * spawnRadius;
+            
+            Vector3 rayStart = new Vector3(
+                player.position.x + randomCircle.x, 
+                player.position.y + 5f, 
+                player.position.z + randomCircle.y
+            );
+
+            if (Physics.Raycast(rayStart, Vector3.down, out RaycastHit hit, 10f))
+            {
+                float heightDifference = Mathf.Abs(hit.point.y - player.position.y);
+
+                if (heightDifference <= maxElevationDifference)
+                {
+                    Vector3 spawnPosition = hit.point + new Vector3(0, groundOffset, 0);
+                    GameObject newEnemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+
+                    if (newEnemy.TryGetComponent<Enemy>(out Enemy chaseScript))
+                    {
+                        chaseScript.player = player;
+                    }
+                    
+                    return; 
+                }
+            }
         }
     }
 }

@@ -6,8 +6,12 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance; 
 
-    [Header("UI Reference")]
-    public TextMeshProUGUI statsText;
+    [Header("UI References")]
+    public TextMeshProUGUI ammoText;
+    public TextMeshProUGUI hpText;
+    public TextMeshProUGUI killsText;
+    
+    [Header("Menus")]
     public GameObject pauseMenuUI; 
 
     public bool isPaused = false; 
@@ -90,11 +94,15 @@ public class UIManager : MonoBehaviour
         RefreshUI();
     }
 
+    public void ShowReloadingText()
+    {
+        if (ammoText != null) ammoText.text = "RELOADING...";
+    }
+
     private void RefreshUI()
     {
-        if (statsText != null)
-        {
-            statsText.text = $"AMMO: {currentAmmo}\nHP: {currentHP}\nKILLS: {currentKills}";
-        }
+        if (ammoText != null) ammoText.text = $"AMMO: {currentAmmo}";
+        if (hpText != null) hpText.text = $"HP: {currentHP}";
+        if (killsText != null) killsText.text = $"KILLS: {currentKills}";
     }
 }

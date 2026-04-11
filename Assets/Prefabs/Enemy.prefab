@@ -259,6 +259,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: 8283e1a0a61f6e24fbf0a05ba6ab9b25, type: 2}
+  dropChance: 1
+  healthPickupPrefab: {fileID: 8856818201944502011, guid: c9012023508fbe047991acd5e8eb8231, type: 3}
+  ammoPickupPrefab: {fileID: 3720225413877312806, guid: 3663db81c31c88149b41c0ff3c63c300, type: 3}
+  maxPlayerReserveAmmo: 120
 --- !u!1 &8710730883076376958
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [Header("Movement Settings")]
     public Transform player;       
     public float moveSpeed = 3f;   
+    public float gravity = 19.62f;
 
     [Header("Attack Settings")]
     public int attackDamage = 10;
@@ -31,6 +32,14 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AK.Wwise.Event IdleSound;
     [SerializeField] private AK.Wwise.Event DeathSound;
+    [Header("Drop Settings")]
+    public float dropChance = 0.25f; 
+    public GameObject healthPickupPrefab;
+    public GameObject ammoPickupPrefab;
+    public int maxPlayerReserveAmmo = 120; 
+
+    private float verticalVelocity = 0f;
+
     private void Start()
     {
         currentHealth = maxHealth; 
@@ -47,10 +56,13 @@ public class Enemy : MonoBehaviour
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
             
             
+            Vector3 movement = Vector3.zero;
+
             if (distanceToPlayer > attackRange)
             {
-                Vector3 direction = (player.position - transform.position).normalized;
-                transform.position += direction * moveSpeed * Time.deltaTime;
+                Vector3 flatTargetPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+                Vector3 direction = (flatTargetPos - transform.position).normalized;
+                movement = direction * moveSpeed;
             }
             else
             {
@@ -59,6 +71,21 @@ public class Enemy : MonoBehaviour
                     AttackPlayer();
                 }
             }
+
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.2f))
+            {
+                verticalVelocity = 0f;
+                
+                transform.position = new Vector3(transform.position.x, hit.point.y + 1f, transform.position.z);
+            }
+            else
+            {
+                verticalVelocity -= gravity * Time.deltaTime;
+            }
+
+            movement.y = verticalVelocity;
+            
+            transform.position += movement * Time.deltaTime;
         }
     }
 
@@ -119,6 +146,35 @@ public class Enemy : MonoBehaviour
         IdleSound.Post(gameObject);
         if (UIManager.Instance != null) UIManager.Instance.UpdateKills(EnemyManager.killCount);
 
+        HandleDrops(); 
+
         Destroy(gameObject);
+    }
+
+    private void HandleDrops()
+    {
+        if (Random.value > dropChance) return; 
+
+        if (player != null)
+        {
+            PlayerMovement pm = player.GetComponent<PlayerMovement>();
+            Gun gun = player.GetComponentInChildren<Gun>();
+
+            bool needsHealth = pm != null && pm.currentHealth < pm.maxHealth;
+            bool needsAmmo = gun != null && gun.reserveAmmo < maxPlayerReserveAmmo;
+
+            if (needsHealth && needsAmmo)
+            {
+                Instantiate(Random.value > 0.5f ? healthPickupPrefab : ammoPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+            }
+            else if (needsHealth && healthPickupPrefab != null)
+            {
+                Instantiate(healthPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+            }
+            else if (needsAmmo && ammoPickupPrefab != null)
+            {
+                Instantiate(ammoPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+            }
+        }
     }
 }

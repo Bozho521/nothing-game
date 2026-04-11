@@ -144,8 +144,6 @@ public class Gun : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = false;
-            
-            if (player != null) player.canLookUpAndDown = false;
         }
         else
         {
@@ -153,8 +151,6 @@ public class Gun : MonoBehaviour
             Cursor.visible = false;
             
             transform.localRotation = originalLocalRotation;
-
-            if (player != null) player.canLookUpAndDown = true;
         }
     }
 
@@ -182,7 +178,7 @@ public class Gun : MonoBehaviour
 
         isReloading = true;
         
-        if (UIManager.Instance != null) UIManager.Instance.statsText.text = "RELOADING...\nHP: " + UIManager.Instance.statsText.text.Split('\n')[1].Substring(4) + "\n" + UIManager.Instance.statsText.text.Split('\n')[2];
+        if (UIManager.Instance != null) UIManager.Instance.ShowReloadingText();
 
         yield return new WaitForSecondsRealtime(reloadTime);
 
