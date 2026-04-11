@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Interfaces;
 using TMPro;
 
 public class Gun : MonoBehaviour
@@ -85,8 +86,14 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(AnimateVisualBullet(firePoint.position, hit.point));
 
-            Enemy enemy = hit.collider.GetComponentInParent<Enemy>();
+            if (hit.collider.TryGetComponent<IDestructable>(out var destructible))
+            {
+                Debug.Log("Hit Destructible object");
+                destructible.TakeDamage(damage);
+                return;
+            }
 
+           Enemy enemy = hit.collider.GetComponentInParent<Enemy>();
             if (enemy != null)
             {
                 bool isHeadshot = hit.collider.CompareTag("Headshot");
