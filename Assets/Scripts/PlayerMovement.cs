@@ -98,6 +98,8 @@ public class PlayerMovement : MonoBehaviour, IInteractor
 
     private void HandleLook()
     {
+        if (Cursor.lockState != CursorLockMode.Locked) return; 
+
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
 
         transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
