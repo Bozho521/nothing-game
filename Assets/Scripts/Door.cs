@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using Interfaces;
+
 public class Door : MonoBehaviour, IInteractable, IDestructable
 {
     [SerializeField]
@@ -9,6 +10,7 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     public float secondsToOpen = 1.5f;
 
     private bool Opened = false;
+    private bool isEncounterManaged = false;
     
     public float Health { get; set; } = 50.0f;
     public int Armor { get; set; } = 0;
@@ -42,6 +44,11 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     public void Interact(IInteractor interactor)
     {
         Debug.Log("Door interacted");
+        if (isEncounterManaged)
+        {
+            return;
+        }
+
         if (interactor is PlayerMovement player && !Opened)
         {
             Debug.Log("Opening Door");
@@ -49,6 +56,22 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
             StartCoroutine(Open());
         }
         //throw new System.NotImplementedException();
+    }
+
+    public void SetEncounterManaged(bool encounterManaged)
+    {
+        isEncounterManaged = encounterManaged;
+    }
+
+    public void OpenFromEncounter()
+    {
+        if (Opened)
+        {
+            return;
+        }
+
+        Opened = true;
+        StartCoroutine(Open());
     }
     
     
