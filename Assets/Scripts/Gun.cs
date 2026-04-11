@@ -217,6 +217,11 @@ public class Gun : MonoBehaviour
         {
             StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, hit.point));
 
+            if (TryHitDamageablePolyshape(hit, damage))
+            {
+                return;
+            }
+
             if (hit.collider.TryGetComponent<IDestructable>(out var destructible) && destructivePower >= destructible.Armor)
             {
                 destructible.TakeDamage(damage);
@@ -365,5 +370,22 @@ public class Gun : MonoBehaviour
     private void UpdateAmmoUI()
     {
         if (UIManager.Instance != null) UIManager.Instance.UpdateAmmo(currentAmmo, reserveAmmo);
+    }
+
+    private static bool TryHitDamageablePolyshape(RaycastHit hit, float damage)
+    {
+        DamageablePolyshapes polyshape = hit.collider.GetComponent<DamageablePolyshapes>();
+        if (polyshape == null)
+        {
+            polyshape = hit.collider.GetComponentInParent<DamageablePolyshapes>();
+        }
+
+        if (polyshape == null)
+        {
+            return false;
+        }
+
+        polyshape.TakeDamageAtHit(damage, hit);
+        return true;
     }
 }

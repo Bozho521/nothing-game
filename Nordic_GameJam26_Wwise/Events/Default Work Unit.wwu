@@ -1,6 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{9A0FDAA8-4D0E-463E-90D8-A9C96844EAF0}" SchemaVersion="123">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{9A0FDAA8-4D0E-463E-90D8-A9C96844EAF0}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{9A0FDAA8-4D0E-463E-90D8-A9C96844EAF0}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="Enemy" ID="{E627CE4F-2015-4998-AA0A-DD79E84C0D69}" ShortID="547890777">
+					<ChildrenList>
+						<Event Name="Play_Enemy_Die" ID="{3DEF6225-A339-400C-A582-6FB1D125DA37}">
+							<ChildrenList>
+								<Action Name="" ID="{8AD5DD1D-32DB-4596-ADDC-9EC7B0A73783}" ShortID="878272643">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Enemy Die" ID="{0D53DB92-0F20-470B-876C-57893EF4DC7E}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Enemy_Idle" ID="{076FFA12-F6E7-437C-AA5B-E236E8A035CC}">
+							<ChildrenList>
+								<Action Name="" ID="{ED5D98F6-4DAF-4CCB-BD0D-039BBEC6211E}" ShortID="1005501594">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Enemy Idle" ID="{BB3A2095-2000-456A-9601-AD5F40718782}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Player" ID="{0F5A3B4E-7B80-4A2C-8DDD-1CFFC7DC6BC0}" ShortID="1011838839">
+					<ChildrenList>
+						<Event Name="Play_Player_Damage" ID="{4AD5D51F-2989-4019-94DF-DC0D47C614A7}">
+							<ChildrenList>
+								<Action Name="" ID="{4D025572-4826-4FA2-9580-EBF1536917F6}" ShortID="905831674">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Player Damage" ID="{8FA24F07-C478-4270-8672-E497D5767778}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Pistol" ID="{5EBE07F8-3C82-4CDC-A9DE-95BD4BC0D54A}" ShortID="743296563">
+					<ChildrenList>
+						<Event Name="Play_Pistol_Shoot" ID="{30B8EBFA-F5A7-4281-841F-AC43E523FBC9}">
+							<ChildrenList>
+								<Action Name="" ID="{DB0E1E57-9FA8-4394-9BA9-FE6FB9BBC5A3}" ShortID="293796613">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Pistol Shoot" ID="{539DB1BB-7325-43EE-9FA7-B0B5F7494757}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Pistol_Empty" ID="{BC2B2702-47B6-40E8-8959-583D6D216FA4}">
+							<ChildrenList>
+								<Action Name="" ID="{41555EDF-DB9A-4F15-8047-E0B44691F363}" ShortID="75558813">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Pistol Empty" ID="{10D5DC79-9A78-4174-BFF1-33F9FE3884EE}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Pistol_Reload" ID="{BC0439D2-3A5B-44EB-91D6-EBA63EDC2A8C}">
+							<ChildrenList>
+								<Action Name="" ID="{5312D2F3-0CA2-4627-A78A-8412914AE943}" ShortID="979288684">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Pistol Reload" ID="{7667A7B2-DF69-4912-91B2-C426EA28D7B3}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Shotgun" ID="{CCA8ACE3-E087-4B38-B4C7-31B3784244DA}" ShortID="837358170">
+					<ChildrenList>
+						<Event Name="Play_Shotgun_Reload" ID="{C31BE833-8EA9-4944-84A9-E47AE7EDCB7D}">
+							<ChildrenList>
+								<Action Name="" ID="{3C9541C8-8740-4264-ACA9-63123533F281}" ShortID="272986037">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Shotgun Reload" ID="{7346EA83-9F6D-4329-9569-87B362525253}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Shotgun_Empty" ID="{06E9987C-9E12-4600-BB13-C569B57A8893}">
+							<ChildrenList>
+								<Action Name="" ID="{93E3E1B9-5FCB-4880-93B2-7536D97B4BBF}" ShortID="431046134">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Shotgun Empty" ID="{A22FBA31-9D1C-4E0E-A47D-0D28DBAB6A8C}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Shotgun_Shells" ID="{E0D7F2A9-A5C1-42CF-B27C-5E8D553EE50E}">
+							<ChildrenList>
+								<Action Name="" ID="{E7D341DA-8542-4843-840F-4BB701FB8321}" ShortID="452913385">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Shotgun Shells" ID="{7B4FF50F-4E57-4024-B793-181805391CEA}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Shotgun_Shoot" ID="{2588BEC1-D6C1-460E-BC6E-F25707DDF14B}">
+							<ChildrenList>
+								<Action Name="" ID="{DF2B64BA-5777-49D7-8070-82ED1259C643}" ShortID="423949428">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Shotgun Shoot" ID="{0B6A4B19-200D-441D-8E68-B63592606500}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Menu" ID="{E5469995-70ED-4FA9-8F54-314428C71AA1}" ShortID="624871280">
+					<ChildrenList>
+						<Event Name="Play_Menu_Button_1" ID="{964D19C9-BBB6-48A1-89C8-1E546CB4CC3B}">
+							<ChildrenList>
+								<Action Name="" ID="{2D8A8227-6437-41A5-8A7A-870FFA11F041}" ShortID="969454528">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Menu Button 1" ID="{BFFB09C0-E952-4DB5-A9D2-2B1FEC98FB65}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Wall" ID="{58A06D1A-1423-462D-A830-1D52EC3BA842}" ShortID="567346124">
+					<ChildrenList>
+						<Event Name="Play_Wall_Destroy" ID="{2F4CB71A-0971-4C13-AEF8-A4B4111F60EA}">
+							<ChildrenList>
+								<Action Name="" ID="{6D0E69A7-91E1-4731-9FEB-FAAE063221C5}" ShortID="129960895">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Wall Destroy" ID="{41C5CDFF-307A-40FE-B1DC-E95E94E9FC4A}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>
