@@ -1,8 +1,9 @@
+using Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IInteractor
 {
     [Header("Movement Stats")]
     public float speed = 6f;
@@ -18,14 +19,23 @@ public class PlayerMovement : MonoBehaviour
     public InputAction moveAction;
     public InputAction jumpAction;
     public InputAction lookAction;
+    public InputAction interactAction;
 
+    public bool canInteract = true;
+    
     private CharacterController controller;
+    [SerializeField]
+    private Camera camera;
     private Vector3 velocity;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        
+        camera = GetComponentInChildren<Camera>();
+        if (camera != null)
+        {
+            Debug.Log("Valid camera");
+        }
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -35,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction.Enable();
         jumpAction.Enable();
         lookAction.Enable();
+        interactAction.Enable();
     }
 
     private void OnDisable()
@@ -42,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
         moveAction.Disable();
         jumpAction.Disable();
         lookAction.Disable();
+        interactAction.Disable();
     }
 
     void Update()
@@ -70,8 +82,28 @@ public class PlayerMovement : MonoBehaviour
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+        CheckInteraction();
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    public void CheckInteraction()
+    {
+        Ray ray = camera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+        
+        if (!Physics.Raycast(ray, out RaycastHit hit)) return;
+        Debug.Log("Ray hit");
+        if (!hit.collider.TryGetComponent<IInteractable>(out var interactable)) return;
+        Debug.Log("Interactable found");
+        if (interactAction.triggered && canInteract)
+        {
+            interactable.Interact(this);
+        }
+    }
+
+    public void OnInteractComplete(IInteractable interacted)
+    {
+        throw new System.NotImplementedException();
     }
 }

@@ -379,3 +379,14 @@ MonoBehaviour:
       m_Action: Look
       m_Flags: 0
     m_Flags: 0
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 12cc3520-b4f8-4865-9dca-977c12cdf94f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  canInteract: 1
+  camera: {fileID: 0}
