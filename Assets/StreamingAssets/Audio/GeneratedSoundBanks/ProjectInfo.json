@@ -1,0 +1,29 @@
+{
+ "ProjectInfo": {
+  "Project": {
+   "Name": "Nordic_GameJam26_Wwise",
+   "GUID": "{AF0CC6DF-9BA5-4408-BD4D-526A112F2812}",
+   "Generator": "2024.1.7.8863"
+  },
+  "CacheRoot": "../../../../../../Nordic_GameJ/Nordic_GameJam26_Wwise/.cache",
+  "Platforms": [
+   {
+    "Name": "Windows",
+    "GUID": "{CC8380A0-206B-4DE5-AFCA-D40A3A43F53E}",
+    "BasePlatform": "Windows",
+    "BasePlatformGUID": "{6E0CB257-C6C8-4C5C-8366-2740DFC441EB}",
+    "Path": "../../../../../../Nordic_GameJ/Nordic_GameJam26_Wwise/GeneratedSoundBanks/Windows"
+   }
+  ],
+  "Languages": [
+   {
+    "Name": "English(US)",
+    "Id": "684519430",
+    "GUID": "{F085E39F-5F86-4EB8-8EC0-2887084535CF}",
+    "Default": "true",
+    "UseAsStandIn": "true"
+   }
+  ],
+  "FileHash": "{543F89AC-9763-71C2-E45A-7023E0AB4D3B}"
+ }
+}
