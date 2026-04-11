@@ -14,8 +14,14 @@ public class PlayerMovement : MonoBehaviour, IInteractor
 
     [Header("Movement Stats")]
     public float speed = 6f;
+    public float sprintSpeed = 10f;
     public float gravity = -19.62f; 
     public float jumpHeight = 2f;
+
+    [Header("Movement Constraints")]
+    public bool canLookUpAndDown = false; 
+    public bool canJump = false;          
+    public bool canSprint = false;
 
     [Header("Camera & Look Settings")]
     public Transform cameraTransform; 
@@ -27,6 +33,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     public InputAction jumpAction;
     public InputAction lookAction;
     public InputAction interactAction;
+    public InputAction sprintAction;
 
     [Header("UI Elements")]
     public GameObject deathScreenUI; 
@@ -60,6 +67,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         jumpAction.Enable();
         lookAction.Enable();
         interactAction.Enable();
+        sprintAction.Enable();
     }
 
     private void OnDisable()
@@ -68,6 +76,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         jumpAction.Disable();
         lookAction.Disable();
         interactAction.Disable();
+        sprintAction.Disable();
     }
 
     private void Update()
@@ -91,30 +100,41 @@ public class PlayerMovement : MonoBehaviour, IInteractor
 
         transform.Rotate(Vector3.up * lookInput.x * mouseSensitivity);
 
-        xRotation -= lookInput.y * mouseSensitivity;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        if (canLookUpAndDown)
+        {
+            xRotation -= lookInput.y * mouseSensitivity;
+            xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+            cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        }
     }
 
     private void HandleMovement()
     {
+        Vector2 moveInput = moveAction.ReadValue<Vector2>();
+        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+
         if (controller.isGrounded && velocity.y < 0)
         {
             velocity.y = -2f; 
         }
 
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
-        controller.Move(move * speed * Time.deltaTime);
-
-        if (jumpAction.triggered && controller.isGrounded)
+        if (jumpAction.triggered && controller.isGrounded && canJump)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
-        CheckInteraction();
 
         velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+
+        float currentSpeed = speed;
+        if (canSprint && sprintAction.IsPressed())
+        {
+            currentSpeed = sprintSpeed;
+        }
+
+        Vector3 finalMovement = (move * currentSpeed) + (Vector3.up * velocity.y);
+        controller.Move(finalMovement * Time.deltaTime);
+
+        CheckInteraction();
     }
 
     public void TakeDamage(int damage)
@@ -187,5 +207,13 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     public void OnInteractComplete(IInteractable interacted)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void UnlockMovementConstraints()
+    {
+        canLookUpAndDown = true;
+        canJump = true;
+        canSprint = true;
+        Debug.Log("Constraints unlocked!");
     }
 }
