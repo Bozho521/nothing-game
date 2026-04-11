@@ -211,6 +211,7 @@ public class Gun : MonoBehaviour
             return; 
         }
 
+<<<<<<< Updated upstream
         if (isPaused || isDead) return;
 
         if (Physics.Raycast(activeVisual.firePoint.position, activeVisual.firePoint.forward, out RaycastHit hit, range))
@@ -218,6 +219,14 @@ public class Gun : MonoBehaviour
             StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, hit.point));
 
             if (hit.collider.TryGetComponent<IDestructable>(out var destructible) && destructivePower >= destructible.Armor)
+=======
+            if (TryHitDamageablePolyshape(hit, damage))
+            {
+                return;
+            }
+
+            if (hit.collider.TryGetComponent<IDestructable>(out var destructible))
+>>>>>>> Stashed changes
             {
                 destructible.TakeDamage(damage);
                 return;
@@ -365,5 +374,22 @@ public class Gun : MonoBehaviour
     private void UpdateAmmoUI()
     {
         if (UIManager.Instance != null) UIManager.Instance.UpdateAmmo(currentAmmo, reserveAmmo);
+    }
+
+    private static bool TryHitDamageablePolyshape(RaycastHit hit, float damage)
+    {
+        DamageablePolyshapes polyshape = hit.collider.GetComponent<DamageablePolyshapes>();
+        if (polyshape == null)
+        {
+            polyshape = hit.collider.GetComponentInParent<DamageablePolyshapes>();
+        }
+
+        if (polyshape == null)
+        {
+            return false;
+        }
+
+        polyshape.TakeDamageAtHit(damage, hit);
+        return true;
     }
 }
