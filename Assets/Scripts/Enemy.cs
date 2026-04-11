@@ -20,7 +20,8 @@ public class Enemy : MonoBehaviour
     private float lastAttackTime = 0f;
 
     [Header("Visual Feedback")]
-    public Renderer enemyRenderer;   
+    public Renderer enemyRenderer;
+    [SerializeField] private Animator animator;
     public Color damageColor = Color.red; 
     private Color originalColor;
     private float flashDuration = 0.1f;   
@@ -86,6 +87,15 @@ public class Enemy : MonoBehaviour
             movement.y = verticalVelocity;
             
             transform.position += movement * Time.deltaTime;
+
+            if (movement.magnitude > 0f)
+            {
+                animator.SetBool("IsMoving", true);
+            }
+            else
+            {
+                animator.SetBool("IsMoving", false);
+            }
         }
     }
 
@@ -102,6 +112,8 @@ public class Enemy : MonoBehaviour
     private void AttackPlayer()
     {
         lastAttackTime = Time.time;
+
+        animator.SetTrigger("IsAttacking");
         
         if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerStats))
         {
@@ -163,15 +175,15 @@ public class Enemy : MonoBehaviour
 
             if (needsHealth && needsAmmo)
             {
-                Instantiate(Random.value > 0.5f ? healthPickupPrefab : ammoPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+                Instantiate(Random.value > 0.5f ? healthPickupPrefab : ammoPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
             }
             else if (needsHealth && healthPickupPrefab != null)
             {
-                Instantiate(healthPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+                Instantiate(healthPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
             }
             else if (needsAmmo && ammoPickupPrefab != null)
             {
-                Instantiate(ammoPickupPrefab, transform.position + Vector3.up, Quaternion.identity);
+                Instantiate(ammoPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
             }
         }
     }
