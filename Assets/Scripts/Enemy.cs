@@ -11,6 +11,12 @@ public class Enemy : MonoBehaviour
     public Transform player;       
     public float moveSpeed = 3f;   
 
+    [Header("Attack Settings")]
+    public int attackDamage = 10;
+    public float attackRange = 2f;
+    public float attackCooldown = 1f;
+    private float lastAttackTime = 0f;
+
     [Header("Visual Feedback")]
     public Renderer enemyRenderer;   
     public Color damageColor = Color.red; 
@@ -33,9 +39,32 @@ public class Enemy : MonoBehaviour
     {
         if (player != null)
         {
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * moveSpeed * Time.deltaTime;
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+            if (distanceToPlayer > attackRange)
+            {
+                Vector3 direction = (player.position - transform.position).normalized;
+                transform.position += direction * moveSpeed * Time.deltaTime;
+            }
+            else
+            {
+                if (Time.time >= lastAttackTime + attackCooldown)
+                {
+                    AttackPlayer();
+                }
+            }
+        }
+    }
+
+    private void AttackPlayer()
+    {
+        lastAttackTime = Time.time;
+        
+        if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerStats))
+        {
+            playerStats.TakeDamage(attackDamage);
         }
     }
 
@@ -71,6 +100,9 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         EnemyManager.killCount++;
+        
+        if (UIManager.Instance != null) UIManager.Instance.UpdateKills(EnemyManager.killCount);
+
         Destroy(gameObject);
     }
 }

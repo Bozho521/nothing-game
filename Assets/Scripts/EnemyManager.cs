@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -12,23 +11,15 @@ public class EnemyManager : MonoBehaviour
     public float minimumSpawnDelay = 0.5f;
     public float spawnRadius = 30f;
 
-    [Header("UI")]
-    public TextMeshProUGUI enemyCountText;
-
     public static int killCount = 0; 
 
     private void Start()
     {
         killCount = 0; 
+        
+        if (UIManager.Instance != null) UIManager.Instance.UpdateKills(killCount);
+        
         StartCoroutine(SpawnRoutine());
-    }
-
-    private void Update()
-    {
-        if (enemyCountText != null)
-        {
-            enemyCountText.text = "KILLS: " + killCount;
-        }
     }
 
     private IEnumerator SpawnRoutine()

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
-using TMPro;
+using Interfaces;
 
 public class Gun : MonoBehaviour
 {
@@ -24,9 +24,6 @@ public class Gun : MonoBehaviour
     public GameObject sparkEffectPrefab; 
     public GameObject visualBulletPrefab; 
     public GameObject bloodDecalPrefab;
-
-    [Header("UI")]
-    public TextMeshProUGUI ammoDisplay;
 
     private float nextFireTime = 0f;
 
@@ -59,7 +56,7 @@ public class Gun : MonoBehaviour
 
         isReloading = true;
         
-        if (ammoDisplay != null) ammoDisplay.text = "RELOADING...";
+        if (UIManager.Instance != null) UIManager.Instance.statsText.text = "RELOADING...\nHP: " + UIManager.Instance.statsText.text.Split('\n')[1].Substring(4) + "\n" + UIManager.Instance.statsText.text.Split('\n')[2];
 
         yield return new WaitForSeconds(reloadTime);
 
@@ -109,10 +106,20 @@ public class Gun : MonoBehaviour
                     }
                 }
             }
-            else if (sparkEffectPrefab != null)
+            else 
             {
-                GameObject sparks = Instantiate(sparkEffectPrefab, hit.point + (hit.normal * 0.05f), Quaternion.LookRotation(hit.normal));
-                Destroy(sparks, 2f);
+                IDestructable destructable = hit.collider.GetComponentInParent<IDestructable>();
+                
+                if (destructable != null)
+                {
+                    destructable.TakeDamage(damage);
+                }
+
+                if (sparkEffectPrefab != null)
+                {
+                    GameObject sparks = Instantiate(sparkEffectPrefab, hit.point + (hit.normal * 0.05f), Quaternion.LookRotation(hit.normal));
+                    Destroy(sparks, 2f);
+                }
             }
         }
         else
@@ -143,9 +150,6 @@ public class Gun : MonoBehaviour
 
     private void UpdateAmmoUI()
     {
-        if (ammoDisplay != null)
-        {
-            ammoDisplay.text = currentAmmo + " / " + reserveAmmo;
-        }
+        if (UIManager.Instance != null) UIManager.Instance.UpdateAmmo(currentAmmo, reserveAmmo);
     }
 }

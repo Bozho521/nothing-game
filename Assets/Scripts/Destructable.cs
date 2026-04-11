@@ -9,7 +9,9 @@ public class Damageable : MonoBehaviour, IDestructable
     
     public void TakeDamage(float damage)
     {
-        Health -= damage;
+        float finalDamage = Mathf.Max(0, damage - Armor);
+        
+        Health -= finalDamage;
         if (Health <= 0)
         {
             DestroyObject();
@@ -18,6 +20,6 @@ public class Damageable : MonoBehaviour, IDestructable
 
     public void DestroyObject()
     {
-        Destroy(this);
+        Destroy(gameObject); 
     }
 }
