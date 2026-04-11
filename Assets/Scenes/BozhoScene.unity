@@ -2498,6 +2498,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 273bc119d64007f4787a7885e310fb39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkInitializer
+  InitializationSettings: {fileID: 11400000, guid: c0ba3b24e38c4aa4cb37b68e0740535d, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
 --- !u!4 &1270645031
 Transform:
   m_ObjectHideFlags: 0
@@ -3079,6 +3092,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 769405538063290709, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
   m_PrefabInstance: {fileID: 6313948591618981468}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1857105224 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2926903539518483947, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+  m_PrefabInstance: {fileID: 6313948591618981468}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1857105228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857105224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57e75be2add12c944b0b7dae6a36cf96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkAudioListener
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &1857105229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857105224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd58783e4469d1947b1a2d62bbb17ffa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkGameObj
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &2041483325
 GameObject:
   m_ObjectHideFlags: 0
@@ -3580,7 +3638,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2926903539518483947, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1857105229}
+    - targetCorrespondingSourceObject: {fileID: 2926903539518483947, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1857105228}
   m_SourcePrefab: {fileID: 100100000, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
 --- !u!1001 &8634383302571727740
 PrefabInstance:

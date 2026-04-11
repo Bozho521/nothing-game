@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: e82c6f81fd9e534e98d22559424ffeaf
     GuidInternal: 
-    m_lastTime: -8584257059583318193
+    m_lastTime: -8584257042860305704
     List: []
   - PhysicalPath: Virtual Acoustics\Factory Acoustic Textures.wwu
     PathAndIcons:
@@ -37,7 +37,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Factory Acoustic Textures
     guid: 6b663d46a83ca54f8b4a5fef12b883f6
     GuidInternal: 
-    m_lastTime: -8584257059583308204
+    m_lastTime: -8584257042860295728
     List:
     - name: Acoustic_Banner
       guid: f2532d2fccda8e408b8898b1b52a26d6
@@ -303,7 +303,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 85a5a6dc293ea24dbe4b8bccbb0646b1
     GuidInternal: 
-    m_lastTime: -8584257059583565741
+    m_lastTime: -8584257042860610971
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -359,8 +359,350 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
     GuidInternal: 
-    m_lastTime: -8584256877953444133
-    List: []
+    m_lastTime: -8584256734712938972
+    List:
+    - name: Enemy
+      guid: 4fce27e615209849aa0add79e84c0d69
+      id: 2299321487
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 4fce27e615209849aa0add79e84c0d69
+      Path: Events\Default Work Unit\Enemy
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Menu
+      guid: 959946e5ed70a94f8f54314428c71aa1
+      id: 2607556080
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Menu
+        ObjectType: 4
+        guid: 959946e5ed70a94f8f54314428c71aa1
+      Path: Events\Default Work Unit\Menu
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Pistol
+      guid: f807be5e823cdc4ca9de95bd4bc0d54a
+      id: 324443136
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Pistol
+        ObjectType: 4
+        guid: f807be5e823cdc4ca9de95bd4bc0d54a
+      Path: Events\Default Work Unit\Pistol
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Enemy_Die
+      guid: 2562ef3d39a30c40a5826fb1d125da37
+      id: 2448258477
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 4fce27e615209849aa0add79e84c0d69
+      - ElementName: Play_Enemy_Die
+        ObjectType: 3
+        guid: 2562ef3d39a30c40a5826fb1d125da37
+      Path: Events\Default Work Unit\Enemy\Play_Enemy_Die
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Enemy_Idle
+      guid: 12fa6f07e7f67c43aa5be236e8a035cc
+      id: 1109600527
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Enemy
+        ObjectType: 4
+        guid: 4fce27e615209849aa0add79e84c0d69
+      - ElementName: Play_Enemy_Idle
+        ObjectType: 3
+        guid: 12fa6f07e7f67c43aa5be236e8a035cc
+      Path: Events\Default Work Unit\Enemy\Play_Enemy_Idle
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Menu_Button_1
+      guid: c9194d96b6bba14889c81e546cb4cc3b
+      id: 328562558
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Menu
+        ObjectType: 4
+        guid: 959946e5ed70a94f8f54314428c71aa1
+      - ElementName: Play_Menu_Button_1
+        ObjectType: 3
+        guid: c9194d96b6bba14889c81e546cb4cc3b
+      Path: Events\Default Work Unit\Menu\Play_Menu_Button_1
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Pistol_Empty
+      guid: 02272bbcb647e8408959583d6d216fa4
+      id: 2165847569
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Pistol
+        ObjectType: 4
+        guid: f807be5e823cdc4ca9de95bd4bc0d54a
+      - ElementName: Play_Pistol_Empty
+        ObjectType: 3
+        guid: 02272bbcb647e8408959583d6d216fa4
+      Path: Events\Default Work Unit\Pistol\Play_Pistol_Empty
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Pistol_Reload
+      guid: d23904bc5b3aeb4491d6eba63edc2a8c
+      id: 1886652945
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Pistol
+        ObjectType: 4
+        guid: f807be5e823cdc4ca9de95bd4bc0d54a
+      - ElementName: Play_Pistol_Reload
+        ObjectType: 3
+        guid: d23904bc5b3aeb4491d6eba63edc2a8c
+      Path: Events\Default Work Unit\Pistol\Play_Pistol_Reload
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Pistol_Shoot
+      guid: faebb830a7f58142841fac43e523fbc9
+      id: 2955138351
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Pistol
+        ObjectType: 4
+        guid: f807be5e823cdc4ca9de95bd4bc0d54a
+      - ElementName: Play_Pistol_Shoot
+        ObjectType: 3
+        guid: faebb830a7f58142841fac43e523fbc9
+      Path: Events\Default Work Unit\Pistol\Play_Pistol_Shoot
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Player_Damage
+      guid: 1fd5d54a8929194094dfdc0d47c614a7
+      id: 3638125099
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Player
+        ObjectType: 4
+        guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
+      - ElementName: Play_Player_Damage
+        ObjectType: 3
+        guid: 1fd5d54a8929194094dfdc0d47c614a7
+      Path: Events\Default Work Unit\Player\Play_Player_Damage
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Shotgun_Empty
+      guid: 7c98e906129e0046bb13c569b57a8893
+      id: 1908822854
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Shotgun
+        ObjectType: 4
+        guid: e3aca8cc87e0384bb4c731b3784244da
+      - ElementName: Play_Shotgun_Empty
+        ObjectType: 3
+        guid: 7c98e906129e0046bb13c569b57a8893
+      Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Empty
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Shotgun_Reload
+      guid: 33e81bc3a98e444984a9e47ae7edcb7d
+      id: 1248355840
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Shotgun
+        ObjectType: 4
+        guid: e3aca8cc87e0384bb4c731b3784244da
+      - ElementName: Play_Shotgun_Reload
+        ObjectType: 3
+        guid: 33e81bc3a98e444984a9e47ae7edcb7d
+      Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Reload
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Shotgun_Shells
+      guid: a9f2d7e0c1a5cf42b27c5e8d553ee50e
+      id: 2876530582
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Shotgun
+        ObjectType: 4
+        guid: e3aca8cc87e0384bb4c731b3784244da
+      - ElementName: Play_Shotgun_Shells
+        ObjectType: 3
+        guid: a9f2d7e0c1a5cf42b27c5e8d553ee50e
+      Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Shells
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Shotgun_Shoot
+      guid: c1be8825c1d60e46bc6ef25707ddf14b
+      id: 2995294012
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Shotgun
+        ObjectType: 4
+        guid: e3aca8cc87e0384bb4c731b3784244da
+      - ElementName: Play_Shotgun_Shoot
+        ObjectType: 3
+        guid: c1be8825c1d60e46bc6ef25707ddf14b
+      Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Shoot
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Play_Wall_Destroy
+      guid: 1ab74c2f7109134caef8a4b4111f60ea
+      id: 1374894833
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Wall
+        ObjectType: 4
+        guid: 1a6da05823142d46a8301d52ec3ba842
+      - ElementName: Play_Wall_Destroy
+        ObjectType: 3
+        guid: 1ab74c2f7109134caef8a4b4111f60ea
+      Path: Events\Default Work Unit\Wall\Play_Wall_Destroy
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Player
+      guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
+      id: 1069431850
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Player
+        ObjectType: 4
+        guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
+      Path: Events\Default Work Unit\Player
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Shotgun
+      guid: e3aca8cc87e0384bb4c731b3784244da
+      id: 51683977
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Shotgun
+        ObjectType: 4
+        guid: e3aca8cc87e0384bb4c731b3784244da
+      Path: Events\Default Work Unit\Shotgun
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: Wall
+      guid: 1a6da05823142d46a8301d52ec3ba842
+      id: 2108779961
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Wall
+        ObjectType: 4
+        guid: 1a6da05823142d46a8301d52ec3ba842
+      Path: Events\Default Work Unit\Wall
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -373,7 +715,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 7e0a1a75cc7fe448b7728c3c1bd11ce7
     GuidInternal: 
-    m_lastTime: -8584257059583634417
+    m_lastTime: -8584257042860649567
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
@@ -387,7 +729,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: eed725982fc3254ab3cf73f78225dfb7
     GuidInternal: 
-    m_lastTime: -8584257059583353558
+    m_lastTime: -8584257042860315232
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -401,7 +743,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 469feeb9110dbc4687199f34a316fcee
     GuidInternal: 
-    m_lastTime: -8584257059583338303
+    m_lastTime: -8584257042860315232
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -415,7 +757,7 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 0917ec52f6d6df4a85001e8a5bcb5d51
     GuidInternal: 
-    m_lastTime: -8584257059583328192
+    m_lastTime: -8584257042860305704
     List: []
   ExpandedFileSystemItemIds: 
   ExpandedWaapiItemIds: 
