@@ -1,43 +1,76 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(CapsuleCollider))] 
 public class Enemy : MonoBehaviour
 {
-    [Header("References")]
+    [Header("Enemy Stats")]
+    public int maxHealth = 30;
+    private int currentHealth;
+
+    [Header("Movement Settings")]
     public Transform player;       
-    public Transform spriteVisual; 
+    public float moveSpeed = 3f;   
 
-    [Header("Stats")]
-    public float speed = 3f;
-    public float stopDistance = 1.5f; 
+    [Header("Visual Feedback")]
+    public Renderer enemyRenderer;   
+    public Color damageColor = Color.red; 
+    private Color originalColor;
+    private float flashDuration = 0.1f;   
+    
+    [Header("Impact Effects")]
+    public GameObject bloodEffectPrefab;
+    public GameObject headshotTextPrefab;
 
-    private CharacterController controller;
-
-    void Start()
+    private void Start()
     {
-        controller = GetComponent<CharacterController>();
+        currentHealth = maxHealth; 
+        
+        if (enemyRenderer == null) enemyRenderer = GetComponentInChildren<Renderer>();
+        if (enemyRenderer != null) originalColor = enemyRenderer.material.color;
     }
 
-    void Update()
+    private void Update()
     {
-        if (player == null || spriteVisual == null) return;
-
-        Vector3 lookDirection = player.position - spriteVisual.position;
-        lookDirection.y = 0f; 
-        
-        if (lookDirection != Vector3.zero)
+        if (player != null)
         {
-            spriteVisual.rotation = Quaternion.LookRotation(lookDirection);
+            Vector3 direction = (player.position - transform.position).normalized;
+            transform.position += direction * moveSpeed * Time.deltaTime;
+            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+        }
+    }
+
+    public void TakeDamage(int damageAmount, Vector3 hitPoint, Vector3 hitNormal, bool isHeadshot)
+    {
+        currentHealth -= damageAmount;
+
+        if (bloodEffectPrefab != null)
+        {
+            GameObject blood = Instantiate(bloodEffectPrefab, hitPoint, Quaternion.LookRotation(hitNormal));
+            Destroy(blood, 2f);
         }
 
-        Vector3 moveDirection = player.position - transform.position;
-        moveDirection.y = 0f; 
-        
-        if (moveDirection.magnitude > stopDistance)
+        if (isHeadshot && headshotTextPrefab != null)
         {
-            controller.Move(moveDirection.normalized * speed * Time.deltaTime);
+            Instantiate(headshotTextPrefab, hitPoint + (Vector3.up * 0.5f), Quaternion.identity);
         }
 
-        controller.Move(Vector3.down * 9.8f * Time.deltaTime);
+        if (enemyRenderer != null)
+        {
+            enemyRenderer.material.color = damageColor;
+            Invoke(nameof(ResetColor), flashDuration); 
+        }
+
+        if (currentHealth <= 0) Die();
+    }
+
+    private void ResetColor()
+    {
+        if (enemyRenderer != null) enemyRenderer.material.color = originalColor;
+    }
+
+    private void Die()
+    {
+        EnemyManager.killCount++;
+        Destroy(gameObject);
     }
 }

@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private Vector3 velocity;
 
-    void Start()
+    private void Start()
     {
         controller = GetComponent<CharacterController>();
         
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
         lookAction.Disable();
     }
 
-    void Update()
+    private void Update()
     {
         Vector2 lookInput = lookAction.ReadValue<Vector2>();
 
@@ -53,7 +53,6 @@ public class PlayerMovement : MonoBehaviour
         xRotation -= lookInput.y * mouseSensitivity;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
 
         if (controller.isGrounded && velocity.y < 0)
         {
@@ -64,7 +63,6 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         controller.Move(move * speed * Time.deltaTime);
-
 
         if (jumpAction.triggered && controller.isGrounded)
         {
