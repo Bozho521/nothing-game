@@ -2,12 +2,14 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
-/.idea.nothing-game.iml
-/modules.xml
 /projectSettingsUpdater.xml
+/modules.xml
+/.idea.nothing-game.iml
 /contentModel.xml
-# Editor-based HTTP Client requests
-/httpRequests/
+# Ignored default folder with query files
+/queries/
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
