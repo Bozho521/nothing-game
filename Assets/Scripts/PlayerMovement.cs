@@ -179,6 +179,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         
         if (interactAction.triggered && canInteract)
         {
+            Debug.Log("Interacting");
             interactable.Interact(this);
         }
     }
