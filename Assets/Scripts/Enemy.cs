@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth; 
         if (enemyRenderer == null) enemyRenderer = GetComponentInChildren<Renderer>();
         if (enemyRenderer != null) originalColor = enemyRenderer.material.color;
+        StartCoroutine(IdleSoundDelay());
     }
 
     private void Update()
