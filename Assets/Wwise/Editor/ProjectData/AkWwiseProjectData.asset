@@ -331,7 +331,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: ab16f78cfb55f94abdb3b44355480770
     GuidInternal: 
-    m_lastTime: -8584256877953388959
+    m_lastTime: -8584256692692108948
     List:
     - name: MainBank
       guid: 30a07b21fa5281478508aa9c60aea44b
@@ -430,8 +430,8 @@ MonoBehaviour:
         guid: 2562ef3d39a30c40a5826fb1d125da37
       Path: Events\Default Work Unit\Enemy\Play_Enemy_Die
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5499063
+      minDuration: 1.3808093
     - name: Play_Enemy_Idle
       guid: 12fa6f07e7f67c43aa5be236e8a035cc
       id: 1109600527
@@ -450,8 +450,8 @@ MonoBehaviour:
         guid: 12fa6f07e7f67c43aa5be236e8a035cc
       Path: Events\Default Work Unit\Enemy\Play_Enemy_Idle
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5499063
+      minDuration: 1.3808093
     - name: Play_Menu_Button_1
       guid: c9194d96b6bba14889c81e546cb4cc3b
       id: 328562558
@@ -470,8 +470,8 @@ MonoBehaviour:
         guid: c9194d96b6bba14889c81e546cb4cc3b
       Path: Events\Default Work Unit\Menu\Play_Menu_Button_1
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.6420684
+      minDuration: 1.3033105
     - name: Play_Pistol_Empty
       guid: 02272bbcb647e8408959583d6d216fa4
       id: 2165847569
@@ -490,8 +490,8 @@ MonoBehaviour:
         guid: 02272bbcb647e8408959583d6d216fa4
       Path: Events\Default Work Unit\Pistol\Play_Pistol_Empty
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Play_Pistol_Reload
       guid: d23904bc5b3aeb4491d6eba63edc2a8c
       id: 1886652945
@@ -510,8 +510,8 @@ MonoBehaviour:
         guid: d23904bc5b3aeb4491d6eba63edc2a8c
       Path: Events\Default Work Unit\Pistol\Play_Pistol_Reload
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Play_Pistol_Shoot
       guid: faebb830a7f58142841fac43e523fbc9
       id: 2955138351
@@ -530,8 +530,8 @@ MonoBehaviour:
         guid: faebb830a7f58142841fac43e523fbc9
       Path: Events\Default Work Unit\Pistol\Play_Pistol_Shoot
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Play_Player_Damage
       guid: 1fd5d54a8929194094dfdc0d47c614a7
       id: 3638125099
@@ -550,8 +550,8 @@ MonoBehaviour:
         guid: 1fd5d54a8929194094dfdc0d47c614a7
       Path: Events\Default Work Unit\Player\Play_Player_Damage
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5499063
+      minDuration: 1.3808093
     - name: Play_Shotgun_Empty
       guid: 7c98e906129e0046bb13c569b57a8893
       id: 1908822854
@@ -570,8 +570,8 @@ MonoBehaviour:
         guid: 7c98e906129e0046bb13c569b57a8893
       Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Empty
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Play_Shotgun_Reload
       guid: 33e81bc3a98e444984a9e47ae7edcb7d
       id: 1248355840
@@ -590,8 +590,8 @@ MonoBehaviour:
         guid: 33e81bc3a98e444984a9e47ae7edcb7d
       Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Reload
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Play_Shotgun_Shells
       guid: a9f2d7e0c1a5cf42b27c5e8d553ee50e
       id: 2876530582
@@ -610,8 +610,8 @@ MonoBehaviour:
         guid: a9f2d7e0c1a5cf42b27c5e8d553ee50e
       Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Shells
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Play_Shotgun_Shoot
       guid: c1be8825c1d60e46bc6ef25707ddf14b
       id: 2995294012
@@ -630,8 +630,8 @@ MonoBehaviour:
         guid: c1be8825c1d60e46bc6ef25707ddf14b
       Path: Events\Default Work Unit\Shotgun\Play_Shotgun_Shoot
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Play_Wall_Destroy
       guid: 1ab74c2f7109134caef8a4b4111f60ea
       id: 1374894833
@@ -650,8 +650,8 @@ MonoBehaviour:
         guid: 1ab74c2f7109134caef8a4b4111f60ea
       Path: Events\Default Work Unit\Wall\Play_Wall_Destroy
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.5953219
+      minDuration: 1.3415004
     - name: Player
       guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
       id: 1069431850
