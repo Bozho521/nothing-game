@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CapsuleCollider))] 
@@ -27,10 +28,12 @@ public class Enemy : MonoBehaviour
     public GameObject bloodEffectPrefab;
     public GameObject headshotTextPrefab;
 
+    [SerializeField]
+    private AK.Wwise.Event IdleSound;
+    [SerializeField] private AK.Wwise.Event DeathSound;
     private void Start()
     {
         currentHealth = maxHealth; 
-        
         if (enemyRenderer == null) enemyRenderer = GetComponentInChildren<Renderer>();
         if (enemyRenderer != null) originalColor = enemyRenderer.material.color;
     }
@@ -42,7 +45,8 @@ public class Enemy : MonoBehaviour
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
             float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
+            
+            
             if (distanceToPlayer > attackRange)
             {
                 Vector3 direction = (player.position - transform.position).normalized;
@@ -56,6 +60,17 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator IdleSoundDelay()
+    {
+        float elapsedTime = 0.0f;
+        while (elapsedTime < 2.5f)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        IdleSound.Post(gameObject);
     }
 
     private void AttackPlayer()
@@ -100,7 +115,8 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         EnemyManager.killCount++;
-        
+        //DeathSound.Post(gameObject);
+        IdleSound.Post(gameObject);
         if (UIManager.Instance != null) UIManager.Instance.UpdateKills(EnemyManager.killCount);
 
         Destroy(gameObject);

@@ -55,6 +55,63 @@ CapsuleCollider:
   m_Height: 0.8104551
   m_Direction: 1
   m_Center: {x: 0.0017337799, y: 0.09477246, z: 0.18463564}
+--- !u!1 &5389973231689010346
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3379538248564878580}
+  - component: {fileID: 7964578742797293263}
+  m_Layer: 0
+  m_Name: Soundbank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3379538248564878580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389973231689010346}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.0060300827, z: -0.16820908}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4479744573263588451}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7964578742797293263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5389973231689010346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d075e3fd41c7da24f921ec2be96638b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkBank
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 4e16d20a72cb3a5488d4b4576edf413a, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &7946325001487091293
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +145,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3379538248564878580}
   - {fileID: 6576284391600872478}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -186,10 +244,21 @@ MonoBehaviour:
   maxHealth: 30
   player: {fileID: 0}
   moveSpeed: 3
+  attackDamage: 10
+  attackRange: 2
+  attackCooldown: 1
   enemyRenderer: {fileID: 0}
   damageColor: {r: 1, g: 0, b: 0, a: 1}
   bloodEffectPrefab: {fileID: 6559164260365895845, guid: d0969b1df5b3a024bbd7dd682c69e61d, type: 3}
   headshotTextPrefab: {fileID: 4095507737644242033, guid: 1b75be281ccd19e42ab5492c018dd2bb, type: 3}
+  IdleSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2c63e63c60366984683a8dd9e72d3886, type: 2}
+  DeathSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 8283e1a0a61f6e24fbf0a05ba6ab9b25, type: 2}
 --- !u!1 &8710730883076376958
 GameObject:
   m_ObjectHideFlags: 0
