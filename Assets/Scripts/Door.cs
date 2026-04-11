@@ -9,25 +9,25 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     [SerializeField]
     public float secondsToOpen = 1.5f;
 
-    [Header("Destructable Settings")]
-    [SerializeField] private float health = 50f;
-    [SerializeField] private int armor = 0;
-
     private bool Opened = false;
+    private bool isEncounterManaged = false;
     
-    public float Health 
-    { 
-        get => health; 
-        set => health = value; 
-    }
-    
-    public int Armor 
-    { 
-        get => armor; 
-        set => armor = value; 
-    }
+    public float Health { get; set; } = 50.0f;
+    public int Armor { get; set; } = 0;
     
     public string InteractPrompt { get; } = "Press E to open";
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+    
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
     IEnumerator Open()
     {
@@ -40,19 +40,45 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
         }
     }
 
+
     public void Interact(IInteractor interactor)
     {
+        Debug.Log("Door interacted");
+        if (isEncounterManaged)
+        {
+            return;
+        }
+
         if (interactor is PlayerMovement player && !Opened)
         {
+            Debug.Log("Opening Door");
             Opened = true;
             StartCoroutine(Open());
         }
+        //throw new System.NotImplementedException();
     }
+
+    public void SetEncounterManaged(bool encounterManaged)
+    {
+        isEncounterManaged = encounterManaged;
+    }
+
+    public void OpenFromEncounter()
+    {
+        if (Opened)
+        {
+            return;
+        }
+
+        Opened = true;
+        StartCoroutine(Open());
+    }
+    
     
     public void TakeDamage(float damage)
     {
         Health -= damage;
-        if (Health <= 0)
+        if (Health<= 0)
         {
             DestroyObject();
         }
@@ -60,6 +86,6 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
 
     public void DestroyObject()
     {
-        Destroy(gameObject);
+        Destroy(this);
     }
 }

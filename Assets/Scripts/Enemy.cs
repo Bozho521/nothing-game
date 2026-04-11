@@ -41,16 +41,27 @@ public class Enemy : MonoBehaviour
 
     private float verticalVelocity = 0f;
 
+    private void OnEnable()
+    {
+        EnsurePlayerReference();
+    }
+
     private void Start()
     {
         currentHealth = maxHealth; 
         if (enemyRenderer == null) enemyRenderer = GetComponentInChildren<Renderer>();
         if (enemyRenderer != null) originalColor = enemyRenderer.material.color;
-        StartCoroutine(IdleSoundDelay());
+
+        EnsurePlayerReference();
     }
 
     private void Update()
     {
+        if (player == null)
+        {
+            EnsurePlayerReference();
+        }
+
         if (player != null)
         {
             transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
@@ -97,6 +108,20 @@ public class Enemy : MonoBehaviour
             {
                 animator.SetBool("IsMoving", false);
             }
+        }
+    }
+
+    private void EnsurePlayerReference()
+    {
+        if (player != null)
+        {
+            return;
+        }
+
+        PlayerMovement playerMovement = FindFirstObjectByType<PlayerMovement>();
+        if (playerMovement != null)
+        {
+            player = playerMovement.transform;
         }
     }
 
