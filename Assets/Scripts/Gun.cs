@@ -211,22 +211,18 @@ public class Gun : MonoBehaviour
             return; 
         }
 
-<<<<<<< Updated upstream
         if (isPaused || isDead) return;
 
         if (Physics.Raycast(activeVisual.firePoint.position, activeVisual.firePoint.forward, out RaycastHit hit, range))
         {
             StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, hit.point));
 
-            if (hit.collider.TryGetComponent<IDestructable>(out var destructible) && destructivePower >= destructible.Armor)
-=======
             if (TryHitDamageablePolyshape(hit, damage))
             {
                 return;
             }
 
-            if (hit.collider.TryGetComponent<IDestructable>(out var destructible))
->>>>>>> Stashed changes
+            if (hit.collider.TryGetComponent<IDestructable>(out var destructible) && destructivePower >= destructible.Armor)
             {
                 destructible.TakeDamage(damage);
                 return;
