@@ -4844,9 +4844,29 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2006796990}
+    - target: {fileID: 4769732467501127522, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4825903810436794468, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
       propertyPath: m_Name
       value: ContinuousCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596536797594235211, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596536797594235211, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596536797594235211, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596536797594235211, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 8118741288161733634, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
       propertyPath: m_Pivot.x
