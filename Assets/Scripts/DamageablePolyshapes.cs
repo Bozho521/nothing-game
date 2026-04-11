@@ -20,8 +20,10 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
     [SerializeField] private ProBuilderMesh[] polyshapeMeshes;
     [SerializeField] private bool autoFindChildPolyshapes = true;
     [SerializeField] private bool destroyWhenNoFacesRemain = false;
+    [SerializeField] private bool useDoubleSidedColliders = true;
 
     private readonly Dictionary<ProBuilderMesh, Dictionary<Face, float>> faceHealthByMesh = new Dictionary<ProBuilderMesh, Dictionary<Face, float>>();
+    private readonly Dictionary<MeshCollider, Mesh> runtimeColliderMeshes = new Dictionary<MeshCollider, Mesh>();
 
     public float Health
     {
@@ -53,6 +55,7 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
             LogDebug($"Auto-found {polyshapeMeshes.Length} ProBuilder mesh(es).");
         }
 
+        RefreshConfiguredMeshColliders();
         InitializeFaceHealthCache();
     }
 
@@ -112,6 +115,19 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         Destroy(gameObject);
     }
 
+    private void OnDestroy()
+    {
+        foreach (Mesh runtimeMesh in runtimeColliderMeshes.Values)
+        {
+            if (runtimeMesh != null)
+            {
+                Destroy(runtimeMesh);
+            }
+        }
+
+        runtimeColliderMeshes.Clear();
+    }
+
     private bool TryResolveHitFace(RaycastHit hit, out ProBuilderMesh targetMesh, out Face targetFace, out int faceIndex, out MeshCollider meshCollider)
     {
         targetFace = null;
@@ -149,12 +165,12 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
             return false;
         }
 
-        // Convert Physics triangle index into a ProBuilder face index.
-        faceIndex = FindFaceIndexFromTriangleOrdinal(targetMesh, hit.triangleIndex);
+        // Vertex matching is robust for reordered or doubled collider triangles.
+        faceIndex = FindFaceIndexFromTriangleVertices(targetMesh, meshCollider.sharedMesh, hit.triangleIndex);
         if (faceIndex < 0)
         {
-            // Fallback path for unusual meshes where face triangle ordering may differ.
-            faceIndex = FindFaceIndexFromTriangleVertices(targetMesh, meshCollider.sharedMesh, hit.triangleIndex);
+            // Fast fallback for normal collider meshes where face ordering is aligned.
+            faceIndex = FindFaceIndexFromTriangleOrdinal(targetMesh, hit.triangleIndex);
         }
 
         if (faceIndex < 0 || faceIndex >= targetMesh.faces.Count)
@@ -202,7 +218,7 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
             MeshFilter meshFilter = targetMesh.GetComponent<MeshFilter>();
             if (meshFilter != null)
             {
-                meshCollider.sharedMesh = meshFilter.sharedMesh;
+                ApplyColliderMesh(targetMesh, meshCollider, meshFilter.sharedMesh);
             }
         }
 
@@ -354,6 +370,96 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
     private static bool ContainsVertex(int a, int b, int c, int value)
     {
         return a == value || b == value || c == value;
+    }
+
+    private void RefreshConfiguredMeshColliders()
+    {
+        if (polyshapeMeshes == null)
+        {
+            return;
+        }
+
+        foreach (ProBuilderMesh mesh in polyshapeMeshes)
+        {
+            if (mesh == null)
+            {
+                continue;
+            }
+
+            MeshCollider meshCollider = mesh.GetComponent<MeshCollider>();
+            MeshFilter meshFilter = mesh.GetComponent<MeshFilter>();
+
+            if (meshCollider == null || meshFilter == null || meshFilter.sharedMesh == null)
+            {
+                continue;
+            }
+
+            meshCollider.sharedMesh = null;
+            ApplyColliderMesh(mesh, meshCollider, meshFilter.sharedMesh);
+        }
+    }
+
+    private void ApplyColliderMesh(ProBuilderMesh ownerMesh, MeshCollider meshCollider, Mesh sourceMesh)
+    {
+        if (meshCollider == null || sourceMesh == null)
+        {
+            return;
+        }
+
+        if (!useDoubleSidedColliders)
+        {
+            meshCollider.sharedMesh = sourceMesh;
+            return;
+        }
+
+        if (runtimeColliderMeshes.TryGetValue(meshCollider, out Mesh previousRuntimeMesh) && previousRuntimeMesh != null)
+        {
+            Destroy(previousRuntimeMesh);
+        }
+
+        Mesh doubleSidedMesh = BuildDoubleSidedMesh(sourceMesh, ownerMesh.name + "_DoubleSidedCollider");
+        runtimeColliderMeshes[meshCollider] = doubleSidedMesh;
+        meshCollider.sharedMesh = doubleSidedMesh;
+    }
+
+    private static Mesh BuildDoubleSidedMesh(Mesh sourceMesh, string runtimeName)
+    {
+        Mesh mesh = new Mesh
+        {
+            name = runtimeName,
+            vertices = sourceMesh.vertices,
+            uv = sourceMesh.uv,
+            normals = sourceMesh.normals,
+            tangents = sourceMesh.tangents,
+            colors = sourceMesh.colors,
+            bounds = sourceMesh.bounds,
+            indexFormat = sourceMesh.indexFormat
+        };
+
+        mesh.subMeshCount = sourceMesh.subMeshCount;
+
+        for (int subMeshIndex = 0; subMeshIndex < sourceMesh.subMeshCount; subMeshIndex++)
+        {
+            int[] frontTriangles = sourceMesh.GetTriangles(subMeshIndex);
+            int[] doubleSidedTriangles = new int[frontTriangles.Length * 2];
+
+            // Keep original winding for front faces.
+            System.Array.Copy(frontTriangles, doubleSidedTriangles, frontTriangles.Length);
+
+            // Append reversed winding so physics hits from the opposite side as well.
+            for (int i = 0; i < frontTriangles.Length; i += 3)
+            {
+                int dst = frontTriangles.Length + i;
+                doubleSidedTriangles[dst] = frontTriangles[i];
+                doubleSidedTriangles[dst + 1] = frontTriangles[i + 2];
+                doubleSidedTriangles[dst + 2] = frontTriangles[i + 1];
+            }
+
+            mesh.SetTriangles(doubleSidedTriangles, subMeshIndex, true);
+        }
+
+        mesh.RecalculateBounds();
+        return mesh;
     }
 
     private void LogDebug(string message)
