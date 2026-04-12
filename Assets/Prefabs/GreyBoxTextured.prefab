@@ -3599,6 +3599,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5476564029867715279}
+  - component: {fileID: 7122801736558626427}
   m_Layer: 0
   m_Name: GreyBoxTextured
   m_TagString: Untagged
@@ -3630,6 +3631,31 @@ Transform:
   - {fileID: 1429118090929184896}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7122801736558626427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784350679104745300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d075e3fd41c7da24f921ec2be96638b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkBank
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 4e16d20a72cb3a5488d4b4576edf413a, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!1 &835635857287654666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3692,6 +3718,10 @@ MonoBehaviour:
   autoFindChildPolyshapes: 1
   destroyWhenNoFacesRemain: 0
   useDoubleSidedColliders: 1
+  wallDestroySound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
 --- !u!1 &1260824010143934841
 GameObject:
   m_ObjectHideFlags: 0
@@ -4479,6 +4509,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   openTransform: {fileID: 4947828723079815161}
   secondsToOpen: 1.5
+  health: 50
+  armor: 0
 --- !u!114 &7035079474192694466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4491,6 +4523,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbe20c29ec3e6041bc2949bae73e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  wallDestroyedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
 --- !u!1 &1891851774684344736
 GameObject:
   m_ObjectHideFlags: 0
@@ -5602,6 +5638,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   openTransform: {fileID: 0}
   secondsToOpen: 1.5
+  health: 50
+  armor: 0
 --- !u!114 &1479164047419119584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5614,6 +5652,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbe20c29ec3e6041bc2949bae73e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  wallDestroyedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
 --- !u!1 &3075844464926497060
 GameObject:
   m_ObjectHideFlags: 0
@@ -11375,6 +11417,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   openTransform: {fileID: 0}
   secondsToOpen: 1.5
+  health: 50
+  armor: 0
 --- !u!114 &5872002462686846813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11387,6 +11431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbe20c29ec3e6041bc2949bae73e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  wallDestroyedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
 --- !u!1 &4897612775446598133
 GameObject:
   m_ObjectHideFlags: 0
@@ -11770,6 +11818,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   openTransform: {fileID: 0}
   secondsToOpen: 1.5
+  health: 50
+  armor: 0
 --- !u!114 &7771708205574665338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11782,6 +11832,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbe20c29ec3e6041bc2949bae73e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  wallDestroyedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
 --- !u!1 &5579880380796080962
 GameObject:
   m_ObjectHideFlags: 0
@@ -11943,6 +11997,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   openTransform: {fileID: 0}
   secondsToOpen: 1.5
+  health: 50
+  armor: 0
 --- !u!114 &2413160033301491703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11955,6 +12011,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbe20c29ec3e6041bc2949bae73e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  wallDestroyedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
 --- !u!1 &6449006846100303456
 GameObject:
   m_ObjectHideFlags: 0
@@ -12083,6 +12143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   openTransform: {fileID: 7825294598259619894}
   secondsToOpen: 1.5
+  health: 50
+  armor: 0
 --- !u!114 &7509874197761991452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12095,6 +12157,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbe20c29ec3e6041bc2949bae73e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  wallDestroyedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
 --- !u!1 &6836699167374373703
 GameObject:
   m_ObjectHideFlags: 0
@@ -22946,6 +23012,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   openTransform: {fileID: 0}
   secondsToOpen: 1.5
+  health: 50
+  armor: 0
 --- !u!114 &2167377152281259092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22958,3 +23026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbe20c29ec3e6041bc2949bae73e032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  wallDestroyedSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 34a6faff79ea85f44b74212100b93662, type: 2}
