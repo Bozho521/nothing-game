@@ -41,10 +41,20 @@ public class Enemy : MonoBehaviour
     public GameObject ammoPickupPrefab;
     public int maxPlayerReserveAmmo = 120; 
 
+    [Header("Visibility Despawn")]
+    public bool despawnWhenOutOfView = true;
+    public float outOfViewDespawnDelay = 6f;
+    public float visibilityCheckInterval = 0.25f;
+    public LayerMask visibilityBlockers = ~0;
+
     private float verticalVelocity = 0f;
+    private float outOfViewTimer = 0f;
+    private float nextVisibilityCheckTime = 0f;
 
     private void OnEnable()
     {
+        outOfViewTimer = 0f;
+        nextVisibilityCheckTime = 0f;
         EnsurePlayerReference();
     }
 
@@ -62,6 +72,13 @@ public class Enemy : MonoBehaviour
         if (player == null)
         {
             EnsurePlayerReference();
+        }
+
+        UpdateOutOfViewDespawn();
+
+        if (this == null)
+        {
+            return;
         }
 
         if (player != null)
@@ -111,6 +128,93 @@ public class Enemy : MonoBehaviour
                 animator.SetBool("IsMoving", false);
             }
         }
+    }
+
+    private void UpdateOutOfViewDespawn()
+    {
+        if (!despawnWhenOutOfView)
+        {
+            return;
+        }
+
+        if (Time.time < nextVisibilityCheckTime)
+        {
+            return;
+        }
+
+        nextVisibilityCheckTime = Time.time + visibilityCheckInterval;
+
+        if (IsVisibleToCamera())
+        {
+            outOfViewTimer = 0f;
+            return;
+        }
+
+        outOfViewTimer += visibilityCheckInterval;
+
+        if (outOfViewTimer >= outOfViewDespawnDelay)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private bool IsVisibleToCamera()
+    {
+        Camera activeCamera = Camera.main;
+        if (activeCamera == null)
+        {
+            return true;
+        }
+
+        if (enemyRenderer == null)
+        {
+            enemyRenderer = GetComponentInChildren<Renderer>();
+        }
+
+        if (enemyRenderer == null)
+        {
+            return true;
+        }
+
+        Plane[] cameraPlanes = GeometryUtility.CalculateFrustumPlanes(activeCamera);
+        Bounds enemyBounds = enemyRenderer.bounds;
+
+        if (!GeometryUtility.TestPlanesAABB(cameraPlanes, enemyBounds))
+        {
+            return false;
+        }
+
+        Vector3 origin = activeCamera.transform.position;
+        Vector3 target = enemyBounds.center;
+        Vector3 direction = target - origin;
+        float distance = direction.magnitude;
+
+        if (distance <= Mathf.Epsilon)
+        {
+            return true;
+        }
+
+        RaycastHit[] hits = Physics.RaycastAll(origin, direction.normalized, distance, visibilityBlockers);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.transform == transform || hit.transform.IsChildOf(transform))
+            {
+                continue;
+            }
+
+            if (player != null && (hit.transform == player || hit.transform.IsChildOf(player)))
+            {
+                continue;
+            }
+
+            if (hit.distance < distance - 0.05f)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private void EnsurePlayerReference()
