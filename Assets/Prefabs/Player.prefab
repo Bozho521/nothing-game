@@ -330,17 +330,35 @@ MonoBehaviour:
   weaponAnimator: {fileID: 3489575554587253910}
   shotFiredBool: ShotFired Bool
   FiredSound:
-    idInternal: 0
+  - idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 81713bd3fe719fe40aa244470f61e7c2, type: 2}
+    WwiseObjectReference: {fileID: 0}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   ReloadSound:
-    idInternal: 0
+  - idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: efb52c460e910cd4fbd57d5a84cb2e2a, type: 2}
+    WwiseObjectReference: {fileID: 0}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
   EmptySound:
-    idInternal: 0
+  - idInternal: 0
     valueGuidInternal: 
-    WwiseObjectReference: {fileID: 11400000, guid: 6dad7d4f5ea59494e92f8165c1b4f399, type: 2}
+    WwiseObjectReference: {fileID: 0}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
+  - idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!95 &3489575554587253910
 Animator:
   serializedVersion: 7
@@ -689,6 +707,10 @@ MonoBehaviour:
   backwardsInput: 0
   leftwardsInput: 0
   rightwardsInput: 0
+  TakeDamageSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: b0ca11a091d431941ab8d83c10c1a1cb, type: 2}
   canInteract: 1
   playerCamera: {fileID: 0}
 --- !u!1001 &3936330236461922018

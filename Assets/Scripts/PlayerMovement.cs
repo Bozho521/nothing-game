@@ -52,6 +52,9 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     [Range(0f, 1f)] public float leftwardsInput;
     [Range(0f, 1f)] public float rightwardsInput;
 
+    [Header("Player SFX")] 
+    [SerializeField] private AK.Wwise.Event TakeDamageSound;
+
     public bool canInteract = true;
     
     private CharacterController controller;
@@ -186,6 +189,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     {
         if (isDead) return;
 
+        TakeDamageSound.Post(gameObject);
         currentHealth -= damage;
         
         if (UIManager.Instance != null) UIManager.Instance.UpdateHP(currentHealth);
