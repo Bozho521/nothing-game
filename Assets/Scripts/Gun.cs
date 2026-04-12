@@ -404,7 +404,7 @@ public class Gun : MonoBehaviour
 
     private bool CheckAndDestroyUI()
     {
-        if(destructivePower<3) return false;
+        if(destructivePower<2) return false;
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = Mouse.current.position.ReadValue()
