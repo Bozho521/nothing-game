@@ -1381,6 +1381,34 @@ PrefabInstance:
       propertyPath: weaponVisuals.Array.data[0].weaponModel
       value: 
       objectReference: {fileID: 384752841}
+    - target: {fileID: 2089288007141417524, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      propertyPath: EmptySound.Array.data[0].WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 6dad7d4f5ea59494e92f8165c1b4f399, type: 2}
+    - target: {fileID: 2089288007141417524, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      propertyPath: EmptySound.Array.data[1].WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 9c2f8e523cc096248bda4c2536f450ef, type: 2}
+    - target: {fileID: 2089288007141417524, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      propertyPath: FiredSound.Array.data[0].WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 81713bd3fe719fe40aa244470f61e7c2, type: 2}
+    - target: {fileID: 2089288007141417524, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      propertyPath: FiredSound.Array.data[1].WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: 443da00a405bdef4b9e8fa957e86a3a3, type: 2}
+    - target: {fileID: 2089288007141417524, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      propertyPath: FiredSound.Array.data[2].WwiseObjectReference
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2089288007141417524, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      propertyPath: ReloadSound.Array.data[0].WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: efb52c460e910cd4fbd57d5a84cb2e2a, type: 2}
+    - target: {fileID: 2089288007141417524, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
+      propertyPath: ReloadSound.Array.data[1].WwiseObjectReference
+      value: 
+      objectReference: {fileID: 11400000, guid: c4eb905db68c5eb41bef2923da03ecca, type: 2}
     - target: {fileID: 3542677059011367177, guid: b26f3d461e622f043b09397b00a7d5d0, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.1

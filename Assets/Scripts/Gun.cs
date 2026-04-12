@@ -47,9 +47,9 @@ public class Gun : MonoBehaviour
 
 
     [Header("Weapon Sounds")] 
-    [SerializeField] private AK.Wwise.Event FiredSound;
-    [SerializeField] private AK.Wwise.Event ReloadSound;
-    [SerializeField] private AK.Wwise.Event EmptySound;
+    [SerializeField] private List<AK.Wwise.Event> FiredSound;
+    [SerializeField] private List<AK.Wwise.Event> ReloadSound;
+    [SerializeField] private List<AK.Wwise.Event> EmptySound;
     private void Start()
     {
         mainCam = GetComponentInParent<Camera>();
@@ -191,7 +191,7 @@ public class Gun : MonoBehaviour
         if (reserveAmmo <= 0) yield break;
 
         isReloading = true;
-        ReloadSound.Post(gameObject);
+        ReloadSound[currentWeaponIndex].Post(gameObject);
         if (UIManager.Instance != null) UIManager.Instance.ShowReloadingText();
 
         yield return new WaitForSecondsRealtime(reloadTime);
@@ -211,10 +211,10 @@ public class Gun : MonoBehaviour
     {
         if (currentAmmo == 0)
         {
-            EmptySound.Post(gameObject);
+            EmptySound[currentWeaponIndex].Post(gameObject);
             return;
         }
-        FiredSound.Post(gameObject);
+        FiredSound[currentWeaponIndex].Post(gameObject);
         currentAmmo--; 
         UpdateAmmoUI();
 
