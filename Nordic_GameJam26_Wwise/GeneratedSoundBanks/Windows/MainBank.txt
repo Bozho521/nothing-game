@@ -2,15 +2,21 @@ Event	ID	Name			Wwise Object Path	Notes
 	328562558	Play_Menu_Button_1			\Default Work Unit\Menu\Play_Menu_Button_1	
 	1109600527	Play_Enemy_Idle			\Default Work Unit\Enemy\Play_Enemy_Idle	
 	1248355840	Play_Shotgun_Reload			\Default Work Unit\Shotgun\Play_Shotgun_Reload	
-	1374894833	Play_Wall_Destroy			\Default Work Unit\Wall\Play_Wall_Destroy	
+	1374894833	Play_Wall_Destroy			\Default Work Unit\Environment\Play_Wall_Destroy	
+	1660008929	Play_Door_Open			\Default Work Unit\Environment\Play_Door_Open	
 	1886652945	Play_Pistol_Reload			\Default Work Unit\Pistol\Play_Pistol_Reload	
 	1908822854	Play_Shotgun_Empty			\Default Work Unit\Shotgun\Play_Shotgun_Empty	
 	2165847569	Play_Pistol_Empty			\Default Work Unit\Pistol\Play_Pistol_Empty	
+	2231054099	Play_Health_Pickup			\Default Work Unit\Player\Play_Health_Pickup	
+	2432025233	Play_Enemy_Atk			\Default Work Unit\Enemy\Play_Enemy_Atk	
 	2448258477	Play_Enemy_Die			\Default Work Unit\Enemy\Play_Enemy_Die	
+	2515369075	Play_Enemy_Dmg			\Default Work Unit\Enemy\Play_Enemy_Dmg	
 	2876530582	Play_Shotgun_Shells			\Default Work Unit\Shotgun\Play_Shotgun_Shells	
 	2955138351	Play_Pistol_Shoot			\Default Work Unit\Pistol\Play_Pistol_Shoot	
 	2995294012	Play_Shotgun_Shoot			\Default Work Unit\Shotgun\Play_Shotgun_Shoot	
 	3638125099	Play_Player_Damage			\Default Work Unit\Player\Play_Player_Damage	
+	3639931096	Play_Railgun_Shoot			\Default Work Unit\Railgun\Play_Railgun_Shoot	
+	4269559823	Play_Ammo_Pickup			\Default Work Unit\Player\Play_Ammo_Pickup	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	29899078	Railgun Shoot	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\43\{437BEF01-6ED0-F787-5A0D-AA66F6798A3E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Railgun\Railgun Shoot		575564
