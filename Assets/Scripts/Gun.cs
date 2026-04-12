@@ -4,7 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Interfaces; 
 using UnityEngine.EventSystems; 
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class WeaponVisual
@@ -450,9 +451,9 @@ public class Gun : MonoBehaviour
 
             StartCoroutine(MakeUIFallAndDie(uiElement));
 
-            if(uiDestroyedCount == 6)
+            if(uiDestroyedCount == 16)
             {
-                Debug.Log("WinCondition Met");
+                SceneManager.LoadScene("EndScene");
                 winConditionMet = true;
             }
             return true; 
