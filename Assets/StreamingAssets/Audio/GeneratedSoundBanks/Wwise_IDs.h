@@ -25,8 +25,7 @@ namespace AK
         static const AkUniqueID PLAY_PISTOL_RELOAD = 1886652945U;
         static const AkUniqueID PLAY_PISTOL_SHOOT = 2955138351U;
         static const AkUniqueID PLAY_PLAYER_DAMAGE = 3638125099U;
-        static const AkUniqueID PLAY_PLAYER_FOOTSTEP = 1724675634U;
-        static const AkUniqueID PLAY_PLAYER_JUMP = 562256996U;
+        static const AkUniqueID PLAY_RAILGUN_IMPACT = 839973173U;
         static const AkUniqueID PLAY_RAILGUN_SHOOT = 3639931096U;
         static const AkUniqueID PLAY_SHOTGUN_EMPTY = 1908822854U;
         static const AkUniqueID PLAY_SHOTGUN_RELOAD = 1248355840U;

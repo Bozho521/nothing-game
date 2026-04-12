@@ -359,7 +359,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
     GuidInternal: 
-    m_lastTime: -8584256160804493785
+    m_lastTime: -8584256110086406677
     List:
     - name: Enemy
       guid: 4fce27e615209849aa0add79e84c0d69
@@ -430,7 +430,7 @@ MonoBehaviour:
       maxDuration: -1
       minDuration: -1
     - name: Play_Ammo_Pickup
-      guid: 0811d98a8743e14a87013d81060b91dc
+      guid: 6bf4d17e2e230548bb276adbf6da0c45
       id: 4269559823
       PathAndIcons:
       - ElementName: Events
@@ -444,13 +444,13 @@ MonoBehaviour:
         guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
       - ElementName: Play_Ammo_Pickup
         ObjectType: 3
-        guid: 0811d98a8743e14a87013d81060b91dc
+        guid: 6bf4d17e2e230548bb276adbf6da0c45
       Path: Events\Default Work Unit\Player\Play_Ammo_Pickup
       maxAttenuation: 0
       maxDuration: 0.585855
       minDuration: 0.46499345
     - name: Play_Door_Open
-      guid: 3785305417791941a7fc12d0a6a4c848
+      guid: 76b630da93c18644a0a9be639ed82730
       id: 1660008929
       PathAndIcons:
       - ElementName: Events
@@ -464,13 +464,13 @@ MonoBehaviour:
         guid: 1a6da05823142d46a8301d52ec3ba842
       - ElementName: Play_Door_Open
         ObjectType: 3
-        guid: 3785305417791941a7fc12d0a6a4c848
+        guid: 76b630da93c18644a0a9be639ed82730
       Path: Events\Default Work Unit\Environment\Play_Door_Open
       maxAttenuation: 0
       maxDuration: 1.3028748
       minDuration: 1.1607294
     - name: Play_Enemy_Atk
-      guid: 0853b08a8326fd48b3a3a8b501665e84
+      guid: a50afdb573645b4ca04a23b53b466059
       id: 2432025233
       PathAndIcons:
       - ElementName: Events
@@ -484,7 +484,7 @@ MonoBehaviour:
         guid: 4fce27e615209849aa0add79e84c0d69
       - ElementName: Play_Enemy_Atk
         ObjectType: 3
-        guid: 0853b08a8326fd48b3a3a8b501665e84
+        guid: a50afdb573645b4ca04a23b53b466059
       Path: Events\Default Work Unit\Enemy\Play_Enemy_Atk
       maxAttenuation: 0
       maxDuration: 0.86002433
@@ -510,7 +510,7 @@ MonoBehaviour:
       maxDuration: 1.5499063
       minDuration: 1.3808093
     - name: Play_Enemy_Dmg
-      guid: eb1f0010a7304440b400a4f2c294080f
+      guid: f62ca0c00221a5429cd75398b88f9821
       id: 2515369075
       PathAndIcons:
       - ElementName: Events
@@ -524,7 +524,7 @@ MonoBehaviour:
         guid: 4fce27e615209849aa0add79e84c0d69
       - ElementName: Play_Enemy_Dmg
         ObjectType: 3
-        guid: eb1f0010a7304440b400a4f2c294080f
+        guid: f62ca0c00221a5429cd75398b88f9821
       Path: Events\Default Work Unit\Enemy\Play_Enemy_Dmg
       maxAttenuation: 0
       maxDuration: 3.2685015
@@ -550,7 +550,7 @@ MonoBehaviour:
       maxDuration: 1.5499063
       minDuration: 1.3808093
     - name: Play_Health_Pickup
-      guid: 92a2356e7efdc046a1c053e75ac5c27f
+      guid: 082dabb1ff218441b467f15e1f2499ba
       id: 2231054099
       PathAndIcons:
       - ElementName: Events
@@ -564,7 +564,7 @@ MonoBehaviour:
         guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
       - ElementName: Play_Health_Pickup
         ObjectType: 3
-        guid: 92a2356e7efdc046a1c053e75ac5c27f
+        guid: 082dabb1ff218441b467f15e1f2499ba
       Path: Events\Default Work Unit\Player\Play_Health_Pickup
       maxAttenuation: 0
       maxDuration: 0.81485957
@@ -669,9 +669,9 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.5499063
       minDuration: 1.3808093
-    - name: Play_Player_Footstep
-      guid: b071c37bb746a74fad880bdc73e42d2c
-      id: 1724675634
+    - name: Play_Railgun_Impact
+      guid: d59fc45934e81840a0073b674e8ce37a
+      id: 839973173
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -679,38 +679,18 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
-      - ElementName: Player
+      - ElementName: Railgun
         ObjectType: 4
-        guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
-      - ElementName: Play_Player_Footstep
+        guid: 0c00b9569d3c764eb5c35fcc310e2bc2
+      - ElementName: Play_Railgun_Impact
         ObjectType: 3
-        guid: b071c37bb746a74fad880bdc73e42d2c
-      Path: Events\Default Work Unit\Player\Play_Player_Footstep
+        guid: d59fc45934e81840a0073b674e8ce37a
+      Path: Events\Default Work Unit\Railgun\Play_Railgun_Impact
       maxAttenuation: 0
-      maxDuration: 0.18293397
-      minDuration: 0.16297562
-    - name: Play_Player_Jump
-      guid: 7ca45edd305e774c9fbfa388affc79d1
-      id: 562256996
-      PathAndIcons:
-      - ElementName: Events
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
-      - ElementName: Player
-        ObjectType: 4
-        guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
-      - ElementName: Play_Player_Jump
-        ObjectType: 3
-        guid: 7ca45edd305e774c9fbfa388affc79d1
-      Path: Events\Default Work Unit\Player\Play_Player_Jump
-      maxAttenuation: 0
-      maxDuration: 0.72944033
-      minDuration: 0.6498574
+      maxDuration: -1
+      minDuration: -1
     - name: Play_Railgun_Shoot
-      guid: a73f76fed5f1d94f90da78f51b1e9031
+      guid: 094370d27a740647bcaec86fbf79bf40
       id: 3639931096
       PathAndIcons:
       - ElementName: Events
@@ -721,10 +701,10 @@ MonoBehaviour:
         guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
       - ElementName: Railgun
         ObjectType: 4
-        guid: 7923f38bdffa8b48baf82f0d9f3bb821
+        guid: 0c00b9569d3c764eb5c35fcc310e2bc2
       - ElementName: Play_Railgun_Shoot
         ObjectType: 3
-        guid: a73f76fed5f1d94f90da78f51b1e9031
+        guid: 094370d27a740647bcaec86fbf79bf40
       Path: Events\Default Work Unit\Railgun\Play_Railgun_Shoot
       maxAttenuation: 0
       maxDuration: 3.2685015
@@ -847,7 +827,7 @@ MonoBehaviour:
       maxDuration: -1
       minDuration: -1
     - name: Railgun
-      guid: 7923f38bdffa8b48baf82f0d9f3bb821
+      guid: 0c00b9569d3c764eb5c35fcc310e2bc2
       id: 639519169
       PathAndIcons:
       - ElementName: Events
@@ -858,7 +838,7 @@ MonoBehaviour:
         guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
       - ElementName: Railgun
         ObjectType: 4
-        guid: 7923f38bdffa8b48baf82f0d9f3bb821
+        guid: 0c00b9569d3c764eb5c35fcc310e2bc2
       Path: Events\Default Work Unit\Railgun
       maxAttenuation: 0
       maxDuration: -1
