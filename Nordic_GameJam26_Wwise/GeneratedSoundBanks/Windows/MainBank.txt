@@ -1,9 +1,11 @@
 Event	ID	Name			Wwise Object Path	Notes
 	328562558	Play_Menu_Button_1			\Default Work Unit\Menu\Play_Menu_Button_1	
+	562256996	Play_Player_Jump			\Default Work Unit\Player\Play_Player_Jump	
 	1109600527	Play_Enemy_Idle			\Default Work Unit\Enemy\Play_Enemy_Idle	
 	1248355840	Play_Shotgun_Reload			\Default Work Unit\Shotgun\Play_Shotgun_Reload	
 	1374894833	Play_Wall_Destroy			\Default Work Unit\Environment\Play_Wall_Destroy	
 	1660008929	Play_Door_Open			\Default Work Unit\Environment\Play_Door_Open	
+	1724675634	Play_Player_Footstep			\Default Work Unit\Player\Play_Player_Footstep	
 	1886652945	Play_Pistol_Reload			\Default Work Unit\Pistol\Play_Pistol_Reload	
 	1908822854	Play_Shotgun_Empty			\Default Work Unit\Shotgun\Play_Shotgun_Empty	
 	2165847569	Play_Pistol_Empty			\Default Work Unit\Pistol\Play_Pistol_Empty	
@@ -28,7 +30,9 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	367251208	Enemy Atk	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\4B\{4B40E175-B0B4-7D98-FAC3-1C11EA693FBD}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Enemy\Enemy Atk		151516
 	450157659	Health Pickup	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\53\{538130C9-9178-E12D-C64D-C69E02B365AF}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Health Pickup		147768
 	455380154	Pistol Empty	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\BF\{BF6F154E-A8F3-F589-7DE1-9F77F7022FF8}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Pistol\Pistol Empty		280976
+	457800406	Player Footstep	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\1F\{1FB8460D-20B8-EA9F-9F9F-4A395991FDD3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Player Footstep		33248
 	508432336	Wall Destroy	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\48\{48991227-0854-1AF9-6543-5F8318361B5C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Environment\Wall Destroy		280976
+	540651060	Player Jump	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\C2\{C21479BB-DF6F-55EB-7CFF-692B008236D3}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Player Jump		132288
 	613488527	Pistol Reload	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\93\{933C4E74-DF03-1EE7-5974-368B6ECB6C3A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Pistol\Pistol Reload		280976
 	695172470	Menu Button 1	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\35\{353D4957-D3D7-049B-8C35-A4E6198D69C6}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Menu\Menu Button 1		280976
 	709175964	Player Damage	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\01\{0111D1EA-C189-7E60-C9BD-939D1B5186BA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Player Damage		280976

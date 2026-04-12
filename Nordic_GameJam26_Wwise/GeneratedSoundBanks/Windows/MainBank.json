@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{217BA030-52FA-4781-8508-AA9C60AEA44B}",
     "Language": "SFX",
-    "Hash": "{331F31CF-9FF1-087B-E006-1B75FF18239C}",
+    "Hash": "{FBF8AA8B-A577-05F5-507A-BB6FAF9BEAF8}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\MainBank",
     "ShortName": "MainBank",
     "Path": "MainBank.bnk",
@@ -88,12 +88,28 @@
       "CachePath": "BF/{BF6F154E-A8F3-F589-7DE1-9F77F7022FF8}.wem"
      },
      {
+      "Id": "457800406",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_PlayerFootstep.wav",
+      "CachePath": "1F/{1FB8460D-20B8-EA9F-9F9F-4A395991FDD3}.wem"
+     },
+     {
       "Id": "508432336",
       "Language": "SFX",
       "Streaming": "false",
       "Location": "Memory",
       "ShortName": "NothingGame_WallDestroy.wav",
       "CachePath": "48/{48991227-0854-1AF9-6543-5F8318361B5C}.wem"
+     },
+     {
+      "Id": "540651060",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_PlayerJump.wav",
+      "CachePath": "C2/{C21479BB-DF6F-55EB-7CFF-692B008236D3}.wem"
      },
      {
       "Id": "613488527",
@@ -330,6 +346,34 @@
       ]
      },
      {
+      "Id": "1724675634",
+      "Name": "Play_Player_Footstep",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Player_Footstep",
+      "GUID": "{7BC371B0-46B7-4FA7-AD88-0BDC73E42D2C}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.16297562",
+      "DurationMax": "0.18293397",
+      "MediaRefs": [
+       {
+        "Id": "457800406"
+       }
+      ]
+     },
+     {
+      "Id": "562256996",
+      "Name": "Play_Player_Jump",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Player_Jump",
+      "GUID": "{DD5EA47C-5E30-4C77-9FBF-A388AFFC79D1}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.6498574",
+      "DurationMax": "0.72944033",
+      "MediaRefs": [
+       {
+        "Id": "540651060"
+       }
+      ]
+     },
+     {
       "Id": "3639931096",
       "Name": "Play_Railgun_Shoot",
       "ObjectPath": "\\Events\\Default Work Unit\\Railgun\\Play_Railgun_Shoot",
@@ -416,6 +460,6 @@
     ]
    }
   ],
-  "FileHash": "{A98D465F-E2CE-9C3C-41C7-D5036ACC4640}"
+  "FileHash": "{111C0629-3512-F283-EA86-7E9164AFE8EC}"
  }
 }
