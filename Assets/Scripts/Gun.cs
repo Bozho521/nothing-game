@@ -31,7 +31,6 @@ public class Gun : MonoBehaviour
     public int currentAmmo;
     public int magazineSize = 10;      
     public int reserveAmmo = 30;       
-    public float reloadTime = 1.5f;    
     private bool isReloading = false;
 
     [Header("Setup & Effects")]
@@ -47,6 +46,7 @@ public class Gun : MonoBehaviour
     [Header("Animation")]
     public Animator weaponAnimator;
     public string shotFiredBool = "ShotFired";
+    public string reloadTrigger = "Reload";
 
     [Header("Weapon Sounds")] 
     [SerializeField] private List<AK.Wwise.Event> FiredSound;
@@ -58,6 +58,7 @@ public class Gun : MonoBehaviour
     
     private Quaternion currentAimRotation;
     private bool wasInUIMode = false;
+    private bool reloadAnimationCompleted = false;
 
     private void Start()
     {
@@ -141,7 +142,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(int index, int newDamage, float newRange, float newFireRate, int newDestructivePower, int newMagSize, int newReserve, float newReloadTime)
+    public void EquipWeapon(int index, int newDamage, float newRange, float newFireRate, int newDestructivePower, int newMagSize, int newReserve)
     {
         if (index < 0 || index >= weaponVisuals.Length) return;
 
@@ -152,7 +153,6 @@ public class Gun : MonoBehaviour
         destructivePower = newDestructivePower;
         magazineSize = newMagSize;
         reserveAmmo = newReserve;
-        reloadTime = newReloadTime;
         
         currentAmmo = magazineSize;
         isReloading = false;
@@ -222,6 +222,25 @@ public class Gun : MonoBehaviour
         if (reserveAmmo <= 0) yield break;
 
         isReloading = true;
+        reloadAnimationCompleted = false;
+
+        if (weaponAnimator == null)
+        {
+            weaponAnimator = weaponVisuals != null && weaponVisuals.Length > currentWeaponIndex
+                ? weaponVisuals[currentWeaponIndex].weaponModel != null
+                    ? weaponVisuals[currentWeaponIndex].weaponModel.GetComponent<Animator>()
+                    : GetComponentInChildren<Animator>()
+                : GetComponentInChildren<Animator>();
+        }
+
+        if (weaponAnimator != null && !string.IsNullOrEmpty(reloadTrigger))
+        {
+            weaponAnimator.SetTrigger(reloadTrigger);
+        }
+        else
+        {
+            reloadAnimationCompleted = true;
+        }
         
         if (ReloadSound != null && ReloadSound.Count > currentWeaponIndex)
         {
@@ -230,7 +249,7 @@ public class Gun : MonoBehaviour
         
         if (UIManager.Instance != null) UIManager.Instance.ShowReloadingText();
 
-        yield return new WaitForSecondsRealtime(reloadTime);
+        yield return new WaitUntil(() => reloadAnimationCompleted);
 
         int bulletsNeeded = magazineSize - currentAmmo;
         int bulletsToReload = Mathf.Min(bulletsNeeded, reserveAmmo);
@@ -241,6 +260,16 @@ public class Gun : MonoBehaviour
         isReloading = false;
         
         UpdateAmmoUI(); 
+    }
+
+    public void OnReloadAnimationComplete()
+    {
+        if (!isReloading)
+        {
+            return;
+        }
+
+        reloadAnimationCompleted = true;
     }
 
     private void Shoot(bool effectivelyInUIMode, bool isPaused, bool isDead)
