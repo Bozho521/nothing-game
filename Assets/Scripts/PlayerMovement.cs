@@ -38,6 +38,20 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     [Header("UI Elements")]
     public GameObject deathScreenUI; 
 
+    [Header("Gun Animation Input")]
+    public Animator gunAnimator;
+    public string forwardsParam = "Forwards";
+    public string backwardsParam = "Backwards";
+    public string leftwardsParam = "Leftwards";
+    public string rightwardsParam = "Rightwards";
+    [Range(0f, 0.5f)] public float moveInputDeadzone = 0.1f;
+
+    [Header("Measured Move Input (Read-Only)")]
+    [Range(0f, 1f)] public float forwardsInput;
+    [Range(0f, 1f)] public float backwardsInput;
+    [Range(0f, 1f)] public float leftwardsInput;
+    [Range(0f, 1f)] public float rightwardsInput;
+
     public bool canInteract = true;
     
     private CharacterController controller;
@@ -115,6 +129,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     private void HandleMovement()
     {
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
+        MeasureDirectionalInput(moveInput);
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
 
         if (controller.isGrounded && velocity.y < 0)
@@ -139,6 +154,32 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         controller.Move(finalMovement * Time.deltaTime);
 
         CheckInteraction();
+    }
+
+    private void MeasureDirectionalInput(Vector2 moveInput)
+    {
+        Vector2 processedInput = ApplyDeadzone(moveInput, moveInputDeadzone);
+
+        forwardsInput = Mathf.Max(0f, processedInput.y);
+        backwardsInput = Mathf.Max(0f, -processedInput.y);
+        rightwardsInput = Mathf.Max(0f, processedInput.x);
+        leftwardsInput = Mathf.Max(0f, -processedInput.x);
+
+        if (gunAnimator == null) return;
+
+        gunAnimator.SetFloat(forwardsParam, forwardsInput);
+        gunAnimator.SetFloat(backwardsParam, backwardsInput);
+        gunAnimator.SetFloat(leftwardsParam, leftwardsInput);
+        gunAnimator.SetFloat(rightwardsParam, rightwardsInput);
+    }
+
+    private static Vector2 ApplyDeadzone(Vector2 value, float deadzone)
+    {
+        float magnitude = value.magnitude;
+        if (magnitude <= deadzone) return Vector2.zero;
+
+        float scaledMagnitude = Mathf.InverseLerp(deadzone, 1f, Mathf.Clamp01(magnitude));
+        return value.normalized * scaledMagnitude;
     }
 
     public void TakeDamage(int damage)

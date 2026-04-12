@@ -44,6 +44,10 @@ public class Gun : MonoBehaviour
     public GameObject aimingReticle; 
     private Quaternion originalLocalRotation; 
 
+    [Header("Animation")]
+    public Animator weaponAnimator;
+    public string shotFiredBool = "ShotFired";
+
     private float nextFireTime = 0f;
     private Camera mainCam;
 
@@ -57,6 +61,11 @@ public class Gun : MonoBehaviour
         RefreshWeaponVisuals();
         currentAmmo = magazineSize; 
         UpdateAmmoUI(); 
+
+        if (weaponAnimator != null)
+        {
+            weaponAnimator.SetBool(shotFiredBool, false);
+        }
     }
 
     private void Update()
@@ -120,6 +129,11 @@ public class Gun : MonoBehaviour
 
         RefreshWeaponVisuals();
         UpdateAmmoUI();
+
+        if (weaponAnimator != null)
+        {
+            weaponAnimator.SetBool(shotFiredBool, false);
+        }
     }
 
     private void RefreshWeaponVisuals()
@@ -209,6 +223,20 @@ public class Gun : MonoBehaviour
 
         if (isPaused || isDead) return;
 
+        if (weaponAnimator == null)
+        {
+            weaponAnimator = weaponVisuals != null && weaponVisuals.Length > currentWeaponIndex
+                ? weaponVisuals[currentWeaponIndex].weaponModel != null
+                    ? weaponVisuals[currentWeaponIndex].weaponModel.GetComponent<Animator>()
+                    : GetComponentInChildren<Animator>()
+                : GetComponentInChildren<Animator>();
+        }
+
+        if (weaponAnimator != null)
+        {
+            weaponAnimator.SetBool(shotFiredBool, true);
+        }
+
         if (Physics.Raycast(activeVisual.firePoint.position, activeVisual.firePoint.forward, out RaycastHit hit, range))
         {
             StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, hit.point));
@@ -265,6 +293,23 @@ public class Gun : MonoBehaviour
         else
         {
             StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, activeVisual.firePoint.position + activeVisual.firePoint.forward * range));
+        }
+    }
+
+    public void ResetShotFired()
+    {
+        if (weaponAnimator == null)
+        {
+            weaponAnimator = weaponVisuals != null && weaponVisuals.Length > currentWeaponIndex
+                ? weaponVisuals[currentWeaponIndex].weaponModel != null
+                    ? weaponVisuals[currentWeaponIndex].weaponModel.GetComponent<Animator>()
+                    : GetComponentInChildren<Animator>()
+                : GetComponentInChildren<Animator>();
+        }
+
+        if (weaponAnimator != null)
+        {
+            weaponAnimator.SetBool(shotFiredBool, false);
         }
     }
 
