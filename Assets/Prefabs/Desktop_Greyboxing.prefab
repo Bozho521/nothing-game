@@ -2113,15 +2113,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 68.28
+      value: 65.36
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 57.300003
+      value: 55.97
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.66
+      value: -19.210001
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2389,10 +2389,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883560711434179353, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_text
+      value: ADA
+      objectReference: {fileID: 0}
     - target: {fileID: 6535686432984913602, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_Name
       value: BreakableIcon (49)
       objectReference: {fileID: 0}
+    - target: {fileID: 7471253524935167502, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 27472a3daf0bc4d78a59adc054dded64, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4671,10 +4679,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4883560711434179353, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: m_text
+      value: Pleasant Dreams
+      objectReference: {fileID: 0}
     - target: {fileID: 6535686432984913602, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_Name
       value: BreakableIcon (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 7471253524935167502, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 998be70111b8046529a0a19dcff1f0e9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8395,15 +8411,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 58.821495
+      value: 72.19
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 27.022644
+      value: 60.5
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -52.65036
+      value: -29.04
       objectReference: {fileID: 0}
     - target: {fileID: 1896901735172874252, guid: 45a7399cb2a8e4e2382054de3db74f54, type: 3}
       propertyPath: m_LocalRotation.w
