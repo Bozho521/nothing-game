@@ -29,14 +29,10 @@ public class Gun : MonoBehaviour
 
     [Header("Ammo System")]
     public int currentAmmo;
-<<<<<<< Updated upstream
+
     public int magazineSize = 10;      
     public int reserveAmmo = 30;       
-=======
-    public int magazineSize = 10;
-    public int reserveAmmo = 30;
-    public float reloadTime = 1.5f;
->>>>>>> Stashed changes
+
     private bool isReloading = false;
 
     [Header("Setup & Effects")]
