@@ -5404,6 +5404,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1727444952}
     m_Modifications:
+    - target: {fileID: 1303544499985840250, guid: 8a770a67650055e4995cdb5d0ce479e5, type: 3}
+      propertyPath: reserveAmmo
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 6491606676306115155, guid: 8a770a67650055e4995cdb5d0ce479e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -723.43
@@ -5443,6 +5447,14 @@ PrefabInstance:
     - target: {fileID: 6491606676306115155, guid: 8a770a67650055e4995cdb5d0ce479e5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083438082921292035, guid: 8a770a67650055e4995cdb5d0ce479e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7133403093602038388, guid: 8a770a67650055e4995cdb5d0ce479e5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8422399462671712063, guid: 8a770a67650055e4995cdb5d0ce479e5, type: 3}
       propertyPath: m_Name
