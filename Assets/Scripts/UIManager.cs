@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem; 
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -33,11 +34,32 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
+        bool isDead = player != null && player.isDead;
+
+        if ((isPaused || isDead) && Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
+        {
+            RestartGame();
+            return; 
+        }
+
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
+            if (isDead)
+            {
+                return;
+            }
+
             if (isPaused) ResumeGame();
             else PauseGame();
         }
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("Restarting Game...");
+        Time.timeScale = 1f; 
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void PauseGame()
