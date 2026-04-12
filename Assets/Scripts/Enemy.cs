@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AK.Wwise.Event IdleSound;
     [SerializeField] private AK.Wwise.Event DeathSound;
+
+    [SerializeField] private AK.Wwise.Event AttackSound;
     [Header("Drop Settings")]
     public float dropChance = 0.25f; 
     public GameObject healthPickupPrefab;
@@ -140,6 +142,7 @@ public class Enemy : MonoBehaviour
         lastAttackTime = Time.time;
 
         animator.SetTrigger("IsAttacking");
+	AttackSound.Post(gameObject);
         
         if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerStats))
         {

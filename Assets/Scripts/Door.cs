@@ -14,6 +14,8 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     
     public float Health { get; set; } = 50.0f;
     public int Armor { get; set; } = 0;
+
+    [SerializeField] AK.Wwise.Event openedSound;    
     
     public string InteractPrompt { get; } = "Press E to open";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,6 +34,7 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     IEnumerator Open()
     {
         float elapsed_time = 0.0f;
+	openedSound.Post(gameObject);
         while (openTransform.position.y > transform.position.y)
         {
             elapsed_time += Time.deltaTime;
