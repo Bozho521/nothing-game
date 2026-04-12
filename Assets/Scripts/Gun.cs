@@ -93,7 +93,7 @@ public class Gun : MonoBehaviour
         bool isDead = player != null && player.isDead;
         bool isPaused = UIManager.Instance != null && UIManager.Instance.isPaused;
 
-        if (!isPaused && !isDead && Keyboard.current.mKey.wasPressedThisFrame)
+        if (!isPaused && !isDead && Mouse.current.rightButton.wasPressedThisFrame)
         {
             isUIModeActive = !isUIModeActive;
             UpdateCursorAndPlayerState();
