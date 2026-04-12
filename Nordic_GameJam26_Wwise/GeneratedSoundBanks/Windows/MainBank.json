@@ -10,11 +10,27 @@
     "Type": "User",
     "GUID": "{217BA030-52FA-4781-8508-AA9C60AEA44B}",
     "Language": "SFX",
-    "Hash": "{4778C33C-EF44-5D74-0098-133E592BFA48}",
+    "Hash": "{331F31CF-9FF1-087B-E006-1B75FF18239C}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\MainBank",
     "ShortName": "MainBank",
     "Path": "MainBank.bnk",
     "Media": [
+     {
+      "Id": "29899078",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_RailGunShoot.wav",
+      "CachePath": "43/{437BEF01-6ED0-F787-5A0D-AA66F6798A3E}.wem"
+     },
+     {
+      "Id": "98375766",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_DoorSound.wav",
+      "CachePath": "9B/{9B9DA063-DE4F-F761-A38A-712121C9F049}.wem"
+     },
      {
       "Id": "268643418",
       "Language": "SFX",
@@ -46,6 +62,22 @@
       "Location": "Memory",
       "ShortName": "NothingGame_DemonDie.wav",
       "CachePath": "F1/{F13513DD-7D05-41D1-3408-0F85ADF364DB}.wem"
+     },
+     {
+      "Id": "367251208",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_DemonATK.wav",
+      "CachePath": "4B/{4B40E175-B0B4-7D98-FAC3-1C11EA693FBD}.wem"
+     },
+     {
+      "Id": "450157659",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_HealthPickup.wav",
+      "CachePath": "53/{538130C9-9178-E12D-C64D-C69E02B365AF}.wem"
      },
      {
       "Id": "455380154",
@@ -104,6 +136,22 @@
       "CachePath": "15/{1512FDBC-0D31-332F-1946-6094FFF08AD5}.wem"
      },
      {
+      "Id": "942397465",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_AmmoPickup.wav",
+      "CachePath": "31/{31112C01-9D5E-F1E2-FDC0-6677BA3897F9}.wem"
+     },
+     {
+      "Id": "971187009",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_DemonDMG.wav",
+      "CachePath": "55/{55B7233E-DB27-3F30-D80E-2114A5124C80}.wem"
+     },
+     {
       "Id": "1054474706",
       "Language": "SFX",
       "Streaming": "false",
@@ -113,6 +161,48 @@
      }
     ],
     "Events": [
+     {
+      "Id": "4269559823",
+      "Name": "Play_Ammo_Pickup",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Ammo_Pickup",
+      "GUID": "{8AD91108-4387-4AE1-8701-3D81060B91DC}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.46499345",
+      "DurationMax": "0.585855",
+      "MediaRefs": [
+       {
+        "Id": "942397465"
+       }
+      ]
+     },
+     {
+      "Id": "1660008929",
+      "Name": "Play_Door_Open",
+      "ObjectPath": "\\Events\\Default Work Unit\\Environment\\Play_Door_Open",
+      "GUID": "{54308537-7917-4119-A7FC-12D0A6A4C848}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.1607294",
+      "DurationMax": "1.3028748",
+      "MediaRefs": [
+       {
+        "Id": "98375766"
+       }
+      ]
+     },
+     {
+      "Id": "2432025233",
+      "Name": "Play_Enemy_Atk",
+      "ObjectPath": "\\Events\\Default Work Unit\\Enemy\\Play_Enemy_Atk",
+      "GUID": "{8AB05308-2683-48FD-B3A3-A8B501665E84}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.7231914",
+      "DurationMax": "0.86002433",
+      "MediaRefs": [
+       {
+        "Id": "367251208"
+       }
+      ]
+     },
      {
       "Id": "2448258477",
       "Name": "Play_Enemy_Die",
@@ -128,6 +218,20 @@
       ]
      },
      {
+      "Id": "2515369075",
+      "Name": "Play_Enemy_Dmg",
+      "ObjectPath": "\\Events\\Default Work Unit\\Enemy\\Play_Enemy_Dmg",
+      "GUID": "{10001FEB-30A7-4044-B400-A4F2C294080F}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.7484713",
+      "DurationMax": "3.2685015",
+      "MediaRefs": [
+       {
+        "Id": "971187009"
+       }
+      ]
+     },
+     {
       "Id": "1109600527",
       "Name": "Play_Enemy_Idle",
       "ObjectPath": "\\Events\\Default Work Unit\\Enemy\\Play_Enemy_Idle",
@@ -138,6 +242,20 @@
       "MediaRefs": [
        {
         "Id": "862177575"
+       }
+      ]
+     },
+     {
+      "Id": "2231054099",
+      "Name": "Play_Health_Pickup",
+      "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Health_Pickup",
+      "GUID": "{6E35A292-FD7E-46C0-A1C0-53E75AC5C27F}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.7259573",
+      "DurationMax": "0.81485957",
+      "MediaRefs": [
+       {
+        "Id": "450157659"
        }
       ]
      },
@@ -212,6 +330,20 @@
       ]
      },
      {
+      "Id": "3639931096",
+      "Name": "Play_Railgun_Shoot",
+      "ObjectPath": "\\Events\\Default Work Unit\\Railgun\\Play_Railgun_Shoot",
+      "GUID": "{FE763FA7-F1D5-4FD9-90DA-78F51B1E9031}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.7484713",
+      "DurationMax": "3.2685015",
+      "MediaRefs": [
+       {
+        "Id": "29899078"
+       }
+      ]
+     },
+     {
       "Id": "1908822854",
       "Name": "Play_Shotgun_Empty",
       "ObjectPath": "\\Events\\Default Work Unit\\Shotgun\\Play_Shotgun_Empty",
@@ -270,7 +402,7 @@
      {
       "Id": "1374894833",
       "Name": "Play_Wall_Destroy",
-      "ObjectPath": "\\Events\\Default Work Unit\\Wall\\Play_Wall_Destroy",
+      "ObjectPath": "\\Events\\Default Work Unit\\Environment\\Play_Wall_Destroy",
       "GUID": "{2F4CB71A-0971-4C13-AEF8-A4B4111F60EA}",
       "DurationType": "OneShot",
       "DurationMin": "1.3415004",
@@ -284,6 +416,6 @@
     ]
    }
   ],
-  "FileHash": "{E620CE3C-EC9B-B9C4-CC7F-89E7190F45B9}"
+  "FileHash": "{A98D465F-E2CE-9C3C-41C7-D5036ACC4640}"
  }
 }

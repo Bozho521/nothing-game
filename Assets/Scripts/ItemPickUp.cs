@@ -15,6 +15,7 @@ public class ItemPickup : MonoBehaviour
     public float bobHeight = 0.25f;
 
     private Vector3 startPos;
+    [SerializeField] private AK.Wwise.Event itemPickupSound;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
+            itemPickupSound.Post(gameObject);
             if (type == PickupType.Health)
             {
                 if (player.currentHealth < player.maxHealth)

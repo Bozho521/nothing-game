@@ -282,6 +282,47 @@
 										</Sound>
 									</ChildrenList>
 								</Folder>
+								<Folder Name="Railgun" ID="{32A115B7-B9F8-4C7F-9865-91119EF114A1}" ShortID="406979171">
+									<ChildrenList>
+										<Sound Name="Railgun Shoot" ID="{EF70393E-6CEA-4927-8FFF-78F677942D81}" ShortID="527239439">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{E26FBEA2-64FA-4C46-A7FD-E427F87295A8}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="150"/>
+																	<Property Name="Min" Type="Real64" Value="-150"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="NothingGame_RailGunShoot" ID="{3D1D0778-A1AA-4A23-80CB-B0314DA97AEE}">
+													<Language>SFX</Language>
+													<AudioFile>NothingGame_RailGunShoot.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="29899078"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="NothingGame_RailGunShoot" ID="{3D1D0778-A1AA-4A23-80CB-B0314DA97AEE}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
+									</ChildrenList>
+								</Folder>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Player" ID="{53F5FD2D-3471-450E-9F4E-966046B2EC36}" ShortID="521692528">
@@ -327,6 +368,80 @@
 										<ActiveSource Name="NothingGame_PlayerDamage" ID="{A352A997-0C25-4D81-93EC-F67F96360CEC}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="Ammo Pickup" ID="{24EC1E5E-C522-41AA-90D6-ADC0AFADF020}" ShortID="854000694">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{F4864B21-166E-4303-9511-8ACBC1C368B3}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="200"/>
+															<Property Name="Min" Type="Real64" Value="-200"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NothingGame_AmmoPickup" ID="{BE4CD118-074F-401A-A392-E90D1CC9731A}">
+											<Language>SFX</Language>
+											<AudioFile>NothingGame_AmmoPickup.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="942397465"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="NothingGame_AmmoPickup" ID="{BE4CD118-074F-401A-A392-E90D1CC9731A}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Health Pickup" ID="{E28BA5B2-7BCC-4D44-A35C-4E4822EBDF57}" ShortID="662335092">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{5BCD3B7C-ABBE-4B59-9280-4F56D1D89407}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NothingGame_HealthPickup" ID="{39DAD65F-9969-46AD-B8A3-27F2B0B2253E}">
+											<Language>SFX</Language>
+											<AudioFile>NothingGame_HealthPickup.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="450157659"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="NothingGame_HealthPickup" ID="{39DAD65F-9969-46AD-B8A3-27F2B0B2253E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Environment" ID="{0C4CACFB-B2BD-4240-8D5F-26654ADEB21F}" ShortID="644279349">
@@ -370,6 +485,43 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="NothingGame_WallDestroy" ID="{9FD9A46E-E883-485A-BE02-D1A52C43AF5C}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Door Open" ID="{D2CA5A29-8DC3-4991-BA2E-55EB31379FD2}" ShortID="170729770">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{EB35E6E8-6A23-474D-B263-92FAA98C7A86}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NothingGame_DoorSound" ID="{567C940C-2F78-4B66-89E5-BB5EE47A5580}">
+											<Language>SFX</Language>
+											<AudioFile>NothingGame_DoorSound.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="98375766"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="NothingGame_DoorSound" ID="{567C940C-2F78-4B66-89E5-BB5EE47A5580}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
@@ -493,6 +645,80 @@
 									</ChildrenList>
 									<ActiveSourceList>
 										<ActiveSource Name="NothingGame_DemonIdle" ID="{D174DAAF-233D-4ED4-810E-5A932ABEC5AF}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Enemy Atk" ID="{E3C6A533-5F59-4185-9F47-1E4EA912114C}" ShortID="660652684">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{0924DE7D-9FBE-4514-BF59-3EBDA23DF70F}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NothingGame_DemonATK" ID="{7906F6DD-3BB0-445F-B2EC-8754EDD4AB5E}">
+											<Language>SFX</Language>
+											<AudioFile>NothingGame_DemonATK.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="367251208"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="NothingGame_DemonATK" ID="{7906F6DD-3BB0-445F-B2EC-8754EDD4AB5E}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Enemy Dmg" ID="{4C75F2CC-BE46-46C0-8E83-D377D620AAE7}" ShortID="601507386">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{8E9E2546-976F-421D-996D-F22BED4AE923}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="150"/>
+															<Property Name="Min" Type="Real64" Value="-150"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NothingGame_DemonDMG" ID="{D471A65E-3898-46A3-B52B-222C972358EB}">
+											<Language>SFX</Language>
+											<AudioFile>NothingGame_DemonDMG.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="971187009"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="NothingGame_DemonDMG" ID="{D471A65E-3898-46A3-B52B-222C972358EB}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
 							</ChildrenList>
