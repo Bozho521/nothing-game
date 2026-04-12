@@ -479,6 +479,80 @@
 										<ActiveSource Name="NothingGame_HealthPickup" ID="{39DAD65F-9969-46AD-B8A3-27F2B0B2253E}" Platform="Linked"/>
 									</ActiveSourceList>
 								</Sound>
+								<Sound Name="Player Jump" ID="{AC350423-1509-4E55-9348-9E7668DA8ECA}" ShortID="54525717">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{125C1AA6-8174-4124-9973-D915D71B9758}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NothingGame_PlayerJump" ID="{3BD351EA-F5B0-4EA3-8183-7201FE3A88B3}">
+											<Language>SFX</Language>
+											<AudioFile>NothingGame_PlayerJump.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="540651060"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="NothingGame_PlayerJump" ID="{3BD351EA-F5B0-4EA3-8183-7201FE3A88B3}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
+								<Sound Name="Player Footstep" ID="{F45D37EA-6E85-4FE6-82FD-5C70926B2C75}" ShortID="384639256">
+									<PropertyList>
+										<Property Name="Pitch" Type="int32">
+											<ModifierList>
+												<ModifierInfo>
+													<Modifier Name="" ID="{03CB2F49-F8D0-49CB-BCA6-6ED25E540338}">
+														<PropertyList>
+															<Property Name="Enabled" Type="bool" Value="True"/>
+															<Property Name="Max" Type="Real64" Value="100"/>
+															<Property Name="Min" Type="Real64" Value="-100"/>
+														</PropertyList>
+													</Modifier>
+												</ModifierInfo>
+											</ModifierList>
+										</Property>
+									</PropertyList>
+									<ReferenceList>
+										<Reference Name="Conversion">
+											<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+										</Reference>
+										<Reference Name="OutputBus">
+											<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+										</Reference>
+									</ReferenceList>
+									<ChildrenList>
+										<AudioFileSource Name="NothingGame_PlayerFootstep" ID="{3548F107-8129-4B24-A74C-AECF6EF40D64}">
+											<Language>SFX</Language>
+											<AudioFile>NothingGame_PlayerFootstep.wav</AudioFile>
+											<MediaIDList>
+												<MediaID ID="457800406"/>
+											</MediaIDList>
+										</AudioFileSource>
+									</ChildrenList>
+									<ActiveSourceList>
+										<ActiveSource Name="NothingGame_PlayerFootstep" ID="{3548F107-8129-4B24-A74C-AECF6EF40D64}" Platform="Linked"/>
+									</ActiveSourceList>
+								</Sound>
 							</ChildrenList>
 						</Folder>
 						<Folder Name="Environment" ID="{0C4CACFB-B2BD-4240-8D5F-26654ADEB21F}" ShortID="644279349">

@@ -22,42 +22,51 @@ public class Gun : MonoBehaviour
 
     [Header("Gun Stats")]
     public int damage = 10;
-    public float range = 100f;         
+    public float range = 100f;
     public float fireRate = 0.15f;
-    public float visualBulletSpeed = 0.15f; 
-    public int destructivePower = 0; 
-    
+    public float visualBulletSpeed = 0.15f;
+    public int destructivePower = 0;
+
     [Header("Ammo System")]
     public int currentAmmo;
+
     public int magazineSize = 10;      
     public int reserveAmmo = 30;       
-    public float reloadTime = 1.5f;    
+
     private bool isReloading = false;
 
     [Header("Setup & Effects")]
-    public GameObject sparkEffectPrefab; 
-    public GameObject visualBulletPrefab; 
+    public GameObject sparkEffectPrefab;
+    public GameObject visualBulletPrefab;
     public GameObject bloodDecalPrefab;
 
     [Header("Meta UI Mode")]
     public bool isUIModeActive = false;
-    public GameObject aimingReticle; 
-    private Quaternion originalLocalRotation; 
+    public GameObject aimingReticle;
+    private Quaternion originalLocalRotation;
 
     [Header("Animation")]
     public Animator weaponAnimator;
     public string shotFiredBool = "ShotFired";
+    public string reloadTrigger = "Reload";
 
-    [Header("Weapon Sounds")] 
+    int uiDestroyedCount = 0;
+
+    [Header("Weapon Sounds")]
     [SerializeField] private List<AK.Wwise.Event> FiredSound;
     [SerializeField] private List<AK.Wwise.Event> ReloadSound;
     [SerializeField] private List<AK.Wwise.Event> EmptySound;
 
+    private List<Canvas> uiElements;
+
     private float nextFireTime = 0f;
     private Camera mainCam;
-    
+
     private Quaternion currentAimRotation;
     private bool wasInUIMode = false;
+    private bool reloadAnimationCompleted = false;
+
+    private bool winConditionMet = false;
 
     private void Start()
     {
@@ -141,7 +150,7 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(int index, int newDamage, float newRange, float newFireRate, int newDestructivePower, int newMagSize, int newReserve, float newReloadTime)
+    public void EquipWeapon(int index, int newDamage, float newRange, float newFireRate, int newDestructivePower, int newMagSize, int newReserve)
     {
         if (index < 0 || index >= weaponVisuals.Length) return;
 
@@ -152,7 +161,6 @@ public class Gun : MonoBehaviour
         destructivePower = newDestructivePower;
         magazineSize = newMagSize;
         reserveAmmo = newReserve;
-        reloadTime = newReloadTime;
         
         currentAmmo = magazineSize;
         isReloading = false;
@@ -222,6 +230,25 @@ public class Gun : MonoBehaviour
         if (reserveAmmo <= 0) yield break;
 
         isReloading = true;
+        reloadAnimationCompleted = false;
+
+        if (weaponAnimator == null)
+        {
+            weaponAnimator = weaponVisuals != null && weaponVisuals.Length > currentWeaponIndex
+                ? weaponVisuals[currentWeaponIndex].weaponModel != null
+                    ? weaponVisuals[currentWeaponIndex].weaponModel.GetComponent<Animator>()
+                    : GetComponentInChildren<Animator>()
+                : GetComponentInChildren<Animator>();
+        }
+
+        if (weaponAnimator != null && !string.IsNullOrEmpty(reloadTrigger))
+        {
+            weaponAnimator.SetTrigger(reloadTrigger);
+        }
+        else
+        {
+            reloadAnimationCompleted = true;
+        }
         
         if (ReloadSound != null && ReloadSound.Count > currentWeaponIndex)
         {
@@ -230,7 +257,7 @@ public class Gun : MonoBehaviour
         
         if (UIManager.Instance != null) UIManager.Instance.ShowReloadingText();
 
-        yield return new WaitForSecondsRealtime(reloadTime);
+        yield return new WaitUntil(() => reloadAnimationCompleted);
 
         int bulletsNeeded = magazineSize - currentAmmo;
         int bulletsToReload = Mathf.Min(bulletsNeeded, reserveAmmo);
@@ -241,6 +268,16 @@ public class Gun : MonoBehaviour
         isReloading = false;
         
         UpdateAmmoUI(); 
+    }
+
+    public void OnReloadAnimationComplete()
+    {
+        if (!isReloading)
+        {
+            return;
+        }
+
+        reloadAnimationCompleted = true;
     }
 
     private void Shoot(bool effectivelyInUIMode, bool isPaused, bool isDead)
@@ -375,6 +412,7 @@ public class Gun : MonoBehaviour
 
     private bool CheckAndDestroyUI()
     {
+        if(destructivePower<2) return false;
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = Mouse.current.position.ReadValue()
@@ -411,6 +449,12 @@ public class Gun : MonoBehaviour
             }
 
             StartCoroutine(MakeUIFallAndDie(uiElement));
+
+            if(uiDestroyedCount == 6)
+            {
+                Debug.Log("WinCondition Met");
+                winConditionMet = true;
+            }
             return true; 
         }
 
@@ -431,6 +475,7 @@ public class Gun : MonoBehaviour
     {
         RectTransform rt = uiElement.GetComponent<RectTransform>();
         if (rt == null) yield break;
+        uiDestroyedCount++;
 
         Vector3 originalPos = rt.anchoredPosition;
         Quaternion originalRot = rt.rotation;

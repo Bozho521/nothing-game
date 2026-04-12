@@ -12,7 +12,6 @@ public class WeaponPickup : MonoBehaviour
     
     public int magazineSize = 30;
     public int reserveAmmo = 90;
-    public float reloadTime = 2.0f;
 
     public float rotationSpeed = 90f;
     public float bobSpeed = 2f;
@@ -48,8 +47,7 @@ public class WeaponPickup : MonoBehaviour
                     fireRate, 
                     destructivePower, 
                     magazineSize, 
-                    reserveAmmo, 
-                    reloadTime
+                    reserveAmmo
                 );
 
                 Destroy(gameObject);

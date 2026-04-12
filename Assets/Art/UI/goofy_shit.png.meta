@@ -146,7 +146,7 @@ TextureImporter:
         serializedVersion: 2
         x: 96
         y: 272
-        width: 48
+        width: 47
         height: 48
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -158,6 +158,182 @@ TextureImporter:
       bones: []
       spriteID: 55049dde43115a94791baeac835e7ba1
       internalID: -1140767994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_3
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 272
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6be83178bbba0594da3364f1174ba226
+      internalID: -1392040051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_4
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 305
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e0a597654add6f499b67a266d157192
+      internalID: 2117363042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_5
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 288
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6eb551a77b41e624ba14228ffe0b8d1b
+      internalID: 1224919673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_6
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 288
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c509bc14a5b4a3640b88ad4b1f7e19b0
+      internalID: 1775856263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_7
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 288
+        width: 14
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5ac996ce16c8094a8504b744ee1e83b
+      internalID: -1088028865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_8
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 304
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abb3a87b421ddf4498abad304f4e296b
+      internalID: 1584168607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_9
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 263
+        width: 36
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c10a836f09d2574ca4ea1c0b3733517
+      internalID: -1367885736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: goofy_shit_10
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 280
+        width: 21
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2deb1142407057468217dea920804e3
+      internalID: 664711388
       vertices: []
       indices: 
       edges: []
@@ -180,7 +356,15 @@ TextureImporter:
     nameFileIdTable:
       goofy_shit_0: 1567647258
       goofy_shit_1: -1698752430
+      goofy_shit_10: 664711388
       goofy_shit_2: -1140767994
+      goofy_shit_3: -1392040051
+      goofy_shit_4: 2117363042
+      goofy_shit_5: 1224919673
+      goofy_shit_6: 1775856263
+      goofy_shit_7: -1088028865
+      goofy_shit_8: 1584168607
+      goofy_shit_9: -1367885736
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

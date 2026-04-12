@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AK.Wwise.Event IdleSound;
     [SerializeField] private AK.Wwise.Event DeathSound;
+
+    [SerializeField] private AK.Wwise.Event AttackSound;
     [Header("Drop Settings")]
     public float dropChance = 0.25f; 
     public GameObject healthPickupPrefab;
@@ -140,6 +142,7 @@ public class Enemy : MonoBehaviour
         lastAttackTime = Time.time;
 
         animator.SetTrigger("IsAttacking");
+	AttackSound.Post(gameObject);
         
         if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerStats))
         {
@@ -201,15 +204,15 @@ public class Enemy : MonoBehaviour
 
             if (needsHealth && needsAmmo)
             {
-                Instantiate(Random.value > 0.5f ? healthPickupPrefab : ammoPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
+                Instantiate(Random.value > 0.5f ? healthPickupPrefab : ammoPickupPrefab, transform.position + Vector3.up * 0.5f, new Quaternion(0f, 0f, -90f, transform.rotation.w));
             }
             else if (needsHealth && healthPickupPrefab != null)
             {
-                Instantiate(healthPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
+                Instantiate(healthPickupPrefab, transform.position + Vector3.up, new Quaternion(0f, 0f, -90f, transform.rotation.w));
             }
             else if (needsAmmo && ammoPickupPrefab != null)
             {
-                Instantiate(ammoPickupPrefab, transform.position + Vector3.up, new Quaternion(-90f, 0f, -90f, transform.rotation.w));
+                Instantiate(ammoPickupPrefab, transform.position + Vector3.up, new Quaternion(0f, 0f, -90f, transform.rotation.w));
             }
         }
     }
