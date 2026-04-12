@@ -24,7 +24,7 @@ public class ItemPickup : MonoBehaviour
 
     private void Update()
     {
-        transform.RotateAround(transform.position, Vector3.up, rotationSpeed * Time.deltaTime);
+        transform.RotateAround(transform.position, transform.up, rotationSpeed * Time.deltaTime);
         float newY = startPos.y + (Mathf.Sin(Time.time * bobSpeed) * bobHeight);
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
