@@ -301,6 +301,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 164b745bda6346948ada4fd5900e0280, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4240545226939838488}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 164b745bda6346948ada4fd5900e0280, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1960622522496042844}
   m_SourcePrefab: {fileID: 100100000, guid: 164b745bda6346948ada4fd5900e0280, type: 3}
 --- !u!1 &151893374059993096 stripped
 GameObject:
@@ -319,20 +322,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4fd888b8923df24a9fbc30a85e073ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gun
+  weaponVisuals: []
+  currentWeaponIndex: 0
   damage: 10
   range: 100
   fireRate: 0.5
   visualBulletSpeed: 0.1
+  destructivePower: 0
   currentAmmo: 10
   magazineSize: 10
   reserveAmmo: 30
   reloadTime: 1.5
-  firePoint: {fileID: 5113316898628236438}
-  muzzleFlash: {fileID: 2188528907667796237, guid: a9eb11750bf008e428c5a71c57504869, type: 3}
   sparkEffectPrefab: {fileID: 5562986803030558085, guid: 06f87de8ceb603f4791b60682cd9590c, type: 3}
   visualBulletPrefab: {fileID: 3808279701110759703, guid: ddff03ff471df014fb7c6cca5acb159b, type: 3}
   bloodDecalPrefab: {fileID: 0}
-  ammoDisplay: {fileID: 0}
+  isUIModeActive: 0
+  aimingReticle: {fileID: 0}
+  weaponAnimator: {fileID: 0}
+  shotFiredBool: ShotFired
+  FiredSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 81713bd3fe719fe40aa244470f61e7c2, type: 2}
+  ReloadSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: efb52c460e910cd4fbd57d5a84cb2e2a, type: 2}
+  EmptySound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 6dad7d4f5ea59494e92f8165c1b4f399, type: 2}
+--- !u!114 &1960622522496042844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151893374059993096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d075e3fd41c7da24f921ec2be96638b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkBank
+  triggerList: ae8d9d44f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 4e16d20a72cb3a5488d4b4576edf413a, type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
 --- !u!4 &671162326977905330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 164b745bda6346948ada4fd5900e0280, type: 3}

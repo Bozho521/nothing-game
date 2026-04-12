@@ -16,41 +16,40 @@ public class WeaponVisual
 
 public class Gun : MonoBehaviour
 {
-    [Header("Weapon Visuals")]
-    public WeaponVisual[] weaponVisuals;
+    [Header("Weapon Visuals")] public WeaponVisual[] weaponVisuals;
     public int currentWeaponIndex = 0;
 
-    [Header("Gun Stats")]
-    public int damage = 10;
-    public float range = 100f;         
+    [Header("Gun Stats")] public int damage = 10;
+    public float range = 100f;
     public float fireRate = 0.15f;
-    public float visualBulletSpeed = 0.15f; 
-    public int destructivePower = 0; 
-    
-    [Header("Ammo System")]
-    public int currentAmmo;
-    public int magazineSize = 10;      
-    public int reserveAmmo = 30;       
-    public float reloadTime = 1.5f;    
+    public float visualBulletSpeed = 0.15f;
+    public int destructivePower = 0;
+
+    [Header("Ammo System")] public int currentAmmo;
+    public int magazineSize = 10;
+    public int reserveAmmo = 30;
+    public float reloadTime = 1.5f;
     private bool isReloading = false;
 
-    [Header("Setup & Effects")]
-    public GameObject sparkEffectPrefab; 
-    public GameObject visualBulletPrefab; 
+    [Header("Setup & Effects")] public GameObject sparkEffectPrefab;
+    public GameObject visualBulletPrefab;
     public GameObject bloodDecalPrefab;
 
-    [Header("Meta UI Mode")]
-    public bool isUIModeActive = false;
-    public GameObject aimingReticle; 
-    private Quaternion originalLocalRotation; 
+    [Header("Meta UI Mode")] public bool isUIModeActive = false;
+    public GameObject aimingReticle;
+    private Quaternion originalLocalRotation;
 
-    [Header("Animation")]
-    public Animator weaponAnimator;
+    [Header("Animation")] public Animator weaponAnimator;
     public string shotFiredBool = "ShotFired";
 
     private float nextFireTime = 0f;
     private Camera mainCam;
 
+
+    [Header("Weapon Sounds")] 
+    [SerializeField] private AK.Wwise.Event FiredSound;
+    [SerializeField] private AK.Wwise.Event ReloadSound;
+    [SerializeField] private AK.Wwise.Event EmptySound;
     private void Start()
     {
         mainCam = GetComponentInParent<Camera>();
@@ -100,6 +99,7 @@ public class Gun : MonoBehaviour
 
         if (currentAmmo <= 0 || Keyboard.current.rKey.wasPressedThisFrame)
         {
+            
             StartCoroutine(Reload());
             return;
         }
@@ -191,17 +191,17 @@ public class Gun : MonoBehaviour
         if (reserveAmmo <= 0) yield break;
 
         isReloading = true;
-        
+        ReloadSound.Post(gameObject);
         if (UIManager.Instance != null) UIManager.Instance.ShowReloadingText();
 
         yield return new WaitForSecondsRealtime(reloadTime);
-
+        
         int bulletsNeeded = magazineSize - currentAmmo;
         int bulletsToReload = Mathf.Min(bulletsNeeded, reserveAmmo);
 
         currentAmmo += bulletsToReload;
         reserveAmmo -= bulletsToReload;
-
+        
         isReloading = false;
         
         UpdateAmmoUI(); 
@@ -209,6 +209,12 @@ public class Gun : MonoBehaviour
 
     private void Shoot(bool effectivelyInUIMode, bool isPaused, bool isDead)
     {
+        if (currentAmmo == 0)
+        {
+            EmptySound.Post(gameObject);
+            return;
+        }
+        FiredSound.Post(gameObject);
         currentAmmo--; 
         UpdateAmmoUI();
 
