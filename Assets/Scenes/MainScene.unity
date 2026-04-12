@@ -480,6 +480,10 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 995
       objectReference: {fileID: 0}
+    - target: {fileID: 1106664886231413524, guid: 499a91f356e0cbb4790ab7d1e23806a2, type: 3}
+      propertyPath: armor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1236321995402076661, guid: 499a91f356e0cbb4790ab7d1e23806a2, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -2720,6 +2724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05291cccde3ade74196dc61b1ecf8414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: AK.Wwise.Unity.MonoBehaviour::AkInitializer
+  disableWwiseOnWebGLBuild: 1
   InitializationSettings: {fileID: 11400000, guid: c0ba3b24e38c4aa4cb37b68e0740535d, type: 2}
   basePath: 
   language: 

@@ -359,7 +359,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
     GuidInternal: 
-    m_lastTime: -8584256110086406677
+    m_lastTime: -8584255809292623633
     List:
     - name: Enemy
       guid: 4fce27e615209849aa0add79e84c0d69
@@ -687,8 +687,8 @@ MonoBehaviour:
         guid: d59fc45934e81840a0073b674e8ce37a
       Path: Events\Default Work Unit\Railgun\Play_Railgun_Impact
       maxAttenuation: 0
-      maxDuration: -1
-      minDuration: -1
+      maxDuration: 1.4150674
+      minDuration: 1.2606816
     - name: Play_Railgun_Shoot
       guid: 094370d27a740647bcaec86fbf79bf40
       id: 3639931096

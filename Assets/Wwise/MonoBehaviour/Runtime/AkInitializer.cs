@@ -37,6 +37,14 @@ using AK.Wwise.Unity.WwiseAddressables;
 public class AkInitializer : UnityEngine.MonoBehaviour
 {
 	private static AkInitializer ms_Instance;
+
+	[UnityEngine.Header("WebGL Build Workaround")]
+	[UnityEngine.SerializeField]
+	[UnityEngine.Tooltip("If enabled, WebGL builds can skip Wwise build preprocessing and runtime initialization on this AkInitializer instance.")]
+	private bool disableWwiseOnWebGLBuild = false;
+
+	public bool DisableWwiseOnWebGLBuild => disableWwiseOnWebGLBuild;
+
 #if AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES
 	public AkWwiseAddressablesInitializationSettings InitializationSettings;
 #else
@@ -143,6 +151,14 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 		}
 #endif
 
+#if UNITY_WEBGL && !UNITY_EDITOR
+		if (disableWwiseOnWebGLBuild)
+		{
+			UnityEngine.Debug.LogWarning("WwiseUnity: WebGL workaround enabled on AkInitializer. Skipping Wwise runtime initialization.", this);
+			return;
+		}
+#endif
+
 		InitializeInitializationSettings();
 #if AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES && UNITY_EDITOR
 		var bankHolder = UnityEngine.Object.FindObjectOfType<AK.Wwise.Unity.WwiseAddressables.InitBankHolder>();
@@ -241,6 +257,27 @@ public class AkInitializer : UnityEngine.MonoBehaviour
 			AkSoundEngineController.Instance.LateUpdate();
 		}
 	}
+
+#if UNITY_EDITOR
+	public static bool ShouldSkipWwiseForWebGLBuild()
+	{
+		if (UnityEditor.EditorUserBuildSettings.activeBuildTarget != UnityEditor.BuildTarget.WebGL)
+		{
+			return false;
+		}
+
+		AkInitializer[] initializers = UnityEngine.Object.FindObjectsByType<AkInitializer>(UnityEngine.FindObjectsInactive.Include, UnityEngine.FindObjectsSortMode.None);
+		for (int i = 0; i < initializers.Length; i++)
+		{
+			if (initializers[i] != null && initializers[i].disableWwiseOnWebGLBuild)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+#endif
 
 #region WwiseMigration
 #if UNITY_EDITOR

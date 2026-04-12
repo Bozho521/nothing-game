@@ -22,6 +22,8 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
 
     private readonly Dictionary<ProBuilderMesh, Dictionary<Face, float>> faceHealthByMesh = new Dictionary<ProBuilderMesh, Dictionary<Face, float>>();
     private readonly Dictionary<MeshCollider, Mesh> runtimeColliderMeshes = new Dictionary<MeshCollider, Mesh>();
+    private readonly Dictionary<MeshCollider, RuntimeMeshState> runtimeMeshStatesByCollider = new Dictionary<MeshCollider, RuntimeMeshState>();
+    private readonly List<Mesh> runtimeRenderMeshes = new List<Mesh>();
 
     public float Health
     {
@@ -48,6 +50,7 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
 
         RefreshConfiguredMeshColliders();
         InitializeFaceHealthCache();
+        InitializeRuntimeMeshFallback();
     }
 
     public void TakeDamage(float damage)
@@ -64,6 +67,8 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
     {
         if (!TryResolveHitFace(hit, out ProBuilderMesh targetMesh, out Face targetFace, out int faceIndex, out MeshCollider targetCollider))
         {
+            // Build-safe fallback when ProBuilder runtime face data is unavailable.
+            HandleRuntimeMeshDamage(hit, damage);
             return;
         }
 
@@ -79,7 +84,7 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         bool deletedFace = TryDeleteFace(targetMesh, targetFace, faceIndex, targetCollider);
         if (deletedFace)
         {
-            wallDestroySound.Post(targetCollider.gameObject);
+            PostWallDestroySound(targetCollider.gameObject);
             RemoveFaceHealth(targetMesh, targetFace);
             health = maxHealthPerFace;
         }
@@ -102,6 +107,17 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         }
 
         runtimeColliderMeshes.Clear();
+
+        foreach (Mesh runtimeMesh in runtimeRenderMeshes)
+        {
+            if (runtimeMesh != null)
+            {
+                Destroy(runtimeMesh);
+            }
+        }
+
+        runtimeRenderMeshes.Clear();
+        runtimeMeshStatesByCollider.Clear();
     }
 
     private bool TryResolveHitFace(RaycastHit hit, out ProBuilderMesh targetMesh, out Face targetFace, out int faceIndex, out MeshCollider meshCollider)
@@ -194,7 +210,7 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
             MeshFilter meshFilter = targetMesh.GetComponent<MeshFilter>();
             if (meshFilter != null)
             {
-                ApplyColliderMesh(targetMesh, meshCollider, meshFilter.sharedMesh);
+                ApplyColliderMesh(targetMesh.name, meshCollider, meshFilter.sharedMesh);
             }
         }
 
@@ -371,11 +387,153 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
             }
 
             meshCollider.sharedMesh = null;
-            ApplyColliderMesh(mesh, meshCollider, meshFilter.sharedMesh);
+            ApplyColliderMesh(mesh.name, meshCollider, meshFilter.sharedMesh);
         }
     }
 
-    private void ApplyColliderMesh(ProBuilderMesh ownerMesh, MeshCollider meshCollider, Mesh sourceMesh)
+    private void InitializeRuntimeMeshFallback()
+    {
+        runtimeMeshStatesByCollider.Clear();
+
+        HashSet<MeshFilter> candidateFilters = new HashSet<MeshFilter>();
+
+        if (polyshapeMeshes != null)
+        {
+            foreach (ProBuilderMesh mesh in polyshapeMeshes)
+            {
+                if (mesh == null)
+                {
+                    continue;
+                }
+
+                MeshFilter filter = mesh.GetComponent<MeshFilter>();
+                if (filter != null)
+                {
+                    candidateFilters.Add(filter);
+                }
+            }
+        }
+
+        if (candidateFilters.Count == 0)
+        {
+            // Covers player builds where ProBuilder components can be stripped.
+            foreach (MeshFilter filter in GetComponentsInChildren<MeshFilter>())
+            {
+                if (filter != null)
+                {
+                    candidateFilters.Add(filter);
+                }
+            }
+        }
+
+        foreach (MeshFilter meshFilter in candidateFilters)
+        {
+            if (meshFilter == null)
+            {
+                continue;
+            }
+
+            MeshCollider meshCollider = meshFilter.GetComponent<MeshCollider>();
+            Mesh sourceMesh = meshFilter.sharedMesh;
+
+            if (meshCollider == null || sourceMesh == null)
+            {
+                continue;
+            }
+
+            Mesh runtimeMesh = Instantiate(sourceMesh);
+            runtimeMesh.name = sourceMesh.name + "_RuntimeDestructible";
+            meshFilter.sharedMesh = runtimeMesh;
+            runtimeRenderMeshes.Add(runtimeMesh);
+
+            RuntimeMeshState runtimeState = new RuntimeMeshState(runtimeMesh, maxHealthPerFace);
+            if (!runtimeState.Initialize())
+            {
+                continue;
+            }
+
+            runtimeMeshStatesByCollider[meshCollider] = runtimeState;
+
+            meshCollider.sharedMesh = null;
+            ApplyColliderMesh(meshFilter.name, meshCollider, runtimeMesh);
+        }
+
+        LogDebug($"Initialized runtime mesh fallback for {runtimeMeshStatesByCollider.Count} collider(s).");
+    }
+
+    private bool HandleRuntimeMeshDamage(RaycastHit hit, float damage)
+    {
+        if (!TryResolveRuntimeFace(hit, out RuntimeMeshState runtimeState, out int faceId, out MeshCollider meshCollider))
+        {
+            return false;
+        }
+
+        float faceHealth = runtimeState.GetFaceHealth(faceId);
+        faceHealth = Mathf.Max(0f, faceHealth - damage);
+        runtimeState.SetFaceHealth(faceId, faceHealth);
+
+        health = faceHealth;
+
+        if (faceHealth > 0f)
+        {
+            return true;
+        }
+
+        if (runtimeState.DeleteFace(faceId))
+        {
+            PostWallDestroySound(meshCollider.gameObject);
+            health = maxHealthPerFace;
+
+            meshCollider.sharedMesh = null;
+            ApplyColliderMesh(meshCollider.name, meshCollider, runtimeState.RuntimeMesh);
+
+            if (destroyWhenNoFacesRemain && runtimeState.RemainingFaceCount == 0)
+            {
+                Destroy(meshCollider.gameObject);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool TryResolveRuntimeFace(RaycastHit hit, out RuntimeMeshState runtimeState, out int faceId, out MeshCollider meshCollider)
+    {
+        runtimeState = null;
+        faceId = -1;
+        meshCollider = hit.collider != null ? hit.collider.GetComponent<MeshCollider>() : null;
+
+        if (meshCollider == null && hit.collider != null)
+        {
+            meshCollider = hit.collider.GetComponentInParent<MeshCollider>();
+        }
+
+        if (meshCollider == null || hit.triangleIndex < 0)
+        {
+            return false;
+        }
+
+        if (!runtimeMeshStatesByCollider.TryGetValue(meshCollider, out runtimeState) || runtimeState == null)
+        {
+            return false;
+        }
+
+        int mappedTriangleIndex = hit.triangleIndex;
+        if (useDoubleSidedColliders && runtimeState.TriangleCount > 0)
+        {
+            mappedTriangleIndex %= runtimeState.TriangleCount;
+        }
+
+        if (!runtimeState.TryGetFaceFromTriangle(mappedTriangleIndex, out faceId))
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private void ApplyColliderMesh(string ownerName, MeshCollider meshCollider, Mesh sourceMesh)
     {
         if (meshCollider == null || sourceMesh == null)
         {
@@ -393,9 +551,17 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
             Destroy(previousRuntimeMesh);
         }
 
-        Mesh doubleSidedMesh = BuildDoubleSidedMesh(sourceMesh, ownerMesh.name + "_DoubleSidedCollider");
+        Mesh doubleSidedMesh = BuildDoubleSidedMesh(sourceMesh, ownerName + "_DoubleSidedCollider");
         runtimeColliderMeshes[meshCollider] = doubleSidedMesh;
         meshCollider.sharedMesh = doubleSidedMesh;
+    }
+
+    private void PostWallDestroySound(GameObject target)
+    {
+        if (wallDestroySound != null)
+        {
+            wallDestroySound.Post(target);
+        }
     }
 
     private static Mesh BuildDoubleSidedMesh(Mesh sourceMesh, string runtimeName)
@@ -446,5 +612,302 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
         }
 
         Debug.Log($"[DamageablePolyshapes] {message}", this);
+    }
+
+    private sealed class RuntimeMeshState
+    {
+        private readonly Mesh runtimeMesh;
+        private readonly float maxFaceHealth;
+        private readonly Dictionary<int, float> healthByTriangle = new Dictionary<int, float>();
+
+        private const float QuadPairNormalDotThreshold = 0.9995f;
+        private const float QuadPairAreaSimilarityThreshold = 0.55f;
+
+        public RuntimeMeshState(Mesh runtimeMesh, float maxFaceHealth)
+        {
+            this.runtimeMesh = runtimeMesh;
+            this.maxFaceHealth = maxFaceHealth;
+        }
+
+        public Mesh RuntimeMesh => runtimeMesh;
+        public int TriangleCount { get; private set; }
+        public int RemainingFaceCount => TriangleCount;
+
+        public bool Initialize()
+        {
+            int[] triangles = runtimeMesh.triangles;
+            if (triangles == null || triangles.Length < 3)
+            {
+                return false;
+            }
+
+            TriangleCount = triangles.Length / 3;
+            return TriangleCount > 0;
+        }
+
+        public bool TryGetFaceFromTriangle(int triangleIndex, out int faceId)
+        {
+            if (triangleIndex >= 0 && triangleIndex < TriangleCount)
+            {
+                faceId = triangleIndex;
+                return true;
+            }
+
+            faceId = -1;
+            return false;
+        }
+
+        public float GetFaceHealth(int faceId)
+        {
+            if (!healthByTriangle.TryGetValue(faceId, out float value))
+            {
+                value = maxFaceHealth;
+                healthByTriangle[faceId] = value;
+            }
+
+            return value;
+        }
+
+        public void SetFaceHealth(int faceId, float value)
+        {
+            healthByTriangle[faceId] = Mathf.Clamp(value, 0f, maxFaceHealth);
+        }
+
+        public bool DeleteFace(int faceId)
+        {
+            if (faceId < 0 || faceId >= TriangleCount)
+            {
+                return false;
+            }
+
+            int[] oldTriangles = runtimeMesh.triangles;
+            int oldTriangleCount = oldTriangles.Length / 3;
+            Vector3[] vertices = runtimeMesh.vertices;
+
+            HashSet<int> trianglesToDelete = new HashSet<int> { faceId };
+            if (TryFindBestQuadPartner(faceId, oldTriangles, vertices, oldTriangleCount, out int partnerTriangle))
+            {
+                trianglesToDelete.Add(partnerTriangle);
+            }
+
+            List<int> newTriangles = new List<int>(oldTriangles.Length);
+            int[] newIndexByOldTriangle = new int[oldTriangleCount];
+
+            int nextTriangleIndex = 0;
+            for (int triangleIndex = 0; triangleIndex < oldTriangleCount; triangleIndex++)
+            {
+                if (trianglesToDelete.Contains(triangleIndex))
+                {
+                    newIndexByOldTriangle[triangleIndex] = -1;
+                    continue;
+                }
+
+                int src = triangleIndex * 3;
+                newTriangles.Add(oldTriangles[src]);
+                newTriangles.Add(oldTriangles[src + 1]);
+                newTriangles.Add(oldTriangles[src + 2]);
+                newIndexByOldTriangle[triangleIndex] = nextTriangleIndex;
+                nextTriangleIndex++;
+            }
+
+            runtimeMesh.triangles = newTriangles.ToArray();
+            runtimeMesh.RecalculateBounds();
+            runtimeMesh.RecalculateNormals();
+
+            Dictionary<int, float> remappedHealth = new Dictionary<int, float>();
+            foreach (KeyValuePair<int, float> pair in healthByTriangle)
+            {
+                int oldIndex = pair.Key;
+                if (oldIndex < 0 || oldIndex >= oldTriangleCount)
+                {
+                    continue;
+                }
+
+                int newIndex = newIndexByOldTriangle[oldIndex];
+                if (newIndex >= 0)
+                {
+                    remappedHealth[newIndex] = pair.Value;
+                }
+            }
+
+            healthByTriangle.Clear();
+            foreach (KeyValuePair<int, float> pair in remappedHealth)
+            {
+                healthByTriangle[pair.Key] = pair.Value;
+            }
+
+            TriangleCount = newTriangles.Count / 3;
+            return true;
+        }
+
+        private static bool TryFindBestQuadPartner(int hitTriangle, int[] triangles, Vector3[] vertices, int triangleCount, out int bestPartner)
+        {
+            bestPartner = -1;
+
+            if (!TryGetTriangleData(hitTriangle, triangles, vertices, out TriangleData source))
+            {
+                return false;
+            }
+
+            float bestScore = float.MinValue;
+
+            for (int candidateIndex = 0; candidateIndex < triangleCount; candidateIndex++)
+            {
+                if (candidateIndex == hitTriangle)
+                {
+                    continue;
+                }
+
+                if (!TryGetTriangleData(candidateIndex, triangles, vertices, out TriangleData candidate))
+                {
+                    continue;
+                }
+
+                if (!TryGetSharedEdge(source, candidate, out int sharedA, out int sharedB))
+                {
+                    continue;
+                }
+
+                float normalDot = Mathf.Abs(Vector3.Dot(source.Normal, candidate.Normal));
+                if (normalDot < QuadPairNormalDotThreshold)
+                {
+                    continue;
+                }
+
+                float areaSimilarity = ComputeAreaSimilarity(source.Area, candidate.Area);
+                if (areaSimilarity < QuadPairAreaSimilarityThreshold)
+                {
+                    continue;
+                }
+
+                float sharedEdgeLengthSq = (vertices[sharedA] - vertices[sharedB]).sqrMagnitude;
+
+                // Heuristic: diagonal shared edge in a split quad is usually the longest shared edge.
+                float score = (sharedEdgeLengthSq * 10f) + (areaSimilarity * 3f) + normalDot;
+                if (score > bestScore)
+                {
+                    bestScore = score;
+                    bestPartner = candidateIndex;
+                }
+            }
+
+            return bestPartner >= 0;
+        }
+
+        private static bool TryGetTriangleData(int triangleIndex, int[] triangles, Vector3[] vertices, out TriangleData data)
+        {
+            data = default;
+            int triStart = triangleIndex * 3;
+
+            if (triStart + 2 >= triangles.Length)
+            {
+                return false;
+            }
+
+            int a = triangles[triStart];
+            int b = triangles[triStart + 1];
+            int c = triangles[triStart + 2];
+
+            if (a < 0 || b < 0 || c < 0 || a >= vertices.Length || b >= vertices.Length || c >= vertices.Length)
+            {
+                return false;
+            }
+
+            Vector3 v0 = vertices[a];
+            Vector3 v1 = vertices[b];
+            Vector3 v2 = vertices[c];
+            Vector3 cross = Vector3.Cross(v1 - v0, v2 - v0);
+
+            float area = cross.magnitude * 0.5f;
+            Vector3 normal = cross.sqrMagnitude > 0f ? cross.normalized : Vector3.up;
+
+            data = new TriangleData(a, b, c, normal, area);
+            return true;
+        }
+
+        private static bool TryGetSharedEdge(TriangleData a, TriangleData b, out int sharedA, out int sharedB)
+        {
+            sharedA = -1;
+            sharedB = -1;
+
+            int count = 0;
+
+            if (b.Contains(a.A))
+            {
+                sharedA = a.A;
+                count++;
+            }
+
+            if (b.Contains(a.B))
+            {
+                if (count == 0)
+                {
+                    sharedA = a.B;
+                }
+                else
+                {
+                    sharedB = a.B;
+                }
+
+                count++;
+            }
+
+            if (b.Contains(a.C))
+            {
+                if (count == 0)
+                {
+                    sharedA = a.C;
+                }
+                else
+                {
+                    sharedB = a.C;
+                }
+
+                count++;
+            }
+
+            if (count == 2 && sharedB >= 0)
+            {
+                return true;
+            }
+
+            sharedA = -1;
+            sharedB = -1;
+            return false;
+        }
+
+        private static float ComputeAreaSimilarity(float a, float b)
+        {
+            float max = Mathf.Max(a, b);
+            if (max <= Mathf.Epsilon)
+            {
+                return 1f;
+            }
+
+            return 1f - Mathf.Abs(a - b) / max;
+        }
+
+        private readonly struct TriangleData
+        {
+            public TriangleData(int a, int b, int c, Vector3 normal, float area)
+            {
+                A = a;
+                B = b;
+                C = c;
+                Normal = normal;
+                Area = area;
+            }
+
+            public int A { get; }
+            public int B { get; }
+            public int C { get; }
+            public Vector3 Normal { get; }
+            public float Area { get; }
+
+            public bool Contains(int vertexIndex)
+            {
+                return A == vertexIndex || B == vertexIndex || C == vertexIndex;
+            }
+        }
     }
 }

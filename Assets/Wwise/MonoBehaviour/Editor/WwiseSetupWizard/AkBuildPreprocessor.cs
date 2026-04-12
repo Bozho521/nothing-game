@@ -80,6 +80,7 @@ public partial class AkBuildPreprocessor : UnityEditor.Build.IPreprocessBuild, U
 	}
 
 	private string destinationSoundBankFolder = string.Empty;
+	private bool skipWwiseBuildProcessingForTarget = false;
 
 	public static bool CopySoundbanks(bool generate, string platformName, ref string destinationFolder)
 	{
@@ -128,6 +129,13 @@ public partial class AkBuildPreprocessor : UnityEditor.Build.IPreprocessBuild, U
 
 	public void OnPreprocessBuildInternal(UnityEditor.BuildTarget target, string path)
 	{
+		skipWwiseBuildProcessingForTarget = target == UnityEditor.BuildTarget.WebGL && AkInitializer.ShouldSkipWwiseForWebGLBuild();
+		if (skipWwiseBuildProcessingForTarget)
+		{
+			UnityEngine.Debug.LogWarning("WwiseUnity: WebGL build workaround enabled on AkInitializer. Skipping Wwise bank copy and plugin activation for this build.");
+			return;
+		}
+
 		var platformName = GetPlatformName(target);
 #if !(AK_WWISE_ADDRESSABLES && UNITY_ADDRESSABLES)
 		if (AkWwiseEditorSettings.Instance.CopySoundBanksAsPreBuildStep)
@@ -151,6 +159,13 @@ public partial class AkBuildPreprocessor : UnityEditor.Build.IPreprocessBuild, U
 
 	public void OnPostprocessBuildInternal(UnityEditor.BuildTarget target, string path)
 	{
+		if (skipWwiseBuildProcessingForTarget)
+		{
+			skipWwiseBuildProcessingForTarget = false;
+			destinationSoundBankFolder = string.Empty;
+			return;
+		}
+
 		AkPluginActivator.ActivatePluginsForDeployment(target, false);
 		if (PlatformConfigurations.TryGetValue(target, out var config))
 		{
