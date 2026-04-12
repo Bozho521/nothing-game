@@ -4841,6 +4841,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ContinuousCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5307760646681136831, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
+      propertyPath: m_text
+      value: BITCRUSH!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5736165534256343607, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 6596536797594235211, guid: 8458a17d888a7fd48b33074304dceaea, type: 3}
       propertyPath: m_UiScaleMode
       value: 1
