@@ -359,7 +359,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
     GuidInternal: 
-    m_lastTime: -8584256176749689984
+    m_lastTime: -8584256160804493785
     List:
     - name: Enemy
       guid: 4fce27e615209849aa0add79e84c0d69
@@ -669,6 +669,46 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 1.5499063
       minDuration: 1.3808093
+    - name: Play_Player_Footstep
+      guid: b071c37bb746a74fad880bdc73e42d2c
+      id: 1724675634
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Player
+        ObjectType: 4
+        guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
+      - ElementName: Play_Player_Footstep
+        ObjectType: 3
+        guid: b071c37bb746a74fad880bdc73e42d2c
+      Path: Events\Default Work Unit\Player\Play_Player_Footstep
+      maxAttenuation: 0
+      maxDuration: 0.18293397
+      minDuration: 0.16297562
+    - name: Play_Player_Jump
+      guid: 7ca45edd305e774c9fbfa388affc79d1
+      id: 562256996
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a8da0f9a0e4d3e4690d8a9c96844eaf0
+      - ElementName: Player
+        ObjectType: 4
+        guid: 4e3b5a0f807b2c4a8ddd1cffc7dc6bc0
+      - ElementName: Play_Player_Jump
+        ObjectType: 3
+        guid: 7ca45edd305e774c9fbfa388affc79d1
+      Path: Events\Default Work Unit\Player\Play_Player_Jump
+      maxAttenuation: 0
+      maxDuration: 0.72944033
+      minDuration: 0.6498574
     - name: Play_Railgun_Shoot
       guid: a73f76fed5f1d94f90da78f51b1e9031
       id: 3639931096
