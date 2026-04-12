@@ -13,10 +13,14 @@ Event	ID	Name			Wwise Object Path	Notes
 	3638125099	Play_Player_Damage			\Default Work Unit\Player\Play_Player_Damage	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	29899078	Railgun Shoot	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\43\{437BEF01-6ED0-F787-5A0D-AA66F6798A3E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Railgun\Railgun Shoot		575564
+	98375766	Door Open	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\9B\{9B9DA063-DE4F-F761-A38A-712121C9F049}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Environment\Door Open		236208
 	268643418	Shotgun Shoot	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\04\{04C18EE4-A65E-A3C7-CA0D-78B2F8933334}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Shotgun\Shotgun Shoot		280976
 	277294612	Pistol Shoot	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\38\{38D571A5-3F9D-1A17-DB13-84E0DB3112ED}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Pistol\Pistol Shoot		280976
 	321431979	Shotgun Empty	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\48\{48BBFF53-984A-0FB4-D387-208841AC71C7}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Shotgun\Shotgun Empty		280976
 	333786727	Enemy Die	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\F1\{F13513DD-7D05-41D1-3408-0F85ADF364DB}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Enemy\Enemy Die		280976
+	367251208	Enemy Atk	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\4B\{4B40E175-B0B4-7D98-FAC3-1C11EA693FBD}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Enemy\Enemy Atk		151516
+	450157659	Health Pickup	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\53\{538130C9-9178-E12D-C64D-C69E02B365AF}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Health Pickup		147768
 	455380154	Pistol Empty	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\BF\{BF6F154E-A8F3-F589-7DE1-9F77F7022FF8}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Pistol\Pistol Empty		280976
 	508432336	Wall Destroy	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\48\{48991227-0854-1AF9-6543-5F8318361B5C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Environment\Wall Destroy		280976
 	613488527	Pistol Reload	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\93\{933C4E74-DF03-1EE7-5974-368B6ECB6C3A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Pistol\Pistol Reload		280976
@@ -24,5 +28,7 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	709175964	Player Damage	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\01\{0111D1EA-C189-7E60-C9BD-939D1B5186BA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Player Damage		280976
 	757288292	Shotgun Reload	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\A7\{A7664D80-F2F1-49FC-9664-E0E3815423CE}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Shotgun\Shotgun Reload		280976
 	862177575	Enemy Idle	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\15\{1512FDBC-0D31-332F-1946-6094FFF08AD5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Enemy\Enemy Idle		280976
+	942397465	Ammo Pickup	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\31\{31112C01-9D5E-F1E2-FDC0-6677BA3897F9}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Ammo Pickup		100308
+	971187009	Enemy Dmg	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\55\{55B7233E-DB27-3F30-D80E-2114A5124C80}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Enemy\Enemy Dmg		575564
 	1054474706	Shotgun Shells	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\48\{48BAB43A-044B-FD1D-A23E-784F6811AFF5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Shotgun\Shotgun Shells		280976
 
