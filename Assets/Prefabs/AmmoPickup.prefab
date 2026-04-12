@@ -161,6 +161,10 @@ MonoBehaviour:
   rotationSpeed: 90
   bobSpeed: 2
   bobHeight: 0.25
+  itemPickupSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 2cf1af9c42cfee642ac959ac333c8e00, type: 2}
 --- !u!114 &8977255206163450766
 MonoBehaviour:
   m_ObjectHideFlags: 0
