@@ -646,7 +646,7 @@ MonoBehaviour:
   speed: 6
   sprintSpeed: 10
   gravity: -19.62
-  jumpHeight: 2
+  jumpHeight: 2.5
   canLookUpAndDown: 0
   canJump: 0
   canSprint: 0
