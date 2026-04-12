@@ -5,7 +5,9 @@ public class Teleporter : MonoBehaviour
 {
     [Header("Teleport Settings")]
     public Transform destinationPoint;
-    
+
+    public PlayerMovement _pm;
+
     public bool matchRotation = true;
 
     private void Awake()
@@ -35,6 +37,8 @@ public class Teleporter : MonoBehaviour
                 }
                 
                 cc.enabled = true;
+
+                _pm.UnlockMovementConstraints();
             }
             else
             {
