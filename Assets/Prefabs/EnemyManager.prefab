@@ -46,6 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
   enemyPrefab: {fileID: 7946325001487091293, guid: f5af0098b53286d4b8b8cbdf3d3e8d40, type: 3}
   player: {fileID: 0}
-  initialSpawnDelay: 3
+  initialSpawnDelay: 10
   minimumSpawnDelay: 0.5
   spawnRadius: 30
+  groundOffset: 1
+  maxElevationDifference: 2
+  maxSpawnAttempts: 10

@@ -13,13 +13,21 @@ namespace AK
 {
     namespace EVENTS
     {
+        static const AkUniqueID PLAY_AMMO_PICKUP = 4269559823U;
+        static const AkUniqueID PLAY_DOOR_OPEN = 1660008929U;
+        static const AkUniqueID PLAY_ENEMY_ATK = 2432025233U;
         static const AkUniqueID PLAY_ENEMY_DIE = 2448258477U;
+        static const AkUniqueID PLAY_ENEMY_DMG = 2515369075U;
         static const AkUniqueID PLAY_ENEMY_IDLE = 1109600527U;
+        static const AkUniqueID PLAY_HEALTH_PICKUP = 2231054099U;
         static const AkUniqueID PLAY_MENU_BUTTON_1 = 328562558U;
         static const AkUniqueID PLAY_PISTOL_EMPTY = 2165847569U;
         static const AkUniqueID PLAY_PISTOL_RELOAD = 1886652945U;
         static const AkUniqueID PLAY_PISTOL_SHOOT = 2955138351U;
         static const AkUniqueID PLAY_PLAYER_DAMAGE = 3638125099U;
+        static const AkUniqueID PLAY_PLAYER_FOOTSTEP = 1724675634U;
+        static const AkUniqueID PLAY_PLAYER_JUMP = 562256996U;
+        static const AkUniqueID PLAY_RAILGUN_SHOOT = 3639931096U;
         static const AkUniqueID PLAY_SHOTGUN_EMPTY = 1908822854U;
         static const AkUniqueID PLAY_SHOTGUN_RELOAD = 1248355840U;
         static const AkUniqueID PLAY_SHOTGUN_SHELLS = 2876530582U;

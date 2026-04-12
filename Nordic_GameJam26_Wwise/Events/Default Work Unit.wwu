@@ -27,6 +27,28 @@
 								</Action>
 							</ChildrenList>
 						</Event>
+						<Event Name="Play_Enemy_Atk" ID="{8AB05308-2683-48FD-B3A3-A8B501665E84}">
+							<ChildrenList>
+								<Action Name="" ID="{6774109B-78F9-464C-9228-6D79A32F207D}" ShortID="510672105">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Enemy Atk" ID="{E3C6A533-5F59-4185-9F47-1E4EA912114C}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Enemy_Dmg" ID="{10001FEB-30A7-4044-B400-A4F2C294080F}">
+							<ChildrenList>
+								<Action Name="" ID="{627B3859-5D30-4EA2-9D6C-374ADA5F60AC}" ShortID="254837695">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Enemy Dmg" ID="{4C75F2CC-BE46-46C0-8E83-D377D620AAE7}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
 					</ChildrenList>
 				</Folder>
 				<Folder Name="Player" ID="{0F5A3B4E-7B80-4A2C-8DDD-1CFFC7DC6BC0}" ShortID="1011838839">
@@ -37,6 +59,50 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Player Damage" ID="{8FA24F07-C478-4270-8672-E497D5767778}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Health_Pickup" ID="{6E35A292-FD7E-46C0-A1C0-53E75AC5C27F}">
+							<ChildrenList>
+								<Action Name="" ID="{5570FDCF-C6A1-475F-AF19-B84F5103C5A9}" ShortID="956924719">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Health Pickup" ID="{E28BA5B2-7BCC-4D44-A35C-4E4822EBDF57}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Ammo_Pickup" ID="{8AD91108-4387-4AE1-8701-3D81060B91DC}">
+							<ChildrenList>
+								<Action Name="" ID="{012D39E6-3EA5-4C82-B62F-0040232C0FB5}" ShortID="114424856">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Ammo Pickup" ID="{24EC1E5E-C522-41AA-90D6-ADC0AFADF020}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Player_Jump" ID="{DD5EA47C-5E30-4C77-9FBF-A388AFFC79D1}">
+							<ChildrenList>
+								<Action Name="" ID="{75482DC2-DE71-4DEC-AE03-12BAEB44B9EC}" ShortID="736958902">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Player Jump" ID="{AC350423-1509-4E55-9348-9E7668DA8ECA}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Player_Footstep" ID="{7BC371B0-46B7-4FA7-AD88-0BDC73E42D2C}">
+							<ChildrenList>
+								<Action Name="" ID="{C5B857ED-ADD9-41BB-84CB-191BAFF9E743}" ShortID="993734431">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Player Footstep" ID="{F45D37EA-6E85-4FE6-82FD-5C70926B2C75}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>
@@ -144,7 +210,7 @@
 						</Event>
 					</ChildrenList>
 				</Folder>
-				<Folder Name="Wall" ID="{58A06D1A-1423-462D-A830-1D52EC3BA842}" ShortID="567346124">
+				<Folder Name="Environment" ID="{58A06D1A-1423-462D-A830-1D52EC3BA842}" ShortID="567346124">
 					<ChildrenList>
 						<Event Name="Play_Wall_Destroy" ID="{2F4CB71A-0971-4C13-AEF8-A4B4111F60EA}">
 							<ChildrenList>
@@ -152,6 +218,32 @@
 									<ReferenceList>
 										<Reference Name="Target">
 											<ObjectRef Name="Wall Destroy" ID="{41C5CDFF-307A-40FE-B1DC-E95E94E9FC4A}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+						<Event Name="Play_Door_Open" ID="{54308537-7917-4119-A7FC-12D0A6A4C848}">
+							<ChildrenList>
+								<Action Name="" ID="{02A1FAB9-25D5-4484-A793-A1D175DDA456}" ShortID="216088457">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Door Open" ID="{D2CA5A29-8DC3-4991-BA2E-55EB31379FD2}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
+										</Reference>
+									</ReferenceList>
+								</Action>
+							</ChildrenList>
+						</Event>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="Railgun" ID="{8BF32379-FADF-488B-BAF8-2F0D9F3BB821}" ShortID="692248647">
+					<ChildrenList>
+						<Event Name="Play_Railgun_Shoot" ID="{FE763FA7-F1D5-4FD9-90DA-78F51B1E9031}">
+							<ChildrenList>
+								<Action Name="" ID="{C0AC92EB-30D9-43AA-9F8A-882C408960FF}" ShortID="731717859">
+									<ReferenceList>
+										<Reference Name="Target">
+											<ObjectRef Name="Railgun Shoot" ID="{EF70393E-6CEA-4927-8FFF-78F677942D81}" WorkUnitID="{F5A3AF40-CE00-4292-BAE7-C89F437AC56D}"/>
 										</Reference>
 									</ReferenceList>
 								</Action>

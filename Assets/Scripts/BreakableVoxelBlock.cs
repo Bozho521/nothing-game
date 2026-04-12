@@ -31,12 +31,37 @@ public class BreakableVoxelBlock : MonoBehaviour, IDestructable
     void Start()
     {
         parentTransform = transform.parent;
-        brokenCubeParent = parentTransform.Find("1_BROKEN CUBE");
-     
-        _meshRenderer = mainBlock.GetComponent<MeshRenderer>();
-        mainMaterial = _meshRenderer.materials[1];
+        
+        if (parentTransform != null)
+        {
+            brokenCubeParent = parentTransform.Find("1_BROKEN CUBE");
+        }
 
-        if (brokenCubeParent != null)
+        _meshRenderer = mainBlock.GetComponent<MeshRenderer>();
+        if (_meshRenderer == null)
+        {
+            _meshRenderer = mainBlock.GetComponentInChildren<MeshRenderer>();
+        }
+
+        if (_meshRenderer != null)
+        {
+            if (_meshRenderer.materials.Length > 1)
+            {
+                mainMaterial = _meshRenderer.materials[1];
+            }
+            else if (_meshRenderer.materials.Length > 0)
+            {
+                Debug.LogWarning($"[BreakableVoxelBlock] {_meshRenderer.name} only has 1 material. Using index 0 instead.", this);
+                mainMaterial = _meshRenderer.materials[0];
+            }
+        }
+        else
+        {
+            Debug.LogError($"[BreakableVoxelBlock] No MeshRenderer found on {mainBlock.name} or its children!", this);
+            return;
+        }
+
+        if (brokenCubeParent != null && mainMaterial != null)
         {
             foreach(var child in brokenCubeParent.GetComponentsInChildren<MeshRenderer>())
             {

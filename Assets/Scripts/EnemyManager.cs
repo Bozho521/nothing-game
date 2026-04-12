@@ -43,7 +43,7 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnSingleEnemy()
     {
-        if (player == null) return;
+        if (player == null || EnemyGrace.IsSpawnSuppressed) return;
 
         for (int i = 0; i < maxSpawnAttempts; i++)
         {

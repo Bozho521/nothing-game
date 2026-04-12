@@ -16,44 +16,55 @@ public class WeaponVisual
 
 public class Gun : MonoBehaviour
 {
-    [Header("Weapon Visuals")] public WeaponVisual[] weaponVisuals;
+    [Header("Weapon Visuals")]
+    public WeaponVisual[] weaponVisuals;
     public int currentWeaponIndex = 0;
 
-    [Header("Gun Stats")] public int damage = 10;
-    public float range = 100f;
+    [Header("Gun Stats")]
+    public int damage = 10;
+    public float range = 100f;         
     public float fireRate = 0.15f;
-    public float visualBulletSpeed = 0.15f;
-    public int destructivePower = 0;
-
-    [Header("Ammo System")] public int currentAmmo;
-    public int magazineSize = 10;
-    public int reserveAmmo = 30;
-    public float reloadTime = 1.5f;
+    public float visualBulletSpeed = 0.15f; 
+    public int destructivePower = 0; 
+    
+    [Header("Ammo System")]
+    public int currentAmmo;
+    public int magazineSize = 10;      
+    public int reserveAmmo = 30;       
     private bool isReloading = false;
 
-    [Header("Setup & Effects")] public GameObject sparkEffectPrefab;
-    public GameObject visualBulletPrefab;
+    [Header("Setup & Effects")]
+    public GameObject sparkEffectPrefab; 
+    public GameObject visualBulletPrefab; 
     public GameObject bloodDecalPrefab;
 
-    [Header("Meta UI Mode")] public bool isUIModeActive = false;
-    public GameObject aimingReticle;
-    private Quaternion originalLocalRotation;
+    [Header("Meta UI Mode")]
+    public bool isUIModeActive = false;
+    public GameObject aimingReticle; 
+    private Quaternion originalLocalRotation; 
 
-    [Header("Animation")] public Animator weaponAnimator;
+    [Header("Animation")]
+    public Animator weaponAnimator;
     public string shotFiredBool = "ShotFired";
-
-    private float nextFireTime = 0f;
-    private Camera mainCam;
-
+    public string reloadTrigger = "Reload";
 
     [Header("Weapon Sounds")] 
     [SerializeField] private List<AK.Wwise.Event> FiredSound;
     [SerializeField] private List<AK.Wwise.Event> ReloadSound;
     [SerializeField] private List<AK.Wwise.Event> EmptySound;
+
+    private float nextFireTime = 0f;
+    private Camera mainCam;
+    
+    private Quaternion currentAimRotation;
+    private bool wasInUIMode = false;
+    private bool reloadAnimationCompleted = false;
+
     private void Start()
     {
         mainCam = GetComponentInParent<Camera>();
         originalLocalRotation = transform.localRotation;
+        currentAimRotation = transform.rotation;
         
         if (aimingReticle != null) aimingReticle.SetActive(false);
 
@@ -83,7 +94,14 @@ public class Gun : MonoBehaviour
 
         if (effectivelyInUIMode)
         {
-            AimGunAtMouse();
+            Cursor.visible = false;
+            
+            if (!wasInUIMode)
+            {
+                currentAimRotation = transform.rotation;
+                wasInUIMode = true;
+            }
+            
             UpdateReticlePosition(); 
             
             if (aimingReticle != null && !aimingReticle.activeSelf) 
@@ -91,6 +109,8 @@ public class Gun : MonoBehaviour
         }
         else
         {
+            wasInUIMode = false;
+            
             if (aimingReticle != null && aimingReticle.activeSelf) 
                 aimingReticle.SetActive(false);
         }
@@ -99,7 +119,6 @@ public class Gun : MonoBehaviour
 
         if (currentAmmo <= 0 || Keyboard.current.rKey.wasPressedThisFrame)
         {
-            
             StartCoroutine(Reload());
             return;
         }
@@ -111,7 +130,19 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void EquipWeapon(int index, int newDamage, float newRange, float newFireRate, int newDestructivePower, int newMagSize, int newReserve, float newReloadTime)
+    private void LateUpdate()
+    {
+        bool isDead = GetComponentInParent<PlayerMovement>()?.isDead ?? false;
+        bool isPaused = UIManager.Instance != null && UIManager.Instance.isPaused;
+        bool effectivelyInUIMode = isUIModeActive || isPaused || isDead;
+
+        if (effectivelyInUIMode)
+        {
+            AimGunAtMouse();
+        }
+    }
+
+    public void EquipWeapon(int index, int newDamage, float newRange, float newFireRate, int newDestructivePower, int newMagSize, int newReserve)
     {
         if (index < 0 || index >= weaponVisuals.Length) return;
 
@@ -122,7 +153,6 @@ public class Gun : MonoBehaviour
         destructivePower = newDestructivePower;
         magazineSize = newMagSize;
         reserveAmmo = newReserve;
-        reloadTime = newReloadTime;
         
         currentAmmo = magazineSize;
         isReloading = false;
@@ -149,8 +179,7 @@ public class Gun : MonoBehaviour
 
     public void UpdateCursorAndPlayerState()
     {
-        PlayerMovement player = GetComponentInParent<PlayerMovement>();
-        bool isDead = player != null && player.isDead;
+        bool isDead = GetComponentInParent<PlayerMovement>()?.isDead ?? false;
         bool isPaused = UIManager.Instance != null && UIManager.Instance.isPaused;
         bool effectivelyInUIMode = isUIModeActive || isPaused || isDead;
 
@@ -183,7 +212,9 @@ public class Gun : MonoBehaviour
         Vector3 targetPoint = ray.GetPoint(50f);
 
         Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.unscaledDeltaTime * 15f);
+        
+        currentAimRotation = Quaternion.Slerp(currentAimRotation, targetRotation, Time.unscaledDeltaTime * 15f);
+        transform.rotation = currentAimRotation;
     }
 
     private IEnumerator Reload()
@@ -191,30 +222,72 @@ public class Gun : MonoBehaviour
         if (reserveAmmo <= 0) yield break;
 
         isReloading = true;
-        ReloadSound[currentWeaponIndex].Post(gameObject);
+        reloadAnimationCompleted = false;
+
+        if (weaponAnimator == null)
+        {
+            weaponAnimator = weaponVisuals != null && weaponVisuals.Length > currentWeaponIndex
+                ? weaponVisuals[currentWeaponIndex].weaponModel != null
+                    ? weaponVisuals[currentWeaponIndex].weaponModel.GetComponent<Animator>()
+                    : GetComponentInChildren<Animator>()
+                : GetComponentInChildren<Animator>();
+        }
+
+        if (weaponAnimator != null && !string.IsNullOrEmpty(reloadTrigger))
+        {
+            weaponAnimator.SetTrigger(reloadTrigger);
+        }
+        else
+        {
+            reloadAnimationCompleted = true;
+        }
+        
+        if (ReloadSound != null && ReloadSound.Count > currentWeaponIndex)
+        {
+            ReloadSound[currentWeaponIndex].Post(gameObject);
+        }
+        
         if (UIManager.Instance != null) UIManager.Instance.ShowReloadingText();
 
-        yield return new WaitForSecondsRealtime(reloadTime);
-        
+        yield return new WaitUntil(() => reloadAnimationCompleted);
+
         int bulletsNeeded = magazineSize - currentAmmo;
         int bulletsToReload = Mathf.Min(bulletsNeeded, reserveAmmo);
 
         currentAmmo += bulletsToReload;
         reserveAmmo -= bulletsToReload;
-        
+
         isReloading = false;
         
         UpdateAmmoUI(); 
+    }
+
+    public void OnReloadAnimationComplete()
+    {
+        if (!isReloading)
+        {
+            return;
+        }
+
+        reloadAnimationCompleted = true;
     }
 
     private void Shoot(bool effectivelyInUIMode, bool isPaused, bool isDead)
     {
         if (currentAmmo == 0)
         {
-            EmptySound[currentWeaponIndex].Post(gameObject);
+            if (EmptySound != null && EmptySound.Count > currentWeaponIndex)
+            {
+                EmptySound[currentWeaponIndex].Post(gameObject);
+            }
             return;
         }
-        FiredSound[currentWeaponIndex].Post(gameObject);
+        
+        if (FiredSound != null && FiredSound.Count > currentWeaponIndex)
+        {
+            FiredSound[currentWeaponIndex].Post(gameObject);
+        }
+        
         currentAmmo--; 
         UpdateAmmoUI();
 
@@ -243,7 +316,17 @@ public class Gun : MonoBehaviour
             weaponAnimator.SetBool(shotFiredBool, true);
         }
 
-        if (Physics.Raycast(activeVisual.firePoint.position, activeVisual.firePoint.forward, out RaycastHit hit, range))
+        Ray aimRay;
+        if (effectivelyInUIMode)
+        {
+            aimRay = mainCam.ScreenPointToRay(Mouse.current.position.ReadValue());
+        }
+        else
+        {
+            aimRay = mainCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        }
+
+        if (Physics.Raycast(aimRay, out RaycastHit hit, range))
         {
             StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, hit.point));
 
@@ -269,8 +352,8 @@ public class Gun : MonoBehaviour
 
                 if (bloodDecalPrefab != null)
                 {
-                    Vector3 passThroughStart = hit.point + (activeVisual.firePoint.forward * 0.5f); 
-                    if (Physics.Raycast(passThroughStart, activeVisual.firePoint.forward, out RaycastHit wallHit, 3f))
+                    Vector3 passThroughStart = hit.point + (aimRay.direction * 0.5f); 
+                    if (Physics.Raycast(passThroughStart, aimRay.direction, out RaycastHit wallHit, 3f))
                     {
                         if (wallHit.collider.GetComponentInParent<Enemy>() == null)
                         {
@@ -298,7 +381,7 @@ public class Gun : MonoBehaviour
         }
         else
         {
-            StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, activeVisual.firePoint.position + activeVisual.firePoint.forward * range));
+            StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, aimRay.GetPoint(range)));
         }
     }
 
@@ -321,6 +404,7 @@ public class Gun : MonoBehaviour
 
     private bool CheckAndDestroyUI()
     {
+        if(destructivePower<2) return false;
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = Mouse.current.position.ReadValue()
@@ -349,10 +433,10 @@ public class Gun : MonoBehaviour
                     GameObject sparks = Instantiate(sparkEffectPrefab, sparkPos, Quaternion.identity);
                     Destroy(sparks, 2f);
                 }
-
-                hitButton.onClick.Invoke(); 
                 
                 StartCoroutine(MakeUIFallAndDie(hitButton.gameObject));
+                StartCoroutine(DelayedButtonInvoke(hitButton, 1.0f));
+                
                 return true; 
             }
 
@@ -363,6 +447,16 @@ public class Gun : MonoBehaviour
         return false;
     }
 
+    private IEnumerator DelayedButtonInvoke(Button btn, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        
+        if (btn != null)
+        {
+            btn.onClick.Invoke(); 
+        }
+    }
+    
     private IEnumerator MakeUIFallAndDie(GameObject uiElement)
     {
         RectTransform rt = uiElement.GetComponent<RectTransform>();
