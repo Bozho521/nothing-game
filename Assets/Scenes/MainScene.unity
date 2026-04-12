@@ -404,6 +404,22 @@ PrefabInstance:
       propertyPath: m_VersionIndex
       value: 980
       objectReference: {fileID: 0}
+    - target: {fileID: 1106664886231413524, guid: 499a91f356e0cbb4790ab7d1e23806a2, type: 3}
+      propertyPath: armor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106664886231413524, guid: 499a91f356e0cbb4790ab7d1e23806a2, type: 3}
+      propertyPath: health
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106664886231413524, guid: 499a91f356e0cbb4790ab7d1e23806a2, type: 3}
+      propertyPath: enableDebugLogs
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1106664886231413524, guid: 499a91f356e0cbb4790ab7d1e23806a2, type: 3}
+      propertyPath: maxHealthPerFace
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1236321995402076661, guid: 499a91f356e0cbb4790ab7d1e23806a2, type: 3}
       propertyPath: m_Mesh
       value: 
