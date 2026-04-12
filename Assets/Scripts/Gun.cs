@@ -22,43 +22,55 @@ public class Gun : MonoBehaviour
 
     [Header("Gun Stats")]
     public int damage = 10;
-    public float range = 100f;         
+    public float range = 100f;
     public float fireRate = 0.15f;
-    public float visualBulletSpeed = 0.15f; 
-    public int destructivePower = 0; 
-    
+    public float visualBulletSpeed = 0.15f;
+    public int destructivePower = 0;
+
     [Header("Ammo System")]
     public int currentAmmo;
+<<<<<<< Updated upstream
     public int magazineSize = 10;      
     public int reserveAmmo = 30;       
+=======
+    public int magazineSize = 10;
+    public int reserveAmmo = 30;
+    public float reloadTime = 1.5f;
+>>>>>>> Stashed changes
     private bool isReloading = false;
 
     [Header("Setup & Effects")]
-    public GameObject sparkEffectPrefab; 
-    public GameObject visualBulletPrefab; 
+    public GameObject sparkEffectPrefab;
+    public GameObject visualBulletPrefab;
     public GameObject bloodDecalPrefab;
 
     [Header("Meta UI Mode")]
     public bool isUIModeActive = false;
-    public GameObject aimingReticle; 
-    private Quaternion originalLocalRotation; 
+    public GameObject aimingReticle;
+    private Quaternion originalLocalRotation;
 
     [Header("Animation")]
     public Animator weaponAnimator;
     public string shotFiredBool = "ShotFired";
     public string reloadTrigger = "Reload";
 
-    [Header("Weapon Sounds")] 
+    int uiDestroyedCount = 0;
+
+    [Header("Weapon Sounds")]
     [SerializeField] private List<AK.Wwise.Event> FiredSound;
     [SerializeField] private List<AK.Wwise.Event> ReloadSound;
     [SerializeField] private List<AK.Wwise.Event> EmptySound;
 
+    private List<Canvas> uiElements;
+
     private float nextFireTime = 0f;
     private Camera mainCam;
-    
+
     private Quaternion currentAimRotation;
     private bool wasInUIMode = false;
     private bool reloadAnimationCompleted = false;
+
+    private bool winConditionMet = false;
 
     private void Start()
     {
@@ -441,6 +453,12 @@ public class Gun : MonoBehaviour
             }
 
             StartCoroutine(MakeUIFallAndDie(uiElement));
+
+            if(uiDestroyedCount == 6)
+            {
+                Debug.Log("WinCondition Met");
+                winConditionMet = true;
+            }
             return true; 
         }
 
@@ -461,6 +479,7 @@ public class Gun : MonoBehaviour
     {
         RectTransform rt = uiElement.GetComponent<RectTransform>();
         if (rt == null) yield break;
+        uiDestroyedCount++;
 
         Vector3 originalPos = rt.anchoredPosition;
         Quaternion originalRot = rt.rotation;
