@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{217BA030-52FA-4781-8508-AA9C60AEA44B}",
     "Language": "SFX",
-    "Hash": "{FBF8AA8B-A577-05F5-507A-BB6FAF9BEAF8}",
+    "Hash": "{D5131720-A563-D05D-510C-2B57AF3EE7C4}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\MainBank",
     "ShortName": "MainBank",
     "Path": "MainBank.bnk",
@@ -168,6 +168,14 @@
       "CachePath": "55/{55B7233E-DB27-3F30-D80E-2114A5124C80}.wem"
      },
      {
+      "Id": "1047711051",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "NothingGame_RailgunImpact.wav",
+      "CachePath": "90/{90BB66DF-70BA-142B-C30B-F9711BB5521D}.wem"
+     },
+     {
       "Id": "1054474706",
       "Language": "SFX",
       "Streaming": "false",
@@ -181,7 +189,7 @@
       "Id": "4269559823",
       "Name": "Play_Ammo_Pickup",
       "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Ammo_Pickup",
-      "GUID": "{8AD91108-4387-4AE1-8701-3D81060B91DC}",
+      "GUID": "{7ED1F46B-232E-4805-BB27-6ADBF6DA0C45}",
       "DurationType": "OneShot",
       "DurationMin": "0.46499345",
       "DurationMax": "0.585855",
@@ -195,7 +203,7 @@
       "Id": "1660008929",
       "Name": "Play_Door_Open",
       "ObjectPath": "\\Events\\Default Work Unit\\Environment\\Play_Door_Open",
-      "GUID": "{54308537-7917-4119-A7FC-12D0A6A4C848}",
+      "GUID": "{DA30B676-C193-4486-A0A9-BE639ED82730}",
       "DurationType": "OneShot",
       "DurationMin": "1.1607294",
       "DurationMax": "1.3028748",
@@ -209,7 +217,7 @@
       "Id": "2432025233",
       "Name": "Play_Enemy_Atk",
       "ObjectPath": "\\Events\\Default Work Unit\\Enemy\\Play_Enemy_Atk",
-      "GUID": "{8AB05308-2683-48FD-B3A3-A8B501665E84}",
+      "GUID": "{B5FD0AA5-6473-4C5B-A04A-23B53B466059}",
       "DurationType": "OneShot",
       "DurationMin": "0.7231914",
       "DurationMax": "0.86002433",
@@ -237,7 +245,7 @@
       "Id": "2515369075",
       "Name": "Play_Enemy_Dmg",
       "ObjectPath": "\\Events\\Default Work Unit\\Enemy\\Play_Enemy_Dmg",
-      "GUID": "{10001FEB-30A7-4044-B400-A4F2C294080F}",
+      "GUID": "{C0A02CF6-2102-42A5-9CD7-5398B88F9821}",
       "DurationType": "OneShot",
       "DurationMin": "2.7484713",
       "DurationMax": "3.2685015",
@@ -265,7 +273,7 @@
       "Id": "2231054099",
       "Name": "Play_Health_Pickup",
       "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Health_Pickup",
-      "GUID": "{6E35A292-FD7E-46C0-A1C0-53E75AC5C27F}",
+      "GUID": "{B1AB2D08-21FF-4184-B467-F15E1F2499BA}",
       "DurationType": "OneShot",
       "DurationMin": "0.7259573",
       "DurationMax": "0.81485957",
@@ -346,30 +354,16 @@
       ]
      },
      {
-      "Id": "1724675634",
-      "Name": "Play_Player_Footstep",
-      "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Player_Footstep",
-      "GUID": "{7BC371B0-46B7-4FA7-AD88-0BDC73E42D2C}",
+      "Id": "839973173",
+      "Name": "Play_Railgun_Impact",
+      "ObjectPath": "\\Events\\Default Work Unit\\Railgun\\Play_Railgun_Impact",
+      "GUID": "{59C49FD5-E834-4018-A007-3B674E8CE37A}",
       "DurationType": "OneShot",
-      "DurationMin": "0.16297562",
-      "DurationMax": "0.18293397",
+      "DurationMin": "1.2606816",
+      "DurationMax": "1.4150674",
       "MediaRefs": [
        {
-        "Id": "457800406"
-       }
-      ]
-     },
-     {
-      "Id": "562256996",
-      "Name": "Play_Player_Jump",
-      "ObjectPath": "\\Events\\Default Work Unit\\Player\\Play_Player_Jump",
-      "GUID": "{DD5EA47C-5E30-4C77-9FBF-A388AFFC79D1}",
-      "DurationType": "OneShot",
-      "DurationMin": "0.6498574",
-      "DurationMax": "0.72944033",
-      "MediaRefs": [
-       {
-        "Id": "540651060"
+        "Id": "1047711051"
        }
       ]
      },
@@ -377,7 +371,7 @@
       "Id": "3639931096",
       "Name": "Play_Railgun_Shoot",
       "ObjectPath": "\\Events\\Default Work Unit\\Railgun\\Play_Railgun_Shoot",
-      "GUID": "{FE763FA7-F1D5-4FD9-90DA-78F51B1E9031}",
+      "GUID": "{D2704309-747A-4706-BCAE-C86FBF79BF40}",
       "DurationType": "OneShot",
       "DurationMin": "2.7484713",
       "DurationMax": "3.2685015",
@@ -460,6 +454,6 @@
     ]
    }
   ],
-  "FileHash": "{111C0629-3512-F283-EA86-7E9164AFE8EC}"
+  "FileHash": "{DCDE8CEB-1C1F-CE64-1568-5A33B1F62E2D}"
  }
 }

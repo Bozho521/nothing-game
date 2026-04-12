@@ -1,11 +1,10 @@
 Event	ID	Name			Wwise Object Path	Notes
 	328562558	Play_Menu_Button_1			\Default Work Unit\Menu\Play_Menu_Button_1	
-	562256996	Play_Player_Jump			\Default Work Unit\Player\Play_Player_Jump	
+	839973173	Play_Railgun_Impact			\Default Work Unit\Railgun\Play_Railgun_Impact	
 	1109600527	Play_Enemy_Idle			\Default Work Unit\Enemy\Play_Enemy_Idle	
 	1248355840	Play_Shotgun_Reload			\Default Work Unit\Shotgun\Play_Shotgun_Reload	
 	1374894833	Play_Wall_Destroy			\Default Work Unit\Environment\Play_Wall_Destroy	
 	1660008929	Play_Door_Open			\Default Work Unit\Environment\Play_Door_Open	
-	1724675634	Play_Player_Footstep			\Default Work Unit\Player\Play_Player_Footstep	
 	1886652945	Play_Pistol_Reload			\Default Work Unit\Pistol\Play_Pistol_Reload	
 	1908822854	Play_Shotgun_Empty			\Default Work Unit\Shotgun\Play_Shotgun_Empty	
 	2165847569	Play_Pistol_Empty			\Default Work Unit\Pistol\Play_Pistol_Empty	
@@ -40,5 +39,6 @@ In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
 	862177575	Enemy Idle	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\15\{1512FDBC-0D31-332F-1946-6094FFF08AD5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Enemy\Enemy Idle		280976
 	942397465	Ammo Pickup	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\31\{31112C01-9D5E-F1E2-FDC0-6677BA3897F9}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Player\Ammo Pickup		100308
 	971187009	Enemy Dmg	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\55\{55B7233E-DB27-3F30-D80E-2114A5124C80}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Enemy\Enemy Dmg		575564
+	1047711051	Railgun Impact	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\90\{90BB66DF-70BA-142B-C30B-F9711BB5521D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Railgun\Railgun Impact		256540
 	1054474706	Shotgun Shells	C:\GameJam_26\nothing-game\Nordic_GameJam26_Wwise\.cache\48\{48BAB43A-044B-FD1D-A23E-784F6811AFF5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\SFX\Guns\Shotgun\Shotgun Shells		280976
 
