@@ -321,6 +321,43 @@
 												<ActiveSource Name="NothingGame_RailGunShoot" ID="{3D1D0778-A1AA-4A23-80CB-B0314DA97AEE}" Platform="Linked"/>
 											</ActiveSourceList>
 										</Sound>
+										<Sound Name="Railgun Impact" ID="{29579CA4-5B92-4DC8-BC67-4BD2195073B0}" ShortID="430565307">
+											<PropertyList>
+												<Property Name="Pitch" Type="int32">
+													<ModifierList>
+														<ModifierInfo>
+															<Modifier Name="" ID="{0A5E9911-7B14-47EA-97EA-C15FC8678635}">
+																<PropertyList>
+																	<Property Name="Enabled" Type="bool" Value="True"/>
+																	<Property Name="Max" Type="Real64" Value="100"/>
+																	<Property Name="Min" Type="Real64" Value="-100"/>
+																</PropertyList>
+															</Modifier>
+														</ModifierInfo>
+													</ModifierList>
+												</Property>
+											</PropertyList>
+											<ReferenceList>
+												<Reference Name="Conversion">
+													<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{42437A3E-9FC5-48E6-B51F-C78176E89A4D}"/>
+												</Reference>
+												<Reference Name="OutputBus">
+													<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{DCA6A585-3E29-4DA2-BE4B-8BCCBB0646B1}"/>
+												</Reference>
+											</ReferenceList>
+											<ChildrenList>
+												<AudioFileSource Name="NothingGame_RailgunImpact" ID="{3E5A913A-D787-4009-A2BB-36423866633E}">
+													<Language>SFX</Language>
+													<AudioFile>NothingGame_RailgunImpact.wav</AudioFile>
+													<MediaIDList>
+														<MediaID ID="1047711051"/>
+													</MediaIDList>
+												</AudioFileSource>
+											</ChildrenList>
+											<ActiveSourceList>
+												<ActiveSource Name="NothingGame_RailgunImpact" ID="{3E5A913A-D787-4009-A2BB-36423866633E}" Platform="Linked"/>
+											</ActiveSourceList>
+										</Sound>
 									</ChildrenList>
 								</Folder>
 							</ChildrenList>
