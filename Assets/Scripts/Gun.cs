@@ -68,6 +68,10 @@ public class Gun : MonoBehaviour
     private bool reloadAnimationCompleted = false;
 
     private bool winConditionMet = false;
+    private readonly HashSet<GameObject> destroyedUIElements = new HashSet<GameObject>();
+
+    [Header("Win Condition")]
+    [SerializeField] private int uiTargetsToDestroyForWin = 16;
 
     private void Start()
     {
@@ -413,9 +417,16 @@ public class Gun : MonoBehaviour
 
     private bool CheckAndDestroyUI()
     {
+        if (winConditionMet) return false;
+
         if (!UIManager.Instance.isPaused)
         {
             if (destructivePower < 2) return false;
+        }
+
+        if (EventSystem.current == null || Mouse.current == null)
+        {
+            return false;
         }
         
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
@@ -440,6 +451,11 @@ public class Gun : MonoBehaviour
             Button hitButton = uiElement.GetComponentInParent<Button>();
             if (hitButton != null)
             {
+                if (!TryRegisterDestroyedUIElement(hitButton.gameObject))
+                {
+                    return false;
+                }
+
                 if (sparkEffectPrefab != null)
                 {
                     Vector3 sparkPos = mainCam.ScreenToWorldPoint(new Vector3(Mouse.current.position.ReadValue().x, Mouse.current.position.ReadValue().y, 1f));
@@ -449,21 +465,51 @@ public class Gun : MonoBehaviour
                 
                 StartCoroutine(MakeUIFallAndDie(hitButton.gameObject));
                 StartCoroutine(DelayedButtonInvoke(hitButton, 1.0f));
+
+                TryCompleteWinCondition();
                 
                 return true; 
             }
 
+            if (!TryRegisterDestroyedUIElement(uiElement))
+            {
+                return false;
+            }
+
             StartCoroutine(MakeUIFallAndDie(uiElement));
 
-            if(uiDestroyedCount == 16)
-            {
-                SceneManager.LoadScene("EndScene");
-                winConditionMet = true;
-            }
+            TryCompleteWinCondition();
             return true; 
         }
 
         return false;
+    }
+
+    private bool TryRegisterDestroyedUIElement(GameObject uiElement)
+    {
+        if (uiElement == null || !uiElement.activeInHierarchy)
+        {
+            return false;
+        }
+
+        if (!destroyedUIElements.Add(uiElement))
+        {
+            return false;
+        }
+
+        uiDestroyedCount++;
+        return true;
+    }
+
+    private void TryCompleteWinCondition()
+    {
+        if (winConditionMet) return;
+
+        if (uiDestroyedCount >= uiTargetsToDestroyForWin)
+        {
+            winConditionMet = true;
+            SceneManager.LoadScene("EndScene");
+        }
     }
 
     private IEnumerator DelayedButtonInvoke(Button btn, float delay)
@@ -480,7 +526,6 @@ public class Gun : MonoBehaviour
     {
         RectTransform rt = uiElement.GetComponent<RectTransform>();
         if (rt == null) yield break;
-        uiDestroyedCount++;
 
         Vector3 originalPos = rt.anchoredPosition;
         Quaternion originalRot = rt.rotation;
