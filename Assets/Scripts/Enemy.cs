@@ -30,11 +30,13 @@ public class Enemy : MonoBehaviour
     public GameObject bloodEffectPrefab;
     public GameObject headshotTextPrefab;
 
-    [SerializeField]
-    private AK.Wwise.Event IdleSound;
+    [SerializeField] private AK.Wwise.Event IdleSound;
     [SerializeField] private AK.Wwise.Event DeathSound;
-
     [SerializeField] private AK.Wwise.Event AttackSound;
+    [SerializeField] private AudioClip idleClip;
+    [SerializeField] private AudioClip deathClip;
+    [SerializeField] private AudioClip attackClip;
+    [SerializeField] private AudioSource webAudioSource;
     [Header("Drop Settings")]
     public float dropChance = 0.25f; 
     public GameObject healthPickupPrefab;
@@ -237,7 +239,7 @@ public class Enemy : MonoBehaviour
         {
             var random_wait = Random.Range(2.0f, 7.5f);
             yield return new WaitForSeconds(random_wait);
-            IdleSound.Post(gameObject);
+            PlayIdleSound();
         }
     }
 
@@ -246,7 +248,7 @@ public class Enemy : MonoBehaviour
         lastAttackTime = Time.time;
 
         animator.SetTrigger("IsAttacking");
-	AttackSound.Post(gameObject);
+	PlayAttackSound();
         
         if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerStats))
         {
@@ -286,13 +288,73 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         EnemyManager.killCount++;
-        DeathSound.Post(gameObject);
+        PlayDeathSound();
         if (UIManager.Instance != null) UIManager.Instance.UpdateKills(EnemyManager.killCount);
 
         HandleDrops(); 
 
         Destroy(gameObject);
     }
+
+    private void PlayIdleSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        PlayWebClip(idleClip);
+#else
+        if (IdleSound != null)
+        {
+            IdleSound.Post(gameObject);
+        }
+#endif
+    }
+
+    private void PlayDeathSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        PlayWebClip(deathClip);
+#else
+        if (DeathSound != null)
+        {
+            DeathSound.Post(gameObject);
+        }
+#endif
+    }
+
+    private void PlayAttackSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        PlayWebClip(attackClip);
+#else
+        if (AttackSound != null)
+        {
+            AttackSound.Post(gameObject);
+        }
+#endif
+    }
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+    private void PlayWebClip(AudioClip clip)
+    {
+        if (clip == null)
+        {
+            return;
+        }
+
+        if (webAudioSource == null)
+        {
+            webAudioSource = GetComponent<AudioSource>();
+            if (webAudioSource == null)
+            {
+                webAudioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
+
+        if (webAudioSource != null)
+        {
+            webAudioSource.PlayOneShot(clip);
+        }
+    }
+#endif
 
     private void HandleDrops()
     {

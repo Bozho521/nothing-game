@@ -15,7 +15,9 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     public float Health { get; set; } = 50.0f;
     public int Armor { get; set; } = 0;
 
-    [SerializeField] AK.Wwise.Event openedSound;    
+    [SerializeField] AK.Wwise.Event openedSound;
+    [SerializeField] private AudioClip openedClip;
+    [SerializeField] private AudioSource webAudioSource;
     
     public string InteractPrompt { get; } = "Press E to open";
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,13 +36,42 @@ public class Door : MonoBehaviour, IInteractable, IDestructable
     IEnumerator Open()
     {
         float elapsed_time = 0.0f;
-	openedSound.Post(gameObject);
+	PlayOpenedSound();
         while (openTransform.position.y > transform.position.y)
         {
             elapsed_time += Time.deltaTime;
             transform.position = Vector3.Lerp(transform.position, openTransform.position, elapsed_time/secondsToOpen);
             yield return null;
         }
+    }
+
+    private void PlayOpenedSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (openedClip == null)
+        {
+            return;
+        }
+
+        if (webAudioSource == null)
+        {
+            webAudioSource = GetComponent<AudioSource>();
+            if (webAudioSource == null)
+            {
+                webAudioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
+
+        if (webAudioSource != null)
+        {
+            webAudioSource.PlayOneShot(openedClip);
+        }
+#else
+        if (openedSound != null)
+        {
+            openedSound.Post(gameObject);
+        }
+#endif
     }
 
 

@@ -19,6 +19,8 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
     [SerializeField] private bool useDoubleSidedColliders = true;
 
     [SerializeField] private AK.Wwise.Event wallDestroySound;
+    [SerializeField] private AudioClip wallDestroyClip;
+    [SerializeField] private AudioSource webAudioSource;
 
     private readonly Dictionary<ProBuilderMesh, Dictionary<Face, float>> faceHealthByMesh = new Dictionary<ProBuilderMesh, Dictionary<Face, float>>();
     private readonly Dictionary<MeshCollider, Mesh> runtimeColliderMeshes = new Dictionary<MeshCollider, Mesh>();
@@ -558,10 +560,31 @@ public class DamageablePolyshapes : MonoBehaviour, IDestructable
 
     private void PostWallDestroySound(GameObject target)
     {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (wallDestroyClip == null)
+        {
+            return;
+        }
+
+        if (webAudioSource == null)
+        {
+            webAudioSource = target != null ? target.GetComponent<AudioSource>() : null;
+            if (webAudioSource == null && target != null)
+            {
+                webAudioSource = target.AddComponent<AudioSource>();
+            }
+        }
+
+        if (webAudioSource != null)
+        {
+            webAudioSource.PlayOneShot(wallDestroyClip);
+        }
+#else
         if (wallDestroySound != null)
         {
             wallDestroySound.Post(target);
         }
+#endif
     }
 
     private static Mesh BuildDoubleSidedMesh(Mesh sourceMesh, string runtimeName)

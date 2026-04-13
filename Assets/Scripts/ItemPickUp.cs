@@ -16,6 +16,8 @@ public class ItemPickup : MonoBehaviour
 
     private Vector3 startPos;
     [SerializeField] private AK.Wwise.Event itemPickupSound;
+    [SerializeField] private AudioClip itemPickupClip;
+    [SerializeField] private AudioSource webAudioSource;
 
     private void Start()
     {
@@ -33,7 +35,7 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
-            itemPickupSound.Post(gameObject);
+            PlayPickupSound();
             if (type == PickupType.Health)
             {
                 if (player.currentHealth < player.maxHealth)
@@ -54,5 +56,34 @@ public class ItemPickup : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void PlayPickupSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (itemPickupClip == null)
+        {
+            return;
+        }
+
+        if (webAudioSource == null)
+        {
+            webAudioSource = GetComponent<AudioSource>();
+            if (webAudioSource == null)
+            {
+                webAudioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
+
+        if (webAudioSource != null)
+        {
+            webAudioSource.PlayOneShot(itemPickupClip);
+        }
+#else
+        if (itemPickupSound != null)
+        {
+            itemPickupSound.Post(gameObject);
+        }
+#endif
     }
 }

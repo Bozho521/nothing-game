@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour, IInteractor
 
     [Header("Player SFX")] 
     [SerializeField] private AK.Wwise.Event TakeDamageSound;
+    [SerializeField] private AudioClip takeDamageClip;
+    [SerializeField] private AudioSource webAudioSource;
 
     public bool canInteract = true;
     
@@ -189,7 +191,7 @@ public class PlayerMovement : MonoBehaviour, IInteractor
     {
         if (isDead) return;
 
-        TakeDamageSound.Post(gameObject);
+        PlayTakeDamageSound();
         currentHealth -= damage;
         
         if (UIManager.Instance != null) UIManager.Instance.UpdateHP(currentHealth);
@@ -200,6 +202,35 @@ public class PlayerMovement : MonoBehaviour, IInteractor
         {
             Die();
         }
+    }
+
+    private void PlayTakeDamageSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        if (takeDamageClip == null)
+        {
+            return;
+        }
+
+        if (webAudioSource == null)
+        {
+            webAudioSource = GetComponent<AudioSource>();
+            if (webAudioSource == null)
+            {
+                webAudioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
+
+        if (webAudioSource != null)
+        {
+            webAudioSource.PlayOneShot(takeDamageClip);
+        }
+#else
+        if (TakeDamageSound != null)
+        {
+            TakeDamageSound.Post(gameObject);
+        }
+#endif
     }
 
     private void Die()

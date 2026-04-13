@@ -57,6 +57,10 @@ public class Gun : MonoBehaviour
     [SerializeField] private List<AK.Wwise.Event> FiredSound;
     [SerializeField] private List<AK.Wwise.Event> ReloadSound;
     [SerializeField] private List<AK.Wwise.Event> EmptySound;
+    [SerializeField] private List<AudioClip> firedSound;
+    [SerializeField] private List<AudioClip> reloadSound;
+    [SerializeField] private List<AudioClip> emptySound;
+    [SerializeField] private AudioSource webAudioSource;
 
     private List<Canvas> uiElements;
 
@@ -255,10 +259,7 @@ public class Gun : MonoBehaviour
             reloadAnimationCompleted = true;
         }
         
-        if (ReloadSound != null && ReloadSound.Count > currentWeaponIndex)
-        {
-            ReloadSound[currentWeaponIndex].Post(gameObject);
-        }
+        PlayReloadSound();
         
         if (UIManager.Instance != null) UIManager.Instance.ShowReloadingText();
 
@@ -289,17 +290,11 @@ public class Gun : MonoBehaviour
     {
         if (currentAmmo == 0)
         {
-            if (EmptySound != null && EmptySound.Count > currentWeaponIndex)
-            {
-                EmptySound[currentWeaponIndex].Post(gameObject);
-            }
+            PlayEmptySound();
             return;
         }
         
-        if (FiredSound != null && FiredSound.Count > currentWeaponIndex)
-        {
-            FiredSound[currentWeaponIndex].Post(gameObject);
-        }
+        PlayFiredSound();
         
         currentAmmo--; 
         UpdateAmmoUI();
@@ -397,6 +392,72 @@ public class Gun : MonoBehaviour
             StartCoroutine(AnimateVisualBullet(activeVisual.firePoint.position, aimRay.GetPoint(range)));
         }
     }
+
+    private void PlayFiredSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        PlayWebSoundByWeaponIndex(firedSound);
+#else
+        if (FiredSound != null && FiredSound.Count > currentWeaponIndex && FiredSound[currentWeaponIndex] != null)
+        {
+            FiredSound[currentWeaponIndex].Post(gameObject);
+        }
+#endif
+    }
+
+    private void PlayReloadSound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        PlayWebSoundByWeaponIndex(reloadSound);
+#else
+        if (ReloadSound != null && ReloadSound.Count > currentWeaponIndex && ReloadSound[currentWeaponIndex] != null)
+        {
+            ReloadSound[currentWeaponIndex].Post(gameObject);
+        }
+#endif
+    }
+
+    private void PlayEmptySound()
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        PlayWebSoundByWeaponIndex(emptySound);
+#else
+        if (EmptySound != null && EmptySound.Count > currentWeaponIndex && EmptySound[currentWeaponIndex] != null)
+        {
+            EmptySound[currentWeaponIndex].Post(gameObject);
+        }
+#endif
+    }
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+    private void PlayWebSoundByWeaponIndex(List<AudioClip> clips)
+    {
+        if (clips == null || clips.Count <= currentWeaponIndex)
+        {
+            return;
+        }
+
+        AudioClip clip = clips[currentWeaponIndex];
+        if (clip == null)
+        {
+            return;
+        }
+
+        if (webAudioSource == null)
+        {
+            webAudioSource = GetComponent<AudioSource>();
+            if (webAudioSource == null)
+            {
+                webAudioSource = gameObject.AddComponent<AudioSource>();
+            }
+        }
+
+        if (webAudioSource != null)
+        {
+            webAudioSource.PlayOneShot(clip);
+        }
+    }
+#endif
 
     public void ResetShotFired()
     {
