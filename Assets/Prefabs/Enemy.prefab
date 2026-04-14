@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6297295539118124179}
   - component: {fileID: 7561472660425530716}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HeadHitbox
   m_TagString: Headshot
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3379538248564878580}
   - component: {fileID: 7964578742797293263}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Soundbank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2293967704281733076}
   - component: {fileID: 8193765061850795097}
   - component: {fileID: 143707273280757476}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,16 +265,10 @@ MonoBehaviour:
     idInternal: 0
     valueGuidInternal: 
     WwiseObjectReference: {fileID: 11400000, guid: ad22e55cba56d4745a16676f92185b31, type: 2}
-  dropChance: 1
+  dropChance: 0.25
   healthPickupPrefab: {fileID: 8856818201944502011, guid: c9012023508fbe047991acd5e8eb8231, type: 3}
   ammoPickupPrefab: {fileID: 3720225413877312806, guid: 3663db81c31c88149b41c0ff3c63c300, type: 3}
   maxPlayerReserveAmmo: 120
-  despawnWhenOutOfView: 1
-  outOfViewDespawnDelay: 0
-  visibilityCheckInterval: 0.25
-  visibilityBlockers:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &8710730883076376958
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,7 +280,7 @@ GameObject:
   - component: {fileID: 6576284391600872478}
   - component: {fileID: 5945875660913724542}
   - component: {fileID: 4427623266823095805}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SpriteVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}

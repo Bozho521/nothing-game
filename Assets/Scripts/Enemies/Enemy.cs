@@ -33,28 +33,18 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AK.Wwise.Event IdleSound;
     [SerializeField] private AK.Wwise.Event DeathSound;
-
     [SerializeField] private AK.Wwise.Event AttackSound;
+
     [Header("Drop Settings")]
     public float dropChance = 0.25f; 
     public GameObject healthPickupPrefab;
     public GameObject ammoPickupPrefab;
     public int maxPlayerReserveAmmo = 120; 
 
-    [Header("Visibility Despawn")]
-    public bool despawnWhenOutOfView = true;
-    public float outOfViewDespawnDelay = 6f;
-    public float visibilityCheckInterval = 0.25f;
-    public LayerMask visibilityBlockers = ~0;
-
     private float verticalVelocity = 0f;
-    private float outOfViewTimer = 0f;
-    private float nextVisibilityCheckTime = 0f;
 
     private void OnEnable()
     {
-        outOfViewTimer = 0f;
-        nextVisibilityCheckTime = 0f;
         EnsurePlayerReference();
     }
 
@@ -65,6 +55,7 @@ public class Enemy : MonoBehaviour
         if (enemyRenderer != null) originalColor = enemyRenderer.material.color;
 
         EnsurePlayerReference();
+        StartCoroutine(IdleSoundDelay());
     }
 
     private void Update()
@@ -72,157 +63,50 @@ public class Enemy : MonoBehaviour
         if (player == null)
         {
             EnsurePlayerReference();
+            if (player == null) return;
         }
 
-        UpdateOutOfViewDespawn();
+        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
 
-        if (this == null)
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        Vector3 movement = Vector3.zero;
+
+        if (distanceToPlayer > attackRange)
         {
-            return;
+            Vector3 flatTargetPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+            Vector3 direction = (flatTargetPos - transform.position).normalized;
+            movement = direction * moveSpeed;
         }
-
-        if (player != null)
+        else
         {
-            transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
-
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            
-            
-            Vector3 movement = Vector3.zero;
-
-            if (distanceToPlayer > attackRange)
+            if (Time.time >= lastAttackTime + attackCooldown)
             {
-                Vector3 flatTargetPos = new Vector3(player.position.x, transform.position.y, player.position.z);
-                Vector3 direction = (flatTargetPos - transform.position).normalized;
-                movement = direction * moveSpeed;
-            }
-            else
-            {
-                if (Time.time >= lastAttackTime + attackCooldown)
-                {
-                    AttackPlayer();
-                }
-            }
-
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.2f))
-            {
-                verticalVelocity = 0f;
-                
-                transform.position = new Vector3(transform.position.x, hit.point.y + 1f, transform.position.z);
-            }
-            else
-            {
-                verticalVelocity -= gravity * Time.deltaTime;
-            }
-
-            movement.y = verticalVelocity;
-            
-            transform.position += movement * Time.deltaTime;
-
-            if (movement.magnitude > 0f)
-            {
-                animator.SetBool("IsMoving", true);
-            }
-            else
-            {
-                animator.SetBool("IsMoving", false);
-            }
-        }
-    }
-
-    private void UpdateOutOfViewDespawn()
-    {
-        if (!despawnWhenOutOfView)
-        {
-            return;
-        }
-
-        if (Time.time < nextVisibilityCheckTime)
-        {
-            return;
-        }
-
-        nextVisibilityCheckTime = Time.time + visibilityCheckInterval;
-
-        if (IsVisibleToCamera())
-        {
-            outOfViewTimer = 0f;
-            return;
-        }
-
-        outOfViewTimer += visibilityCheckInterval;
-
-        if (outOfViewTimer >= outOfViewDespawnDelay)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    private bool IsVisibleToCamera()
-    {
-        Camera activeCamera = Camera.main;
-        if (activeCamera == null)
-        {
-            return true;
-        }
-
-        if (enemyRenderer == null)
-        {
-            enemyRenderer = GetComponentInChildren<Renderer>();
-        }
-
-        if (enemyRenderer == null)
-        {
-            return true;
-        }
-
-        Plane[] cameraPlanes = GeometryUtility.CalculateFrustumPlanes(activeCamera);
-        Bounds enemyBounds = enemyRenderer.bounds;
-
-        if (!GeometryUtility.TestPlanesAABB(cameraPlanes, enemyBounds))
-        {
-            return false;
-        }
-
-        Vector3 origin = activeCamera.transform.position;
-        Vector3 target = enemyBounds.center;
-        Vector3 direction = target - origin;
-        float distance = direction.magnitude;
-
-        if (distance <= Mathf.Epsilon)
-        {
-            return true;
-        }
-
-        RaycastHit[] hits = Physics.RaycastAll(origin, direction.normalized, distance, visibilityBlockers);
-
-        foreach (RaycastHit hit in hits)
-        {
-            if (hit.transform == transform || hit.transform.IsChildOf(transform))
-            {
-                continue;
-            }
-
-            if (player != null && (hit.transform == player || hit.transform.IsChildOf(player)))
-            {
-                continue;
-            }
-
-            if (hit.distance < distance - 0.05f)
-            {
-                return false;
+                AttackPlayer();
             }
         }
 
-        return true;
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.2f))
+        {
+            verticalVelocity = 0f;
+            transform.position = new Vector3(transform.position.x, hit.point.y + 1f, transform.position.z);
+        }
+        else
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
+
+        movement.y = verticalVelocity;
+        transform.position += movement * Time.deltaTime;
+
+        if (animator != null)
+        {
+            animator.SetBool("IsMoving", movement.x != 0 || movement.z != 0);
+        }
     }
 
     private void EnsurePlayerReference()
     {
-        if (player != null)
-        {
-            return;
-        }
+        if (player != null) return;
 
         PlayerMovement playerMovement = FindFirstObjectByType<PlayerMovement>();
         if (playerMovement != null)
@@ -237,7 +121,7 @@ public class Enemy : MonoBehaviour
         {
             var random_wait = Random.Range(2.0f, 7.5f);
             yield return new WaitForSeconds(random_wait);
-            IdleSound.Post(gameObject);
+            if (IdleSound != null) IdleSound.Post(gameObject);
         }
     }
 
@@ -245,8 +129,8 @@ public class Enemy : MonoBehaviour
     {
         lastAttackTime = Time.time;
 
-        animator.SetTrigger("IsAttacking");
-	AttackSound.Post(gameObject);
+        if (animator != null) animator.SetTrigger("IsAttacking");
+        if (AttackSound != null) AttackSound.Post(gameObject);
         
         if (player.TryGetComponent<PlayerMovement>(out PlayerMovement playerStats))
         {
@@ -286,7 +170,7 @@ public class Enemy : MonoBehaviour
     private void Die()
     {
         EnemyManager.killCount++;
-        DeathSound.Post(gameObject);
+        if (DeathSound != null) DeathSound.Post(gameObject);
         if (UIManager.Instance != null) UIManager.Instance.UpdateKills(EnemyManager.killCount);
 
         HandleDrops(); 
