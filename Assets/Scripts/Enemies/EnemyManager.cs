@@ -9,10 +9,8 @@ public class EnemyManager : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform player;
     
-    [Tooltip("Lowered cap for better pacing.")]
     public int maxConcurrentEnemies = 6;
 
-    [Tooltip("Slower spawn rates.")]
     public float initialSpawnDelay = 3f;
     public float minimumSpawnDelay = 1.5f;
     public float minimumSpawnRadius = 10f;
@@ -45,8 +43,6 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        float currentDelay = initialSpawnDelay;
-
         while (true)
         {
             activeEnemies.RemoveAll(enemy => enemy == null);
@@ -59,8 +55,8 @@ public class EnemyManager : MonoBehaviour
                 }
             }
             
-            currentDelay = Mathf.Max(minimumSpawnDelay, currentDelay - 0.05f);
-            yield return new WaitForSeconds(currentDelay);
+            float randomDelay = Random.Range(minimumSpawnDelay, initialSpawnDelay);
+            yield return new WaitForSeconds(randomDelay);
         }
     }
 
@@ -74,12 +70,13 @@ public class EnemyManager : MonoBehaviour
         for (int i = 0; i < maxSpawnAttempts; i++)
         {
             float spawnDistance = Random.Range(minimumSpawnRadius, maximumSpawnRadius);
-            float spawnAngle = Random.Range(0f, Mathf.PI * 2f);
-            Vector3 randomOffset = new Vector3(Mathf.Cos(spawnAngle), 0f, Mathf.Sin(spawnAngle)) * spawnDistance;
+            
+            float localAngle = Random.Range(-135f, 135f);
+            Vector3 randomOffset = Quaternion.Euler(0, localAngle, 0) * player.forward * spawnDistance;
 
             Vector3 randomCoordinate = player.position + randomOffset;
 
-            if (NavMesh.SamplePosition(randomCoordinate, out NavMeshHit navHit, 10f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomCoordinate, out NavMeshHit navHit, 25f, NavMesh.AllAreas))
             {
                 Vector3 validSpawnPosition = navHit.position + new Vector3(0, groundOffset, 0);
 

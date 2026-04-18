@@ -1,7 +1,9 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
-[RequireComponent(typeof(CapsuleCollider))] 
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy Stats")]
@@ -19,7 +21,13 @@ public class Enemy : MonoBehaviour
     public float attackCooldown = 1f;
     private float lastAttackTime = 0f;
 
+    [Header("Despawn Settings")]
+    public float despawnRadius = 40f; 
+    public float timeToDespawn = 10f;
+    private float outOfRangeTimer = 0f;
+
     [Header("Visual Feedback")]
+    public Transform spriteVisual; 
     public Renderer enemyRenderer;
     [SerializeField] private Animator animator;
     public Color damageColor = Color.red; 
@@ -30,8 +38,7 @@ public class Enemy : MonoBehaviour
     public GameObject bloodEffectPrefab;
     public GameObject headshotTextPrefab;
 
-    [SerializeField]
-    private AK.Wwise.Event IdleSound;
+    [SerializeField] private AK.Wwise.Event IdleSound;
     [SerializeField] private AK.Wwise.Event DeathSound;
     [SerializeField] private AK.Wwise.Event AttackSound;
 
@@ -41,7 +48,25 @@ public class Enemy : MonoBehaviour
     public GameObject ammoPickupPrefab;
     public int maxPlayerReserveAmmo = 120; 
 
+    private CharacterController controller;
+    private NavMeshAgent agent;
     private float verticalVelocity = 0f;
+    private Camera mainCam;
+
+    private void Awake()
+    {
+        controller = GetComponent<CharacterController>();
+        agent = GetComponent<NavMeshAgent>();
+        
+        agent.updatePosition = false;
+        agent.updateRotation = false; 
+
+        agent.speed = moveSpeed;
+        agent.stoppingDistance = attackRange - 0.2f; 
+        agent.acceleration = 20f; 
+
+        mainCam = Camera.main;
+    }
 
     private void OnEnable()
     {
@@ -51,7 +76,12 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth; 
-        if (enemyRenderer == null) enemyRenderer = GetComponentInChildren<Renderer>();
+        
+        if (enemyRenderer == null && spriteVisual != null) 
+        {
+            enemyRenderer = spriteVisual.GetComponent<Renderer>();
+        }
+            
         if (enemyRenderer != null) originalColor = enemyRenderer.material.color;
 
         EnsurePlayerReference();
@@ -66,29 +96,57 @@ public class Enemy : MonoBehaviour
             if (player == null) return;
         }
 
-        transform.LookAt(new Vector3(player.position.x, transform.position.y, player.position.z));
+        if (spriteVisual != null && mainCam != null)
+        {
+            spriteVisual.rotation = Quaternion.LookRotation(spriteVisual.position - mainCam.transform.position);
+            spriteVisual.eulerAngles = new Vector3(0f, spriteVisual.eulerAngles.y, 0f);
+        }
+        else
+        {
+            Vector3 lookPos = new Vector3(player.position.x, transform.position.y, player.position.z);
+            transform.LookAt(lookPos);
+        }
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer > despawnRadius)
+        {
+            outOfRangeTimer += Time.deltaTime;
+            
+            if (outOfRangeTimer >= timeToDespawn)
+            {
+                Destroy(gameObject); 
+                return;
+            }
+        }
+        else
+        {
+            outOfRangeTimer = 0f;
+        }
+
+        agent.nextPosition = transform.position;
+
         Vector3 movement = Vector3.zero;
 
         if (distanceToPlayer > attackRange)
         {
-            Vector3 flatTargetPos = new Vector3(player.position.x, transform.position.y, player.position.z);
-            Vector3 direction = (flatTargetPos - transform.position).normalized;
-            movement = direction * moveSpeed;
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+            movement = agent.desiredVelocity;
         }
         else
         {
+            agent.isStopped = true;
+            
             if (Time.time >= lastAttackTime + attackCooldown)
             {
                 AttackPlayer();
             }
         }
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 1.2f))
+        if (controller.isGrounded && verticalVelocity < 0)
         {
-            verticalVelocity = 0f;
-            transform.position = new Vector3(transform.position.x, hit.point.y + 1f, transform.position.z);
+            verticalVelocity = -2f;
         }
         else
         {
@@ -96,11 +154,12 @@ public class Enemy : MonoBehaviour
         }
 
         movement.y = verticalVelocity;
-        transform.position += movement * Time.deltaTime;
+        controller.Move(movement * Time.deltaTime);
 
         if (animator != null)
         {
-            animator.SetBool("IsMoving", movement.x != 0 || movement.z != 0);
+            Vector3 horizontalVelocity = new Vector3(controller.velocity.x, 0f, controller.velocity.z);
+            animator.SetBool("IsMoving", horizontalVelocity.magnitude > 0.1f);
         }
     }
 

@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class PanelThreatRadar : MonoBehaviour
 {
-    [Header("UI Panels")]
-    public Image leftPanelWarning;
-    public Image rightPanelWarning;
+    public static PanelThreatRadar Instance; 
+
+    [Header("UI Image References (Scene Objects)")]
+    public Image topPanel;    
+    public Image bottomPanel; 
+    public Image leftPanel;   
+    public Image rightPanel;  
 
     [Header("Radar Settings")]
     public Camera playerCamera;
@@ -15,52 +20,110 @@ public class PanelThreatRadar : MonoBehaviour
     public Color warningColor = new Color(1f, 0f, 0f, 0.4f); 
     private Color clearColor = new Color(1f, 0f, 0f, 0f);
 
+    private bool threatFront = false;
+    private bool threatBack = false;
+    private bool threatLeft = false;
+    private bool threatRight = false;
+    
+    private float hitFlashTimer = 0f;
+    private Collider[] hitColliders = new Collider[30];
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void Start()
     {
-        if (playerCamera == null) 
-        {
-            playerCamera = Camera.main;
-        }
+        if (playerCamera == null) playerCamera = Camera.main;
 
-        if (leftPanelWarning) leftPanelWarning.color = clearColor;
-        if (rightPanelWarning) rightPanelWarning.color = clearColor;
+        InitializeImage(topPanel);
+        InitializeImage(bottomPanel);
+        InitializeImage(leftPanel);
+        InitializeImage(rightPanel);
+
+        StartCoroutine(RadarScanRoutine());
+    }
+
+    private void InitializeImage(Image img)
+    {
+        if (img != null)
+        {
+            img.gameObject.SetActive(true);
+            img.color = clearColor;
+        }
+    }
+
+    public void TriggerHitFlash()
+    {
+        hitFlashTimer = 0.4f;
     }
 
     private void Update()
     {
-        if (playerCamera == null) return;
+        if (hitFlashTimer > 0) hitFlashTimer -= Time.deltaTime;
+        bool isHit = hitFlashTimer > 0;
 
-        bool threatLeft = false;
-        bool threatRight = false;
+        UpdatePanelColor(topPanel, isHit || threatFront);
+        UpdatePanelColor(bottomPanel, isHit || threatBack);
+        UpdatePanelColor(leftPanel, isHit || threatLeft);
+        UpdatePanelColor(rightPanel, isHit || threatRight);
+    }
 
-        Collider[] hits = Physics.OverlapSphere(playerCamera.transform.position, detectionRadius);
+    private void UpdatePanelColor(Image img, bool isThreat)
+    {
+        if (img == null) return;
+        Color targetColor = isThreat ? warningColor : clearColor;
+        img.color = Color.Lerp(img.color, targetColor, Time.deltaTime * flashSpeed);
+    }
 
-        foreach (Collider hit in hits)
+    private IEnumerator RadarScanRoutine()
+    {
+        WaitForSeconds waitTime = new WaitForSeconds(0.1f);
+
+        while (true)
         {
-            Enemy enemy = hit.GetComponentInParent<Enemy>(); 
-            if (enemy == null || !enemy.gameObject.activeInHierarchy) continue; 
+            if (playerCamera == null) yield break;
 
-            Vector3 dirToEnemy = enemy.transform.position - playerCamera.transform.position;
-            
-            Vector3 viewportPos = playerCamera.WorldToViewportPoint(enemy.transform.position);
-            bool isOnScreen = viewportPos.z > 0 && viewportPos.x > 0 && viewportPos.x < 1 && viewportPos.y > 0 && viewportPos.y < 1;
+            threatFront = false;
+            threatBack = false;
+            threatLeft = false;
+            threatRight = false;
 
-            if (!isOnScreen)
+            int hitCount = Physics.OverlapSphereNonAlloc(playerCamera.transform.position, detectionRadius, hitColliders);
+
+            for (int i = 0; i < hitCount; i++)
             {
+                Collider hit = hitColliders[i];
+                Enemy enemy = hit.GetComponentInParent<Enemy>(); 
+                
+                if (enemy == null || !enemy.gameObject.activeInHierarchy) continue; 
+
+                Vector3 dirToEnemy = enemy.transform.position - playerCamera.transform.position;
                 Vector3 flatDirToEnemy = new Vector3(dirToEnemy.x, 0, dirToEnemy.z).normalized;
                 Vector3 flatCamForward = new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z).normalized;
 
                 float angle = Vector3.SignedAngle(flatCamForward, flatDirToEnemy, Vector3.up);
 
-                if (angle < -5f) threatLeft = true;
-                if (angle > 5f) threatRight = true;
+                if (angle >= -45f && angle <= 45f) threatFront = true;
+                else if (angle > 45f && angle < 135f) threatRight = true;
+                else if (angle < -45f && angle > -135f) threatLeft = true;
+                else threatBack = true;
             }
+            yield return waitTime;
         }
-
-        if (leftPanelWarning)
-            leftPanelWarning.color = Color.Lerp(leftPanelWarning.color, threatLeft ? warningColor : clearColor, Time.deltaTime * flashSpeed);
-        
-        if (rightPanelWarning)
-            rightPanelWarning.color = Color.Lerp(rightPanelWarning.color, threatRight ? warningColor : clearColor, Time.deltaTime * flashSpeed);
     }
 }

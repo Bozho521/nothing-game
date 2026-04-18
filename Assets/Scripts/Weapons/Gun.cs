@@ -52,6 +52,7 @@ public class Gun : MonoBehaviour
     private GunCombat combatModule;
     private GunMeta metaModule;
     private Camera mainCam;
+    private PlayerMovement cachedPlayer;
 
     private float nextFireTime = 0f;
     private Quaternion currentAimRotation;
@@ -63,6 +64,7 @@ public class Gun : MonoBehaviour
         combatModule = GetComponent<GunCombat>();
         metaModule = GetComponent<GunMeta>();
         mainCam = GetComponentInParent<Camera>();
+        cachedPlayer = GetComponentInParent<PlayerMovement>();
     }
 
     private void Start()
@@ -79,8 +81,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        PlayerMovement player = GetComponentInParent<PlayerMovement>();
-        bool isDead = player != null && player.isDead;
+        bool isDead = cachedPlayer != null && cachedPlayer.isDead;
         bool isPaused = UIManager.Instance != null && UIManager.Instance.isPaused;
 
         if (!isPaused && !isDead && Mouse.current.rightButton.wasPressedThisFrame)
@@ -127,7 +128,7 @@ public class Gun : MonoBehaviour
 
     private void LateUpdate()
     {
-        bool isDead = GetComponentInParent<PlayerMovement>()?.isDead ?? false;
+        bool isDead = cachedPlayer != null && cachedPlayer.isDead;
         bool isPaused = UIManager.Instance != null && UIManager.Instance.isPaused;
         bool effectivelyInUIMode = isUIModeActive || isPaused || isDead;
 
@@ -168,7 +169,7 @@ public class Gun : MonoBehaviour
 
     public void UpdateCursorAndPlayerState()
     {
-        bool isDead = GetComponentInParent<PlayerMovement>()?.isDead ?? false;
+        bool isDead = cachedPlayer != null && cachedPlayer.isDead;
         bool isPaused = UIManager.Instance != null && UIManager.Instance.isPaused;
         bool effectivelyInUIMode = isUIModeActive || isPaused || isDead;
 

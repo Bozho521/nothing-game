@@ -67,6 +67,8 @@ public class PlayerHealth : MonoBehaviour
             if (img != null) img.color = flashColor;
         }
 
+        if (PanelThreatRadar.Instance != null) PanelThreatRadar.Instance.TriggerHitFlash();
+
         if (currentHealth <= 0) Die();
     }
 

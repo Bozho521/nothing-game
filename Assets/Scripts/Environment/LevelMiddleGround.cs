@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class Teleporter : MonoBehaviour
+public class LevelMiddleGround : MonoBehaviour
 {
     [Header("Teleport Settings")]
     public Transform destinationPoint;
@@ -17,13 +17,10 @@ public class Teleporter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (destinationPoint == null)
-        {
-            return;
-        }
-
         if (other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
+            if (destinationPoint == null) return;
+
             CharacterController cc = player.GetComponent<CharacterController>();
             
             if (cc != null)
@@ -38,7 +35,10 @@ public class Teleporter : MonoBehaviour
                 
                 cc.enabled = true;
 
-                _pm.UnlockMovementConstraints();
+                if (_pm != null)
+                {
+                    _pm.UnlockMovementConstraints();
+                }
             }
             else
             {
@@ -48,6 +48,14 @@ public class Teleporter : MonoBehaviour
                     player.transform.rotation = destinationPoint.rotation;
                 }
             }
+            
+            return;
+        }
+
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy != null)
+        {
+            Destroy(enemy.gameObject);
         }
     }
 }

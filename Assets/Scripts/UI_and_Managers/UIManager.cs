@@ -21,6 +21,9 @@ public class UIManager : MonoBehaviour
     private string currentAmmo = "0 / 0";
     private int currentKills = 0;
 
+    private PlayerMovement cachedPlayer;
+    private Gun cachedGun;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -30,12 +33,13 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
+        cachedPlayer = FindFirstObjectByType<PlayerMovement>();
+        cachedGun = FindFirstObjectByType<Gun>();
     }
 
     private void Update()
     {
-        PlayerMovement player = FindFirstObjectByType<PlayerMovement>();
-        bool isDead = player != null && player.isDead;
+        bool isDead = cachedPlayer != null && cachedPlayer.isDead;
 
         if ((isPaused || isDead) && Keyboard.current != null && Keyboard.current.rKey.wasPressedThisFrame)
         {
@@ -57,7 +61,6 @@ public class UIManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Debug.Log("Restarting Game...");
         Time.timeScale = 1f; 
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -77,8 +80,7 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        Gun playerGun = FindFirstObjectByType<Gun>();
-        if (playerGun != null) playerGun.UpdateCursorAndPlayerState();
+        if (cachedGun != null) cachedGun.UpdateCursorAndPlayerState();
     }
 
     public void ResumeGame()
@@ -88,13 +90,11 @@ public class UIManager : MonoBehaviour
         
         if (pauseMenuUI != null) pauseMenuUI.SetActive(false);
 
-        Gun playerGun = FindFirstObjectByType<Gun>();
-        if (playerGun != null) playerGun.UpdateCursorAndPlayerState();
+        if (cachedGun != null) cachedGun.UpdateCursorAndPlayerState();
     }
 
     public void QuitGame()
     {
-        Debug.Log("Quitting Game...");
         Application.Quit(); 
     }
 
